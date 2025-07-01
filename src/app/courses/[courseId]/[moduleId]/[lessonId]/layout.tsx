@@ -7,14 +7,7 @@ import { FocusModeProvider } from '@/contexts/FocusModeContext';
 export default async function LessonLayout({
   children,
   params,
-}: {
-  children: React.ReactNode;
-  params: {
-    courseId: string;
-    moduleId: string;
-    lessonId: string;
-  };
-}) {
+}: any) {
   const course = await getCourseStructure(params.courseId);
   const lesson = await getLesson(params.courseId, params.moduleId, params.lessonId);
 
