@@ -4,16 +4,17 @@ import { getCourseStructure, getLesson } from '@/lib/course-loader';
 import { notFound } from 'next/navigation';
 import { FocusModeProvider } from '@/contexts/FocusModeContext';
 
-interface LessonLayoutProps {
+export default async function LessonLayout({
+  children,
+  params,
+}: {
   children: React.ReactNode;
   params: {
     courseId: string;
     moduleId: string;
     lessonId: string;
   };
-}
-
-export default async function LessonLayout({ children, params }: LessonLayoutProps) {
+}) {
   const course = await getCourseStructure(params.courseId);
   const lesson = await getLesson(params.courseId, params.moduleId, params.lessonId);
 
