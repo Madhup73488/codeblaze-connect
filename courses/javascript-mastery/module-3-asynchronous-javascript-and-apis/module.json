@@ -1,0 +1,5 @@
+{
+  "title": "Module 3: Asynchronous JavaScript and APIs",
+  "description": "Learn how to handle asynchronous operations in JavaScript using callbacks, Promises, and async/await, and how to interact with APIs.",
+  "order": 3
+}

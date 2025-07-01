@@ -1,0 +1,8 @@
+{
+  "title": "Lesson 2.3: CSS Selectors (Advanced)",
+  "description": "Learn about advanced CSS selectors, including attribute selectors, combinators, and pseudo-classes.",
+  "order": 3,
+  "duration": 25,
+  "type": "text",
+  "difficulty": "intermediate"
+}

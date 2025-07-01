@@ -1,0 +1,8 @@
+{
+  "title": "Lesson 5.4: Best Practices & Clean Code",
+  "description": "Learn about best practices for writing clean, readable, and maintainable JavaScript code.",
+  "order": 4,
+  "duration": 20,
+  "type": "text",
+  "difficulty": "intermediate"
+}

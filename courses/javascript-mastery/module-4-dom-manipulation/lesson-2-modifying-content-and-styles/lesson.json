@@ -1,0 +1,8 @@
+{
+  "title": "Lesson 4.2: Modifying Content and Styles",
+  "description": "Learn how to dynamically modify the content and style of HTML elements using the DOM.",
+  "order": 2,
+  "duration": 20,
+  "type": "text",
+  "difficulty": "intermediate"
+}

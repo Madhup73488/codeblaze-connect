@@ -1,0 +1,8 @@
+{
+  "title": "Lesson 5.3: ES Modules in Practice & Modern Tooling (Brief)",
+  "description": "Learn about ES Modules and modern tooling like bundlers, transpilers, and linters.",
+  "order": 3,
+  "duration": 20,
+  "type": "text",
+  "difficulty": "intermediate"
+}

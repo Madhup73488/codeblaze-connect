@@ -1,0 +1,8 @@
+{
+  "title": "Lesson 1.2: The Cascade, Specificity, and Inheritance",
+  "description": "Understand the core concepts that determine how CSS rules are applied and how to resolve conflicts.",
+  "order": 2,
+  "duration": 20,
+  "type": "text",
+  "difficulty": "beginner"
+}

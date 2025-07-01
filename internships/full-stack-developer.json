@@ -1,0 +1,670 @@
+[
+  {
+    "week": 1,
+    "title": "Foundations - Mastering HTML5",
+    "goal": "By the end of this week, you will have a rock-solid understanding of HTML5, the foundational language for structuring web content. You will be able to build a semantic and well-structured webpage from scratch.",
+    "concepts": [
+      "HTML Structure: The basic boilerplate of an HTML document (<!DOCTYPE>, <html>, <head>, <body>).",
+      "Elements & Attributes: Understanding tags, content, and key attributes like id and class.",
+      "Text Semantics: Using correct tags for headings (<h1>-<h6>), paragraphs (<p>), emphasis (<em>, <strong>), and quotations.",
+      "Links & Images: Creating hyperlinks (<a>) for navigation and embedding images (<img>) with proper accessibility (alt).",
+      "Lists & Tables: Structuring data with ordered, unordered, and definition lists (<ol>, <ul>, <dl>) and creating basic data tables (<table>).",
+      "Semantic HTML5: Using modern, meaningful tags like <header>, <nav>, <main>, <section>, <footer> to organize your page logically.",
+      "Forms: Building basic forms with input fields (<input>) and text areas (<textarea>)."
+    ],
+    "dailyPlan": [
+      {
+        "days": "1-2",
+        "focus": "Core Structure & Text",
+        "courseLink": "/courses/html5-mastery/module-1-html-fundamentals/lesson-1-html-structure-and-elements",
+        "task": "Complete the exercises for these lessons. Create a simple \"About Me\" page with a main title, a few paragraphs, and correctly used heading levels."
+      },
+      {
+        "days": "3",
+        "focus": "Navigation & Multimedia",
+        "courseLink": "/courses/html5-mastery/module-1-html-fundamentals/lesson-3-links-and-images",
+        "task": "Complete the \"Create a Simple Portfolio Page\" exercise. Use both absolute and relative links."
+      },
+      {
+        "days": "4",
+        "focus": "Data Structures",
+        "courseLink": "/courses/html5-mastery/module-2-advanced-html-structure/lesson-1-lists-ordered-unordered-definition",
+        "task": "Build a \"Product Catalog\" page with a product list and a price table. Use rowspan and colspan in your table."
+      },
+      {
+        "days": "5",
+        "focus": "Semantic HTML & Forms",
+        "courseLink": "/courses/html5-mastery/module-2-advanced-html-structure/lesson-3-semantic-html5-elements",
+        "task": "Refactor your \"Portfolio Page\" to use semantic tags (<header>, <main>, <footer>, etc.). Then, build a simple \"Contact Us\" form with a text input, email input, and text area."
+      },
+      {
+        "days": "6",
+        "focus": "Final Review & Project",
+        "courseLink": "/courses/html5-mastery/module-5-html-best-practices-and-accessibility/lesson-1-html-boilerplate-and-meta-tags",
+        "task": "Create a single-page HTML website that looks like a blog homepage. It should have a semantic structure with a <header> (blog title/nav), a <main> area with multiple <article> elements for blog posts, and a <footer>. Each article should have an <h2> and a paragraph of text. Include images and a \"Read More\" link."
+      },
+      {
+        "days": "7",
+        "focus": "Rest & Prepare for CSS!",
+        "task": ""
+      }
+    ],
+    "checklist": [
+      "Created and linked a basic HTML file.",
+      "Used <h1> to <h6> in correct hierarchy.",
+      "Styled text with <em>, <strong>, <mark>, etc.",
+      "Created both relative and absolute hyperlinks (<a>).",
+      "Embedded at least one image with a meaningful alt attribute.",
+      "Built an ordered list (<ol>) and an unordered list (<ul>).",
+      "Created a data table with <thead>, <tbody>, <th>, and <td>.",
+      "Used <header>, <nav>, <main>, <section>, and <footer> to structure a page.",
+      "Built a basic form with <input>, <label>, and <textarea>.",
+      "Completed the \"Personal Blog Homepage\" project.",
+      "Validated your HTML code using the W3C validator."
+    ],
+    "tips": [
+      "Focus on structure first. Don't worry about how it looks yet. The goal is to make your HTML as logical and clean as possible.",
+      "Use a code editor like VS Code with the Live Server extension to see your changes instantly.",
+      "Use the browser's Developer Tools (Elements tab) to inspect the DOM tree and ensure your tags are correctly nested."
+    ]
+  },
+  {
+    "week": 2,
+    "title": "Styling - Mastering CSS3",
+    "goal": "You will now bring your HTML pages to life! By the end of this week, you will be able to style your websites from scratch, master the Box Model, create responsive layouts using Flexbox and Grid, and add basic animations.",
+    "concepts": [
+      "Core Syntax: How to write CSS rules and include them (external stylesheet).",
+      "The Box Model: Understanding content, padding, border, and margin.",
+      "Styling Properties: Colors, backgrounds, fonts, and text properties.",
+      "Layouts (Flexbox): Building one-dimensional layouts (rows or columns) for components like navbars and cards.",
+      "Layouts (CSS Grid): Creating powerful two-dimensional layouts (rows and columns) for entire pages.",
+      "Responsive Design: Using media queries to adapt your website to different screen sizes.",
+      "Animations & Transitions: Adding smooth visual effects on hover or other events."
+    ],
+    "dailyPlan": [
+      {
+        "days": "1-2",
+        "focus": "Core Styling & The Box Model",
+        "courseLink": "/courses/css3-mastery/module-1-getting-started-with-css/lesson-1-introduction-to-css-and-core-syntax",
+        "task": "Take your \"Personal Blog Homepage\" from Week 1. Link a style.css file and style all the elements. Experiment with different colors, fonts, margins, and padding. Use the browser's dev tools to inspect the Box Model."
+      },
+      {
+        "days": "3",
+        "focus": "Flexbox Layouts",
+        "courseLink": "/courses/css3-mastery/module-3-layouts-with-flexbox-and-css-grid/lesson-2-flexbox-one-dimensional-layout",
+        "task": "Convert your blog's navigation bar into a responsive row using Flexbox. Create a simple grid of \"blog cards\" and arrange them in a row."
+      },
+      {
+        "days": "4",
+        "focus": "CSS Grid Layouts",
+        "courseLink": "/courses/css3-mastery/module-3-layouts-with-flexbox-and-css-grid/lesson-3-css-grid-two-dimensional-layout",
+        "task": "Re-structure your entire blog homepage using CSS Grid. Create a layout with a header, nav, main content area, and footer. Use grid-template-areas for a clean layout."
+      },
+      {
+        "days": "5",
+        "focus": "Responsive Web Design & Animations",
+        "courseLink": "/courses/css3-mastery/module-4-responsive-web-design/lesson-1-media-queries",
+        "task": "Add a meta viewport tag to your HTML. Use media queries to make your blog layout and Flexbox card grid adapt to mobile screens (e.g., stack cards vertically below 768px). Add a subtle transition effect to your navigation links on hover."
+      },
+      {
+        "days": "6",
+        "focus": "Final Review & Project",
+        "courseLink": "/courses/css3-mastery/module-5-advanced-css-features-and-best-practices/lesson-1-transitions-and-animations",
+        "task": "Build a new, responsive landing page for a fictional product. Use a semantic HTML structure and a beautiful CSS design with Flexbox and Grid. It should have a hero section, a features section with a grid of cards, and a contact form. It must be fully responsive and adapt from desktop to mobile."
+      },
+      {
+        "days": "7",
+        "focus": "Rest & Prepare for JavaScript!",
+        "task": ""
+      }
+    ],
+    "checklist": [
+      "Created an external style.css and linked it to your HTML.",
+      "Applied styles using ID, class, and element selectors.",
+      "Styled text, backgrounds, and used color values (hex, rgba).",
+      "Mastered margin, padding, and border and understand box-sizing: border-box.",
+      "Built a layout with Flexbox and used properties like justify-content and align-items.",
+      "Built a layout with CSS Grid and used grid-template-areas.",
+      "Implemented responsive design using @media queries and a mobile-first approach.",
+      "Added CSS transitions or animations.",
+      "Completed the \"Fully Styled & Responsive Landing Page\" project."
+    ]
+  },
+  {
+    "week": 3,
+    "title": "Logic - JavaScript Fundamentals",
+    "goal": "By the end of this week, you will be able to add interactivity to your webpages. You will master core programming concepts like variables, data types, control flow, and functions, which are the building blocks of any dynamic application.",
+    "concepts": [
+      "Variables: Using const and let (and understanding var) to store data.",
+      "Data Types: Working with strings, numbers, booleans, arrays, and objects.",
+      "Operators: Performing arithmetic, comparison, and logical operations.",
+      "Control Flow: Using if/else, switch, and loops (for, while) to control program logic.",
+      "Functions: Defining reusable code blocks using declarations, expressions, and arrow functions.",
+      "Scope: Understanding global, function, and block scope."
+    ],
+    "dailyPlan": [
+      {
+        "days": "1-2",
+        "focus": "First Steps & Data",
+        "courseLink": "/courses/javascript-mastery/module-1-javascript-fundamentals/lesson-1-variables-data-types-and-operators",
+        "task": "Create an app.js and link it to an HTML file. Declare a const variable for a user's name, a let for their age. Use console.log() to display their name and a message. Complete the \"Basic Calculations and Variable Play\" exercise."
+      },
+      {
+        "days": "3",
+        "focus": "Control Flow",
+        "courseLink": "/courses/javascript-mastery/module-1-javascript-fundamentals/lesson-2-control-flow-conditionals-loops",
+        "task": "Complete the \"FizzBuzz with a Twist\" exercise. This is a classic coding challenge that tests your understanding of conditionals and loops."
+      },
+      {
+        "days": "4-5",
+        "focus": "Functions & Scope",
+        "courseLink": "/courses/javascript-mastery/module-1-javascript-fundamentals/lesson-3-functions-declarations-expressions-arrow-functions",
+        "task": "Complete the \"Calculator Functions\" exercise. Implement functions for add, subtract, multiply, and divide, and use both function declarations and arrow functions."
+      },
+      {
+        "days": "6",
+        "focus": "Final Review & Project",
+        "task": "Weekly Project: An Interactive Tip Calculator. Build a web page with an input field for the bill amount and a button to calculate the tip. HTML: Use a form with an input. JavaScript: Get the value from the input. Write a function to calculate the tip (e.g., 15% of the bill). Use a conditional statement (if/else) to check if the bill amount is valid (e.g., greater than 0). Display the calculated tip amount on the page."
+      },
+      {
+        "days": "7",
+        "focus": "Rest & Prepare for Modern JavaScript!",
+        "task": ""
+      }
+    ],
+    "checklist": [
+      "Understood let, const, and var.",
+      "Worked with string, number, boolean, array, object data types.",
+      "Used arithmetic, assignment, comparison, and logical operators.",
+      "Implemented if/else, else if, and switch statements.",
+      "Used for, while, do...while, for...of, and for...in loops.",
+      "Defined and called functions using declarations, expressions, and arrow functions.",
+      "Understood global, local, and block scope.",
+      "Completed the \"Interactive Tip Calculator\" project."
+    ]
+  },
+  {
+    "week": 4,
+    "title": "Frontend - Introduction to React.js",
+    "goal": "This week marks your entry into modern frontend development with React.js! You will grasp the core concepts of component-based architecture, JSX, and the fundamental ways React renders and manages UI elements.",
+    "concepts": [
+      "React Basics: What React is, its advantages, and the Virtual DOM concept.",
+      "Project Setup: Creating a new React application using Create React App.",
+      "JSX: Writing HTML-like code within JavaScript, embedding expressions, and basic conditional rendering.",
+      "Components: Understanding components as reusable UI building blocks.",
+      "Functional Components: The modern way to write React components.",
+      "Props: Passing data from parent components to child components.",
+      "Class-Based Components (Overview): Understanding their structure for legacy code."
+    ],
+    "dailyPlan": [
+      {
+        "days": "1",
+        "focus": "Getting Started with React & Project Setup",
+        "courseLink": "/courses/javascript-mastery/module-2-modern-javascript-es6+/lesson-1-let-const-template-literals-destructuring",
+        "task": "Complete the \"Create Your First React App\" exercise. Get familiar with npm start and live reloading. Explore public/index.html and src/index.js to see how React injects into the HTML."
+      },
+      {
+        "days": "2-3",
+        "focus": "Demystifying JSX",
+        "courseLink": "/courses/javascript-mastery/module-2-modern-javascript-es6+/lesson-2-spread-rest-operators-modules-import-export",
+        "task": "Complete the \"Create a Dynamic Welcome Component\" exercise. Experiment with embedding variables, arithmetic operations, and simple ternary/logical && for rendering different messages based on conditions. Practice using className and self-closing tags."
+      },
+      {
+        "days": "4-5",
+        "focus": "Building with Components & Props",
+        "courseLink": "/courses/javascript-mastery/module-2-modern-javascript-es6+/lesson-3-classes-and-object-oriented-programming",
+        "task": "Complete the \"Build a User List with Components\" exercise. Create UserItem and UserList components, passing user data down as props. Understand that props are read-only. Briefly look at the Class-Based Counter example to see the differences, but focus on functional components."
+      },
+      {
+        "days": "6",
+        "focus": "Final Review & Project",
+        "task": "Weekly Project: A Static Product Display Page. Create a React application that displays a list of mock products. App.js: Will hold the main structure and a static array of product data (objects with id, name, price, imageUrl). ProductCard.js (Component): A functional component that receives product data as props. It should render a div for a single product, displaying its name, price, and image. ProductList.js (Component): A functional component that receives the array of products as props. It should use map() to render multiple ProductCard components. Styling: Use basic CSS (e.g., in App.css) to make the product cards look presentable (e.g., borders, padding, some layout with Flexbox if you feel adventurous)."
+      },
+      {
+        "days": "7",
+        "focus": "Rest & Prepare for React State!",
+        "task": ""
+      }
+    ],
+    "checklist": [
+      "Successfully set up a React project using npx create-react-app.",
+      "Understood what JSX is and its basic rules.",
+      "Embedded JavaScript expressions within JSX using {}.",
+      "Performed basic conditional rendering in JSX.",
+      "Created and used functional React components.",
+      "Passed data from parent to child components using props.",
+      "Understood the difference between functional and class-based components.",
+      "Completed the \"Static Product Display Page\" project."
+    ]
+  },
+  {
+    "week": 5,
+    "title": "Frontend - React State & Hooks (useState, useEffect)",
+    "goal": "This week, you will learn how to make your React applications dynamic and interactive by mastering component state management using React Hooks, particularly useState and useEffect.",
+    "concepts": [
+      "State: Understanding component-specific data that can change over time.",
+      "useState Hook: How to declare and update state variables in functional components.",
+      "Event Handling: Responding to user interactions like clicks, input changes, and form submissions.",
+      "Controlled Components: Managing form input values with React state.",
+      "useEffect Hook: Performing side effects (data fetching, subscriptions, DOM manipulation) in functional components and understanding its dependency array.",
+      "Component Lifecycle (with Hooks perspective): How useEffect maps to componentDidMount, componentDidUpdate, and componentWillUnmount."
+    ],
+    "dailyPlan": [
+      {
+        "days": "1-2",
+        "focus": "useState and Event Handling",
+        "courseLink": "/courses/react-js-mastery/module-2-react-hooks",
+        "task": "Convert your \"Static Product Display Page\" from Week 4 into a \"Dynamic Shopping Cart Item\". Add buttons to increment/decrement the quantity of a product using useState. Implement an \"Add to Cart\" button that changes its text after clicking (e.g., \"Added!\")."
+      },
+      {
+        "days": "3-4",
+        "focus": "Controlled Forms & Basic useEffect",
+        "courseLink": "/courses/react-js-mastery/module-2-react-hooks",
+        "task": "Build a \"Feedback Form\" component. Use useState for each input field (name, email, message) to create controlled components. Display the form input values in real-time as the user types. Use useEffect to console.log() a message every time the name input changes."
+      },
+      {
+        "days": "5",
+        "focus": "useEffect for Data Fetching & Cleanup",
+        "courseLink": "/courses/react-js-mastery/module-2-react-hooks",
+        "task": "Create a \"Simple Post Viewer\" component. Use useEffect to fetch a list of posts from a public API (e.g., https://jsonplaceholder.typicode.com/posts) when the component mounts. Display a loading message while fetching and handle errors. Implement a cleanup function in useEffect (e.g., for a hypothetical timer)."
+      },
+      {
+        "days": "6",
+        "focus": "Final Review & Project",
+        "task": "Weekly Project: An Interactive To-Do List. Build a React application that functions as a simple to-do list. Features: Display a list of to-do items. Add new to-do items via an input field and a button. Mark items as complete (e.g., toggle a strikethrough). Delete items. Use useState for the list of todos and input fields. Use useEffect to load and save todos to localStorage (for persistence across page refreshes)."
+      },
+      {
+        "days": "7",
+        "focus": "Rest & Prepare for React Router!",
+        "task": ""
+      }
+    ],
+    "checklist": [
+      "Used useState to manage component state.",
+      "Handled various DOM events (e.g., onClick, onChange, onSubmit).",
+      "Created controlled form components.",
+      "Used useEffect for component mounting effects.",
+      "Fetched data using useEffect and fetch (or Axios).",
+      "Understood and implemented cleanup functions in useEffect.",
+      "Completed the \"Interactive To-Do List\" project, demonstrating persistence."
+    ]
+  },
+  {
+    "week": 6,
+    "title": "Frontend - React Router & Advanced State (Context API / Redux Toolkit Intro)",
+    "goal": "This week, you will learn how to create multi-page React applications using React Router and explore more advanced state management patterns with the Context API or an introduction to Redux Toolkit.",
+    "concepts": [
+      "Client-Side Routing: Understanding why and how React Router manages navigation without full page reloads.",
+      "React Router DOM: Setting up BrowserRouter, Routes, and Route components.",
+      "Navigation: Using Link components and the useNavigate hook for programmatic navigation.",
+      "Nested Routes & Protected Routes: Structuring complex routes and restricting access.",
+      "Context API: Providing data to a component tree without prop drilling.",
+      "Redux Toolkit (Introduction): Understanding the core principles of Redux (store, actions, reducers) and how Redux Toolkit simplifies it. (Focus on this if Redux Toolkit is the primary state management tool in your curriculum)."
+    ],
+    "dailyPlan": [
+      {
+        "days": "1-2",
+        "focus": "React Router - Basic Setup & Navigation",
+        "courseLink": "/courses/react-js-mastery/module-3-react-router",
+        "task": "Create a simple \"Blog App\" with three pages: Home (/), About (/about), and Posts (/posts). Use BrowserRouter, Routes, and Route components. Add a navigation bar with Link components to move between pages."
+      },
+      {
+        "days": "3",
+        "focus": "React Router - Dynamic & Nested Routes",
+        "courseLink": "/courses/react-js-mastery/module-3-react-router",
+        "task": "Extend your \"Blog App\". Add a PostDetail page (/posts/:id) that displays a single post based on its ID. Use useParams to extract the ID. Implement Outlet for nested routes (e.g., /posts showing a list, and then /posts/1 for detail)."
+      },
+      {
+        "days": "4",
+        "focus": "Context API for State Management",
+        "courseLink": "/courses/react-js-mastery/module-2-react-hooks",
+        "task": "Refactor your \"Interactive To-Do List\" from Week 5 to use the Context API for managing the global todos state. Create a TodoContext.js and a TodoProvider.js to wrap your App component."
+      },
+      {
+        "days": "5",
+        "focus": "Introduction to Redux Toolkit (Optional/Advanced)",
+        "courseLink": "/courses/react-js-mastery/module-3-state-management",
+        "task": "(If applicable) Set up a basic Redux Toolkit store. Implement a simple counter with actions (increment, decrement) and a reducer. Connect this counter to a React component using useSelector and useDispatch. This is an introductory task, not meant for full mastery yet."
+      },
+      {
+        "days": "6",
+        "focus": "Final Review & Project",
+        "task": "Weekly Project: A Simple E-commerce Product Listing with Details. Create a React application that lists products and allows viewing product details on a separate page. Use React Router for navigation (/products for list, /products/:id for detail). Use Context API (or Redux Toolkit if you covered it) to manage a global cart state that allows adding items. Display product information fetched from a mock API (e.g., JSONPlaceholder for generic items, or local JSON)."
+      },
+      {
+        "days": "7",
+        "focus": "Rest & Prepare for Node.js!",
+        "task": ""
+      }
+    ],
+    "checklist": [
+      "Implemented client-side routing using react-router-dom.",
+      "Used BrowserRouter, Routes, and Route components.",
+      "Navigated between pages using Link and useNavigate.",
+      "Created dynamic routes using URL parameters (:id).",
+      "Used Outlet for nested routes.",
+      "Implemented state sharing using the React Context API.",
+      "(If applicable) Set up a basic Redux Toolkit store and integrated it with a component.",
+      "Completed the \"Simple E-commerce Product Listing with Details\" project."
+    ]
+  },
+  {
+    "week": 7,
+    "title": "Backend - Node.js & Express.js Fundamentals",
+    "goal": "You will now shift to the backend, learning the core concepts of Node.js and setting up your first server-side application with Express.js.",
+    "concepts": [
+      "Node.js Introduction: What Node.js is, its event-driven, non-blocking I/O model.",
+      "NPM (Node Package Manager): Initializing projects (package.json), installing packages.",
+      "Node.js Modules: Understanding require and module.exports.",
+      "HTTP Server: Building a basic HTTP server without a framework.",
+      "Express.js Introduction: Why use Express, basic setup.",
+      "Routing: Handling different HTTP methods (GET, POST) and basic URL paths.",
+      "Middleware: Understanding the concept and basic use cases."
+    ],
+    "dailyPlan": [
+      {
+        "days": "1-2",
+        "focus": "Node.js Core & NPM",
+        "courseLink": "/courses/node-js-and-express-js-mastery/module-1-node-js-fundamentals",
+        "task": "Initialize a new Node.js project (npm init). Write a simple Node.js script that reads a file and prints its content to the console. Experiment with installing and using a simple NPM package (e.g., lodash)."
+      },
+      {
+        "days": "3",
+        "focus": "Building a Simple HTTP Server",
+        "courseLink": "/courses/node-js-and-express-js-mastery/module-1-node-js-fundamentals",
+        "task": "Create a Node.js script that acts as a simple HTTP server. It should respond with \"Hello, World!\" for all requests. Add a basic conditional to respond differently for /about path."
+      },
+      {
+        "days": "4-5",
+        "focus": "Express.js Setup & Basic Routing",
+        "courseLink": "/courses/node-js-and-express-js-mastery/module-2-express-js-framework",
+        "task": "Set up a new Express.js project. Create GET routes for / (home), /api/products, and /api/users. Have these routes send simple JSON responses. Use nodemon for automatic server restarts."
+      },
+      {
+        "days": "6",
+        "focus": "Middleware Introduction & Final Review",
+        "task": "Weekly Project: A Simple Express API. Build an Express.js API with the following routes: GET /api/info: Returns a JSON object like { \"message\": \"Welcome to my API\", \"version\": \"1.0\" }. GET /api/time: Returns the current server time in JSON. Implement a simple custom middleware that logs the incoming request method and URL to the console for every request."
+      },
+      {
+        "days": "7",
+        "focus": "Rest & Prepare for RESTful APIs!",
+        "task": ""
+      }
+    ],
+    "checklist": [
+      "Initialized a Node.js project with npm init.",
+      "Installed and used an NPM package.",
+      "Created a basic HTTP server using Node.js's built-in http module.",
+      "Set up an Express.js application.",
+      "Created GET routes with Express.js.",
+      "Used res.send() and res.json() to send responses.",
+      "Implemented a simple custom middleware function.",
+      "Completed the \"Simple Express API\" project."
+    ]
+  },
+  {
+    "week": 8,
+    "title": "Backend - Express.js RESTful APIs & Advanced Concepts",
+    "goal": "This week, you will dive deeper into building robust RESTful APIs with Express.js, implementing CRUD operations, handling incoming data, and managing errors effectively.",
+    "concepts": [
+      "RESTful API Design Principles: Understanding standard conventions for API endpoints.",
+      "CRUD Operations: Implementing GET, POST, PUT, DELETE endpoints.",
+      "Request Body Handling: Using express.json() and express.urlencoded() (or body-parser).",
+      "Route Parameters: Extracting dynamic values from URLs (/users/:id).",
+      "Query Parameters: Handling optional parameters for filtering and searching.",
+      "Error Handling Middleware: Creating a centralized error handling strategy.",
+      "Environment Variables: Securing sensitive information using .env.",
+      "API Testing: Using Postman or Insomnia to test your API endpoints."
+    ],
+    "dailyPlan": [
+      {
+        "days": "1-2",
+        "focus": "Implementing CRUD for Resources",
+        "courseLink": "/courses/node-js-and-express-js-mastery/module-2-express-js-framework",
+        "task": "Create a mock \"books\" API. Start with a simple in-memory array of book objects. Implement: GET /api/books: Returns all books. GET /api/books/:id: Returns a single book by ID. POST /api/books: Adds a new book (use express.json()). PUT /api/books/:id: Updates an existing book. DELETE /api/books/:id: Deletes a book. Test all endpoints using Postman or Insomnia."
+      },
+      {
+        "days": "3",
+        "focus": "Request Body, Params & Query Parameters",
+        "courseLink": "/courses/node-js-and-express-js-mastery/module-2-express-js-framework",
+        "task": "In your \"books\" API, implement: A GET /api/books?author=... route to filter books by author using query parameters. Ensure your POST and PUT requests correctly parse data from the request body."
+      },
+      {
+        "days": "4-5",
+        "focus": "Error Handling & Environment Variables",
+        "courseLink": "/courses/node-js-and-express-js-mastery/module-3-advanced-back-end-concepts",
+        "task": "Implement a centralized error handling middleware in your Express app. Test it by trying to access a non-existent route or sending invalid data in a POST request. Introduce environment variables (.env file and dotenv package) to store a dummy API key or a secret message. Access it in your Express app."
+      },
+      {
+        "days": "6",
+        "focus": "Advanced Back-End Concepts & Project",
+        "task": "Weekly Project: A Mock API for a Blog. Build a complete mock RESTful API for a blog using Express.js. Resources: posts, comments. Implement full CRUD for posts. Implement GET and POST for comments (e.g., POST /api/posts/:postId/comments). Use in-memory arrays for data storage for now. Ensure proper error handling for invalid IDs or missing data. Use Postman/Insomnia for comprehensive testing."
+      },
+      {
+        "days": "7",
+        "focus": "Rest & Prepare for MongoDB!",
+        "task": ""
+      }
+    ],
+    "checklist": [
+      "Designed and implemented RESTful API endpoints for GET, POST, PUT, DELETE.",
+      "Used express.json() to parse JSON request bodies.",
+      "Extracted route parameters using req.params.",
+      "Handled query parameters using req.query.",
+      "Implemented a global error handling middleware.",
+      "Used environment variables (.env) to manage sensitive data.",
+      "Thoroughly tested API endpoints using Postman/Insomnia.",
+      "Completed the \"Mock API for a Blog\" project."
+    ]
+  },
+  {
+    "week": 9,
+    "title": "Database - MongoDB & Mongoose Basics",
+    "goal": "This week, you will introduce a database to your MERN stack! You'll learn the fundamentals of NoSQL databases, specifically MongoDB, and connect your Express.js API to it using Mongoose.",
+    "concepts": [
+      "NoSQL vs. SQL: Understanding the differences and why MongoDB fits MERN.",
+      "MongoDB Basics: Collections, documents, embedded documents.",
+      "MongoDB Atlas: Setting up a cloud-hosted MongoDB database.",
+      "MongoDB CRUD Operations (Shell/Compass): Basic interactions directly with the database.",
+      "Mongoose ODM: Why use Mongoose, setting up connection.",
+      "Schemas & Models: Defining data structure with Mongoose schemas.",
+      "Mongoose CRUD: Performing database operations from Express using Mongoose models.",
+      "Data Validation: Basic validation with Mongoose."
+    ],
+    "dailyPlan": [
+      {
+        "days": "1-2",
+        "focus": "MongoDB Introduction & Setup",
+        "courseLink": "/courses/mongodb-mastery/module-1-introduction-to-nosql",
+        "task": "Create a free MongoDB Atlas cluster. Connect to it using MongoDB Compass. Perform basic CRUD operations directly in Compass (insert a document, find documents, update one, delete one)."
+      },
+      {
+        "days": "3-4",
+        "focus": "Connecting Express to MongoDB with Mongoose",
+        "courseLink": "/courses/mongodb-mastery/module-3-connecting-node-js-express-with-mongodb",
+        "task": "Take your \"Mock API for a Blog\" from Week 8. Remove the in-memory array. Install Mongoose. Establish a connection to your MongoDB Atlas database from your Express app. Define a Mongoose Schema and Model for a \"Post\" (e.g., title, content, author)."
+      },
+      {
+        "days": "5-6",
+        "focus": "Mongoose CRUD & Validation",
+        "courseLink": "/courses/mongodb-mastery/module-3-connecting-node-js-express-with-mongodb",
+        "task": "Implement Mongoose CRUD operations for your \"Post\" model in the blog API: GET /api/posts: Fetch all posts from MongoDB. GET /api/posts/:id: Fetch a single post by ID. POST /api/posts: Create a new post and save to DB. PUT /api/posts/:id: Update a post in DB. DELETE /api/posts/:id: Delete a post from DB. Add basic Mongoose validation (e.g., title is required, content is required). Test error handling when validation fails."
+      },
+      {
+        "days": "7",
+        "focus": "Rest & Prepare for Full-Stack Integration!",
+        "task": ""
+      }
+    ],
+    "checklist": [
+      "Understood the basics of NoSQL databases and MongoDB's document model.",
+      "Set up a free MongoDB Atlas cluster.",
+      "Performed basic CRUD operations directly in MongoDB Compass.",
+      "Connected an Express.js application to MongoDB using Mongoose.",
+      "Defined a Mongoose Schema and created a Mongoose Model.",
+      "Implemented find(), findById(), save(), findByIdAndUpdate(), findByIdAndDelete() using Mongoose.",
+      "Added basic data validation to Mongoose schemas.",
+      "Successfully integrated and tested your Express API with MongoDB."
+    ]
+  },
+  {
+    "week": 10,
+    "title": "Putting It All Together - Capstone Project 1: Simple CRUD Application",
+    "goal": "This is your first major full-stack project! You will integrate your React frontend with your Node.js/Express/MongoDB backend to build a complete, production-ready CRUD application.",
+    "concepts": [
+      "Frontend-Backend Communication: Making HTTP requests from React (using Fetch or Axios) to your Express API.",
+      "CORS (Cross-Origin Resource Sharing): Understanding and configuring it for local development and deployment.",
+      "Data Flow: Handling data from API response to React state and vice-versa.",
+      "Error Handling (Full-Stack): Propagating errors from backend to frontend.",
+      "Loading States: Displaying UI feedback during API calls.",
+      "Full CRUD Implementation: Ensuring all Create, Read, Update, Delete functionalities work end-to-end."
+    ],
+    "dailyPlan": [
+      {
+        "days": "1-2",
+        "focus": "Connecting React to Express (GET Requests)",
+        "courseLink": "/courses/react-js-mastery/module-3-connecting-front-end-and-back-end",
+        "task": "Take your \"Interactive To-Do List\" (Week 5/6) and the \"Blog API\" (Week 9). Modify the React app to fetch todos (now \"posts\" or \"tasks\") from your Express/MongoDB API instead of localStorage. Display a loading indicator while data is being fetched. Configure CORS in your Express app."
+      },
+      {
+        "days": "3-4",
+        "focus": "Creating & Deleting Data (POST/DELETE)",
+        "courseLink": "/courses/react-js-mastery/module-3-connecting-front-end-and-back-end",
+        "task": "In your integrated To-Do/Blog app, implement the functionality to add new items (POST request) and delete existing items (DELETE request) from the React frontend, persisting changes to your MongoDB backend. Handle success and error messages for these operations."
+      },
+      {
+        "days": "5-6",
+        "focus": "Updating Data (PUT/PATCH) & Full-Stack Error Handling",
+        "courseLink": "/courses/react-js-mastery/module-3-connecting-front-end-and-back-end",
+        "task": "Implement the \"update\" functionality for your items (e.g., marking a todo as complete, editing a blog post title). This will involve a PUT or PATCH request. Enhance error handling: If your backend returns an error (e.g., validation error, item not found), display a user-friendly error message in the React frontend."
+      },
+      {
+        "days": "7",
+        "focus": "Rest & Prepare for Advanced Features!",
+        "task": "Weekly Project: A MERN Stack Simple Blog Application. Build a complete MERN stack blog application from scratch. Frontend (React): Display a list of blog posts. Form to create new posts. Button/link to delete existing posts. Button/form to edit existing posts. Backend (Node.js/Express): RESTful API for /posts (GET, POST, PUT, DELETE). Connects to MongoDB using Mongoose. Post schema with title and content fields. Basic validation."
+      }
+    ],
+    "checklist": [
+      "Configured CORS in the Express.js backend.",
+      "Made GET requests from React to the backend API.",
+      "Displayed loading states and handled API errors in the frontend.",
+      "Implemented POST requests from React to create new resources.",
+      "Implemented DELETE requests from React to remove resources.",
+      "Implemented PUT (or PATCH) requests from React to update resources.",
+      "Ensured end-to-end CRUD functionality between frontend and backend.",
+      "Completed the \"MERN Stack Simple Blog Application\" project."
+    ]
+  },
+  {
+    "week": 11,
+    "title": "Capstone Project 2: A More Complex Application (Authentication & File Uploads)",
+    "goal": "This week, you will elevate your full-stack development skills by adding crucial features like user authentication (login/signup) using JWT, handling user sessions, and implementing file uploads.",
+    "concepts": [
+      "Authentication vs. Authorization: Understanding the difference.",
+      "JSON Web Tokens (JWT): How they work, creating, signing, and verifying tokens.",
+      "User Registration & Login: Hashing passwords (e.g., bcryptjs).",
+      "Protected Routes (Backend): Middleware to verify JWT and restrict access.",
+      "Protected Routes (Frontend): Conditional rendering based on user authentication status.",
+      "Local Storage for Tokens: Storing JWT on the client-side.",
+      "File Uploads: Using multer in Express to handle image or file uploads.",
+      "Image Storage: Storing file paths in MongoDB."
+    ],
+    "dailyPlan": [
+      {
+        "days": "1-2",
+        "focus": "User Authentication - Backend (Signup & Login)",
+        "courseLink": "/courses/node-js-and-express-js-mastery/module-3-advanced-back-end-concepts",
+        "task": "In a new Express.js project (or integrated with your blog app), create a User Mongoose schema (name, email, password). Implement /api/auth/register (hashing password with bcryptjs) and /api/auth/login (comparing password, generating JWT). Test these endpoints with Postman."
+      },
+      {
+        "days": "3-4",
+        "focus": "Protected Routes & Frontend Authentication Flow",
+        "courseLink": "/courses/react-js-mastery/module-3-connecting-front-end-and-back-end",
+        "task": "Create an Express middleware to protect a route (e.g., /api/protected-data) by verifying the JWT. On the React frontend, build signup and login forms. After successful login, store the JWT in localStorage. Use React Context (or Redux) to manage the global authentication state (isLoggedIn, user). Conditionally render UI elements (e.g., \"Login\" vs \"Logout\" button)."
+      },
+      {
+        "days": "5",
+        "focus": "File Uploads",
+        "courseLink": "/courses/node-js-and-express-js-mastery/module-3-advanced-back-end-concepts",
+        "task": "Add multer to your Express backend. Create an endpoint (e.g., POST /api/upload) that accepts an image file and saves it to a uploads folder. Store the file path in your MongoDB document (e.g., add an imageUrl field to your Blog Post schema). From the React frontend, add an <input type=\"file\"> to your create/edit post form and send the file data with FormData to the backend."
+      },
+      {
+        "days": "6",
+        "focus": "Final Review & Project",
+        "task": "Weekly Project: A MERN Stack Social Media Clone (Simplified). Build a simplified social media application focusing on user posts with images. Features: User Registration and Login/Logout. Authenticated users can create posts with text and an image. Display posts, including the image and author. Protected routes (only logged-in users can create posts)."
+      },
+      {
+        "days": "7",
+        "focus": "Rest & Prepare for Deployment!",
+        "task": ""
+      }
+    ],
+    "checklist": [
+      "Implemented user registration (bcryptjs for password hashing).",
+      "Implemented user login (password comparison, JWT generation).",
+      "Created Express middleware to protect API routes with JWT verification.",
+      "Managed authentication state on the React frontend (Context/Redux).",
+      "Stored JWT in localStorage on the client.",
+      "Implemented multer for file uploads on the Express backend.",
+      "Sent file uploads from React frontend using FormData.",
+      "Stored file paths in MongoDB.",
+      "Completed the \"MERN Stack Social Media Clone (Simplified)\" project."
+    ]
+  },
+  {
+    "week": 12,
+    "title": "Deployment & Best Practices, Capstone Refinement",
+    "goal": "You will learn to prepare your MERN stack application for production, deploy both the frontend and backend, and understand crucial best practices for professional development.",
+    "concepts": [
+      "Git & GitHub: Advanced usage (branching, merging, pull requests, .gitignore).",
+      "Frontend Deployment: Deploying React apps (e.g., Netlify, Vercel).",
+      "Backend Deployment: Deploying Node.js/Express apps (e.g., Render, Heroku).",
+      "Environment Variables (Deployment): Setting up environment variables on hosting platforms.",
+      "Connecting Deployed Apps: Ensuring frontend calls the correct deployed backend API.",
+      "Build Processes: Understanding npm run build for React.",
+      "Code Organization & Clean Code: Best practices for maintainability.",
+      "Performance Optimization (Basic): Code splitting, image optimization overview."
+    ],
+    "dailyPlan": [
+      {
+        "days": "1-2",
+        "focus": "Git & GitHub for Collaboration",
+        "courseLink": "/courses/deployment-and-best-practices/module-1-git-and-github",
+        "task": "Initialize your \"Social Media Clone\" project with Git. Make several meaningful commits. Create a new branch, make changes, and merge it back to main. Create a GitHub repository and push your code. Practice creating a Pull Request (even if to yourself)."
+      },
+      {
+        "days": "3-4",
+        "focus": "Frontend Deployment",
+        "courseLink": "/courses/deployment-and-best-practices/module-2-deployment",
+        "task": "Deploy the frontend of your \"Social Media Clone\" to Netlify or Vercel. Ensure all API calls are configured to point to your local backend for now."
+      },
+      {
+        "days": "5",
+        "focus": "Backend Deployment",
+        "courseLink": "/courses/deployment-and-best-practices/module-2-deployment",
+        "task": "Deploy the backend of your \"Social Media Clone\" to Render or Heroku. Configure environment variables (especially your MongoDB URI and JWT secret) on the hosting platform. Update your frontend's API calls to point to the deployed backend URL. Test the deployed full-stack application."
+      },
+      {
+        "days": "6",
+        "focus": "Best Practices & Capstone Refinement",
+        "courseLink": "/courses/deployment-and-best-practices/module-3-best-practices",
+        "task": "Refactor a part of your \"Social Media Clone\" project to improve code readability or folder structure. Review your project against the \"Best Practices\" checklist (e.g., consistent naming, modular components, basic error logging). Add any final touches or minor features to your capstone project."
+      },
+      {
+        "days": "7",
+        "focus": "Internship Wrap-up & Portfolio Building!",
+        "task": "Weekly Project: Fully Deployed MERN Stack Social Media Clone (Production Ready). Ensure your \"Social Media Clone\" is fully deployed, both frontend and backend, and functioning correctly. Document your project's features, tech stack, and deployment steps. Prepare it for your portfolio."
+      }
+    ],
+    "checklist": [
+      "Mastered core Git commands and GitHub workflow.",
+      "Deployed the React frontend to a hosting service (e.g., Netlify/Vercel).",
+      "Deployed the Node.js/Express backend to a hosting service (e.g., Render/Heroku).",
+      "Configured environment variables correctly on deployment platforms.",
+      "Ensured seamless communication between the deployed frontend and backend.",
+      "Applied basic code organization and best practices.",
+      "Refined and debugged the full-stack capstone project.",
+      "Prepared the capstone project for your professional portfolio."
+    ]
+  }
+]

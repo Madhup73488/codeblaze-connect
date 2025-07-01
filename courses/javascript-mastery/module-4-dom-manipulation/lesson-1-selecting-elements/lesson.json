@@ -1,0 +1,8 @@
+{
+  "title": "Lesson 4.1: Selecting Elements",
+  "description": "Learn how to select and manipulate HTML elements using the Document Object Model (DOM).",
+  "order": 1,
+  "duration": 20,
+  "type": "text",
+  "difficulty": "intermediate"
+}

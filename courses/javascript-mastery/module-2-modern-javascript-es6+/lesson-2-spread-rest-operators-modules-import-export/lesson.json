@@ -1,0 +1,8 @@
+{
+  "title": "Lesson 2.2: Spread/Rest Operators, Modules (Import/Export)",
+  "description": "Learn about the spread and rest operators, and how to use modules to organize your code.",
+  "order": 2,
+  "duration": 25,
+  "type": "text",
+  "difficulty": "intermediate"
+}

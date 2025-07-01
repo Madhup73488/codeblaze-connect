@@ -1,0 +1,8 @@
+{
+  "title": "Lesson 3.1: Callbacks and The Event Loop (Conceptual)",
+  "description": "Learn about callbacks and the event loop, the core concepts behind asynchronous JavaScript.",
+  "order": 1,
+  "duration": 20,
+  "type": "text",
+  "difficulty": "intermediate"
+}

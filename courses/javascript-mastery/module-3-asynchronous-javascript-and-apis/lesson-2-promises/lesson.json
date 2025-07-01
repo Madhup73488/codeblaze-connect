@@ -1,0 +1,8 @@
+{
+  "title": "Lesson 3.2: Promises",
+  "description": "Learn how to use Promises to handle asynchronous operations in a more elegant way than callbacks.",
+  "order": 2,
+  "duration": 25,
+  "type": "text",
+  "difficulty": "intermediate"
+}

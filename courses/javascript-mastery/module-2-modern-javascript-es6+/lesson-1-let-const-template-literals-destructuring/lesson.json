@@ -1,0 +1,8 @@
+{
+  "title": "Lesson 2.1: let, const, Template Literals, Destructuring",
+  "description": "Learn about modern JavaScript features like let, const, template literals, and destructuring.",
+  "order": 1,
+  "duration": 20,
+  "type": "text",
+  "difficulty": "intermediate"
+}

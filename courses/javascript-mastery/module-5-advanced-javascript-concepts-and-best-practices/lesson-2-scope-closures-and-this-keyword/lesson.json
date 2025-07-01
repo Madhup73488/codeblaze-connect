@@ -1,0 +1,8 @@
+{
+  "title": "Lesson 5.2: Scope, Closures, and this Keyword",
+  "description": "Learn about scope, closures, and the 'this' keyword in JavaScript.",
+  "order": 2,
+  "duration": 30,
+  "type": "text",
+  "difficulty": "advanced"
+}

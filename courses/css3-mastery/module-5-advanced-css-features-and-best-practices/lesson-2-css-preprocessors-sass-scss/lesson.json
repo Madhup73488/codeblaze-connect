@@ -1,0 +1,8 @@
+{
+  "title": "Lesson 5.2: CSS Preprocessors (Sass/SCSS)",
+  "description": "Learn how to use CSS preprocessors like Sass/SCSS to write more maintainable and powerful CSS.",
+  "order": 2,
+  "duration": 30,
+  "type": "text",
+  "difficulty": "intermediate"
+}
