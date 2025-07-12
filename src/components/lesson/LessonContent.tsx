@@ -1,8 +1,8 @@
-'use client';
+"use client";
 import React, { useEffect, useState } from "react";
-import { Lesson, Course } from '@/lib/course-loader';
-import VideoPlayer from '@/components/lesson/VideoPlayer';
-import InteractiveCode from '@/components/lesson/InteractiveCode';
+import { Lesson, Course } from "@/lib/course-loader";
+import VideoPlayer from "@/components/lesson/VideoPlayer";
+import InteractiveCode from "@/components/lesson/InteractiveCode";
 import {
   Code,
   FileText,
@@ -99,20 +99,30 @@ const LessonContent = ({
 
       {/* Header Section */}
       <div className="relative">
-        <div className="max-w-7xl mx-auto px-4 py-6">
+        <div className="max-w-[100%] mx-auto px-4 py-6">
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 mb-4 animate-slideDown">
-            <Link href={`/courses/${courseId}`} className="hover:underline hover:text-blue-600 dark:hover:text-blue-400">{course.title}</Link>
+            <Link
+              href={`/courses/${courseId}`}
+              className="hover:underline hover:text-blue-600 dark:hover:text-blue-400"
+            >
+              {course.title}
+            </Link>
             <ChevronRight className="w-4 h-4" />
-            <Link href={`/courses/${courseId}`} className="hover:underline hover:text-blue-600 dark:hover:text-blue-400">{currentModule?.title}</Link>
+            <Link
+              href={`/courses/${courseId}`}
+              className="hover:underline hover:text-blue-600 dark:hover:text-blue-400"
+            >
+              {currentModule?.title}
+            </Link>
             <ChevronRight className="w-4 h-4" />
-            <span className="text-slate-900 dark:text-white font-medium">{lesson.title}</span>
+            <span className="text-slate-900 dark:text-white font-medium">
+              {lesson.title}
+            </span>
           </nav>
 
-         
           <div className="lg:grid lg:grid-cols-1 gap-8">
             <div className="lg:col-span-1">
-              
               {/* Lesson Meta */}
               <div className="flex flex-wrap items-center gap-3 mb-4 animate-slideUp">
                 <div
@@ -169,7 +179,7 @@ const LessonContent = ({
       </div>
 
       {/* Content Section */}
-      <div className="max-w-7xl mx-auto px-6 pb-12">
+      <div className="max-w-[100%] mx-auto px-6 pb-12 lg:ml-0">
         <div
           className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-md rounded-3xl border border-white/40 dark:border-slate-700/40 shadow-2xl shadow-slate-200/50 dark:shadow-slate-900/50 overflow-hidden animate-slideUp"
           style={{ animationDelay: "0.5s" }}
@@ -195,7 +205,7 @@ const LessonContent = ({
           )}
 
           {lesson.type === "text" && lesson.content && (
-            <div className="animate-fadeIn prose prose-lg prose-slate max-w-none rounded-2xl p-8 border border-slate-200 dark:border-slate-700 prose-headings:text-slate-900 dark:prose-headings:text-white prose-p:text-slate-600 dark:prose-p:text-slate-300 prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-strong:text-slate-900 dark:prose-strong:text-white prose-code:text-blue-600 dark:prose-code:text-blue-400 prose-pre:bg-slate-100 dark:prose-pre:bg-slate-800 prose-pre:text-slate-900 dark:prose-pre:text-white">
+            <div className="animate-fadeIn prose prose-lg prose-slate max-w-none rounded-2xl p-8 border border-slate-200 dark:border-slate-700 prose-headings:text-slate-900 dark:prose-headings:text-white prose-p:text-slate-600 dark:prose-p:text-white prose-li:text-slate-600 dark:prose-li:text-white prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-strong:text-slate-900 dark:prose-strong:text-white prose-pre:bg-slate-100 dark:prose-pre:bg-slate-800 prose-pre:text-slate-900 dark:prose-pre:text-white">
               <MarkdownRenderer content={lesson.content} />
             </div>
           )}
@@ -291,6 +301,7 @@ const LessonContent = ({
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
           background: linear-gradient(to bottom, #2563eb, #7c3aed);
         }
+
       `}</style>
     </div>
   );

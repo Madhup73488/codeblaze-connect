@@ -342,7 +342,7 @@ body {
   height: 100%;
   background: var(--gradient);
   border-radius: 4px;
-  transition: width 0.3s ease;
+  width: 35%;
 }
 
 .progress-text {
@@ -523,6 +523,12 @@ body {
   height: 100%;
   border-radius: 2px;
   width: 35%;
+}
+
+.video-progress-text {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-align: center;
 }
 
 /* Code Editor */
@@ -763,4 +769,16 @@ body {
 
 .pulse {
   animation: pulse 2s infinite;
+}
+.sm\:px-4 {
+  @media (width >= 40rem) {
+    padding-inline: calc(var(--spacing) * 9);
+  }
+}
+
+code::before,
+code::after,
+pre code::before,
+pre code::after {
+  content: none !important;
 }

@@ -16,7 +16,8 @@ const CoursePage = () => {
   useEffect(() => {
     if (!courseId) return;
     const fetchCourse = async () => {
-      const courseData = await api.get(`/api/courses/${courseId}`);
+      const allCourses = await api.get('/api/courses');
+      const courseData = allCourses.find((c: Course) => c.id === courseId);
       setCourse(courseData);
     };
     fetchCourse();

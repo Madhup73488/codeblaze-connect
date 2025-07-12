@@ -25,7 +25,7 @@ export const useProgress = () => {
     if (!authContext?.user) return;
     try {
       setLoading(true);
-      const response = await apiClient.get(`/api/connect/progress/user/${authContext.user.id}`);
+      const response = await apiClient.get(`/api/connect/user/progress`);
       setProgress(response.data);
     } catch (error) {
       console.error("Failed to load progress:", error);
@@ -47,8 +47,10 @@ export const useProgress = () => {
     timeSpent: number,
     completed: boolean = false
   ) => {
+    if (!authContext?.user) return;
     try {
-      await apiClient.post("/api/connect/progress/lesson-complete", {
+      await apiClient.post("/api/connect/user/progress", {
+        userId: authContext.user.id,
         courseId,
         moduleId,
         lessonId,

@@ -9,7 +9,7 @@ export async function GET() {
     const courseMapping = JSON.parse(fileContent);
     return NextResponse.json(courseMapping);
   } catch (error) {
-    console.error('Failed to get course mapping:', error);
-    return new NextResponse('Internal Server Error', { status: 500 });
+    console.error('Failed to load course mapping:', error);
+    return NextResponse.json({ error: 'Failed to load course mapping' }, { status: 500 });
   }
 }

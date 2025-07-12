@@ -28,7 +28,7 @@ export interface Lesson {
   difficulty?: string;
 }
 
-export const getAllCourses = async (): Promise<Omit<Course, 'modules'>[]> => {
+export const getAllCourses = async (): Promise<Course[]> => {
   const coursesPath = path.join(process.cwd(), 'courses');
   const courseFolders = await fs.readdir(coursesPath, { withFileTypes: true });
 
@@ -37,21 +37,11 @@ export const getAllCourses = async (): Promise<Omit<Course, 'modules'>[]> => {
       .filter(dirent => dirent.isDirectory())
       .map(async (dirent) => {
         const courseId = dirent.name;
-        const coursePath = path.join(coursesPath, courseId);
-        try {
-          const courseJsonContent = await fs.readFile(
-            path.join(coursePath, 'course.json'),
-            'utf8'
-          );
-          const courseJson = JSON.parse(courseJsonContent);
-          return { ...courseJson, id: courseId };
-        } catch (e) {
-          return null;
-        }
+        return getCourseStructure(courseId);
       })
   );
 
-  return courses.filter(Boolean) as Omit<Course, 'modules'>[];
+  return courses.filter(Boolean) as Course[];
 };
 
 export const getCourseStructure = async (courseId: string): Promise<Course | null> => {

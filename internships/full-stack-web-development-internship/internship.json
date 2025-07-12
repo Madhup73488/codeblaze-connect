@@ -1,6 +1,6 @@
 [
   {
-    "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "id": "full-stack-web-development-internship",
     "week": 1,
     "title": "Foundations - Mastering HTML5",
     "goal": "By the end of this week, you will have a rock-solid understanding of HTML5, the foundational language for structuring web content. You will be able to build a semantic and well-structured webpage from scratch.",
@@ -70,7 +70,7 @@
     ]
   },
   {
-    "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "id": "full-stack-web-development-internship",
     "week": 2,
     "title": "Styling - Mastering CSS3",
     "goal": "You will now bring your HTML pages to life! By the end of this week, you will be able to style your websites from scratch, master the Box Model, create responsive layouts using Flexbox and Grid, and add basic animations.",
@@ -133,7 +133,7 @@
     ]
   },
   {
-    "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "id": "full-stack-web-development-internship",
     "week": 3,
     "title": "Logic - JavaScript Fundamentals",
     "goal": "By the end of this week, you will be able to add interactivity to your webpages. You will master core programming concepts like variables, data types, control flow, and functions, which are the building blocks of any dynamic application.",
@@ -187,7 +187,7 @@
     ]
   },
   {
-    "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "id": "full-stack-web-development-internship",
     "week": 4,
     "title": "Frontend - Introduction to React.js",
     "goal": "This week marks your entry into modern frontend development with React.js! You will grasp the core concepts of component-based architecture, JSX, and the fundamental ways React renders and manages UI elements.",
@@ -242,7 +242,7 @@
     ]
   },
   {
-    "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "id": "full-stack-web-development-internship",
     "week": 5,
     "title": "Frontend - React State & Hooks (useState, useEffect)",
     "goal": "This week, you will learn how to make your React applications dynamic and interactive by mastering component state management using React Hooks, particularly useState and useEffect.",
@@ -295,7 +295,7 @@
     ]
   },
   {
-    "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "id": "full-stack-web-development-internship",
     "week": 6,
     "title": "Frontend - React Router & Advanced State (Context API / Redux Toolkit Intro)",
     "goal": "This week, you will learn how to create multi-page React applications using React Router and explore more advanced state management patterns with the Context API or an introduction to Redux Toolkit.",
@@ -355,7 +355,7 @@
     ]
   },
   {
-    "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "id": "full-stack-web-development-internship",
     "week": 7,
     "title": "Backend - Node.js & Express.js Fundamentals",
     "goal": "You will now shift to the backend, learning the core concepts of Node.js and setting up your first server-side application with Express.js.",
@@ -410,7 +410,7 @@
     ]
   },
   {
-    "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "id": "full-stack-web-development-internship",
     "week": 8,
     "title": "Backend - Express.js RESTful APIs & Advanced Concepts",
     "goal": "This week, you will dive deeper into building robust RESTful APIs with Express.js, implementing CRUD operations, handling incoming data, and managing errors effectively.",
@@ -466,7 +466,7 @@
     ]
   },
   {
-    "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "id": "full-stack-web-development-internship",
     "week": 9,
     "title": "Database - MongoDB & Mongoose Basics",
     "goal": "This week, you will introduce a database to your MERN stack! You'll learn the fundamentals of NoSQL databases, specifically MongoDB, and connect your Express.js API to it using Mongoose.",
@@ -517,7 +517,7 @@
     ]
   },
   {
-    "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "id": "full-stack-web-development-internship",
     "week": 10,
     "title": "Putting It All Together - Capstone Project 1: Simple CRUD Application",
     "goal": "This is your first major full-stack project! You will integrate your React frontend with your Node.js/Express/MongoDB backend to build a complete, production-ready CRUD application.",
@@ -566,7 +566,7 @@
     ]
   },
   {
-    "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "id": "full-stack-web-development-internship",
     "week": 11,
     "title": "Capstone Project 2: A More Complex Application (Authentication & File Uploads)",
     "goal": "This week, you will elevate your full-stack development skills by adding crucial features like user authentication (login/signup) using JWT, handling user sessions, and implementing file uploads.",
@@ -623,7 +623,7 @@
     ]
   },
   {
-    "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "id": "full-stack-web-development-internship",
     "week": 12,
     "title": "Deployment & Best Practices, Capstone Refinement",
     "goal": "You will learn to prepare your MERN stack application for production, deploy both the frontend and backend, and understand crucial best practices for professional development.",

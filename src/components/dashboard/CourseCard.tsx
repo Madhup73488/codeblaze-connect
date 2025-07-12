@@ -48,14 +48,14 @@ const CourseCard = ({ course }: CourseCardProps) => (
     </div>
     
     <div className="p-6">
-      <div className="flex justify-between items-start mb-2">
-        <h3 className="text-xl font-bold text-gray-900">{course.title}</h3>
+      <div className="flex justify-between items-start mb-2 min-h-[56px]"> {/* Added min-h to ensure consistent title height */}
+        <h3 className="text-xl font-bold text-gray-900 line-clamp-2">{course.title}</h3>
         <div className="flex items-center gap-1 text-yellow-500">
           <Star size={14} fill="currentColor" />
           <span className="text-sm font-medium">{course.rating}</span>
         </div>
       </div>
-      <p className="text-gray-600 mb-2">{course.description}</p>
+      <p className="text-gray-600 mb-2 line-clamp-2 min-h-[48px]">{course.description}</p> {/* Added min-h to ensure consistent description height */}
       <p className="text-sm text-gray-500 mb-4">by {course.instructor}</p>
       
       <div className="flex justify-between text-xs text-gray-500 mb-4">

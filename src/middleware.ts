@@ -3,12 +3,15 @@ import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
   const token = request.cookies.get('auth_token');
+  const { pathname } = request.nextUrl;
 
-  if (!token && !request.nextUrl.pathname.startsWith('/login')) {
+  // Allow access to public pages without a token
+  const publicPaths = ['/login', '/terms', '/privacy'];
+  if (!token && !publicPaths.some(path => pathname.startsWith(path))) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
 
-  if (token && request.nextUrl.pathname.startsWith('/login')) {
+  if (token && pathname.startsWith('/login')) {
     return NextResponse.redirect(new URL('/dashboard', request.url));
   }
 
@@ -20,5 +23,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+  matcher: ['/((?!api/|_next/static|_next/image|favicon.ico).*)'],
 };

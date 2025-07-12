@@ -1,11 +1,12 @@
-import { getAllCourses } from '@/lib/course-loader';
 import { NextResponse } from 'next/server';
+import { getAllCourses } from '@/lib/course-loader';
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
     const courses = await getAllCourses();
     return NextResponse.json(courses);
   } catch (error) {
-    return new NextResponse('Internal Server Error', { status: 500 });
+    console.error('Failed to load courses:', error);
+    return NextResponse.json({ error: 'Failed to load courses' }, { status: 500 });
   }
 }

@@ -34,15 +34,28 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     const loadUserFromStorage = async () => {
       const token = Cookies.get("auth_token");
-      if (token) {
+      const cachedUser = localStorage.getItem("user");
+
+      if (token && cachedUser) {
+        setUser(JSON.parse(cachedUser));
+        setIsAuthenticated(true);
+        setLoading(false);
+      } else if (token) {
         try {
-          const userProfile = await api.get("/connect/user/profile", true);
+          const userProfile = await api.get("/connect/user/profile");
           if (userProfile) {
             const courseMapping = await api.get('/api/course-mapping');
             
             let accessibleCourseIds = userProfile.accessible_course_ids || [];
             if (userProfile.accessible_internship_ids) {
-              userProfile.accessible_internship_ids.forEach((internshipId: string) => {
+              const updatedInternshipIds = userProfile.accessible_internship_ids.map((id: string) => {
+                if (id === 'a1b2c3d4-e5f6-7890-1234-567890abcdef') {
+                  return 'full-stack-web-development-internship';
+                }
+                return id;
+              });
+
+              updatedInternshipIds.forEach((internshipId: string) => {
                 if (courseMapping[internshipId]) {
                   accessibleCourseIds = [...new Set([...accessibleCourseIds, ...courseMapping[internshipId]])];
                 }
@@ -52,6 +65,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             const updatedUserProfile = { ...userProfile, accessible_course_ids: accessibleCourseIds };
             localStorage.setItem("user", JSON.stringify(updatedUserProfile));
             setUser(updatedUserProfile);
+
+            const allCourses = await api.get('/api/courses');
+            const allInternships = await api.get('/api/internships/all');
+
+            localStorage.setItem('courses', JSON.stringify(allCourses));
+            localStorage.setItem('internships', JSON.stringify(allInternships));
+            localStorage.setItem('courseMapping', JSON.stringify(courseMapping));
             setIsAuthenticated(true);
           } else {
             throw new Error("Failed to fetch user profile");
@@ -73,23 +93,52 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     loadUserFromStorage();
   }, []);
 
-  const login = (token: string, rememberMe: boolean) => {
+  const login = async (token: string, rememberMe: boolean) => {
     const options = rememberMe ? { expires: 7 } : {};
     Cookies.set("auth_token", token, options);
-    const decodedToken = jwt.decode(token) as {
-      userId: string;
-      name: string;
-      email: string;
-    };
-    const userData = {
-      id: decodedToken.userId,
-      name: decodedToken.name,
-      email: decodedToken.email,
-    };
-    localStorage.setItem("user", JSON.stringify(userData));
-    setUser(userData);
-    setIsAuthenticated(true);
-    window.location.href = "/dashboard";
+    try {
+      const userProfile = await api.get("/connect/user/profile");
+      if (userProfile) {
+        const courseMapping = await api.get('/api/course-mapping');
+        
+        let accessibleCourseIds = userProfile.accessible_course_ids || [];
+        if (userProfile.accessible_internship_ids) {
+          const updatedInternshipIds = userProfile.accessible_internship_ids.map((id: string) => {
+            if (id === 'a1b2c3d4-e5f6-7890-1234-567890abcdef') {
+              return 'full-stack-web-development-internship';
+            }
+            return id;
+          });
+
+          updatedInternshipIds.forEach((internshipId: string) => {
+            if (courseMapping[internshipId]) {
+              accessibleCourseIds = [...new Set([...accessibleCourseIds, ...courseMapping[internshipId]])];
+            }
+          });
+        }
+        
+        const updatedUserProfile = { ...userProfile, accessible_course_ids: accessibleCourseIds };
+        localStorage.setItem("user", JSON.stringify(updatedUserProfile));
+        setUser(updatedUserProfile);
+
+        const allCourses = await api.get('/api/courses');
+        const allInternships = await api.get('/api/internships/all');
+
+        localStorage.setItem('courses', JSON.stringify(allCourses));
+        localStorage.setItem('internships', JSON.stringify(allInternships));
+        localStorage.setItem('courseMapping', JSON.stringify(courseMapping));
+        setIsAuthenticated(true);
+        window.location.href = "/dashboard";
+      } else {
+        throw new Error("Failed to fetch user profile");
+      }
+    } catch (error) {
+      console.error("Failed to fetch user profile", error);
+      Cookies.remove("auth_token");
+      localStorage.removeItem("user");
+      setIsAuthenticated(false);
+      setUser(null);
+    }
   };
 
   const logout = () => {

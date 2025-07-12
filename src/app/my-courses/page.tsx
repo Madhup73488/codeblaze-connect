@@ -41,33 +41,62 @@ const MyCoursesPage = () => {
   const [userProgress, setUserProgress] = useState<any>(null);
 
   useEffect(() => {
-    const fetchCoursesAndProgress = async () => {
-      if (!authLoading && user && user.accessible_course_ids && user.accessible_course_ids.length > 0) {
-        const coursePromises = user.accessible_course_ids.map((courseId: string) =>
-          api.get(`/api/courses/${courseId}`)
-        );
-        const [courses, progress] = await Promise.all([
-          Promise.all(coursePromises),
-          api.get('/api/progress'),
-        ]);
+    const loadCoursesAndProgress = () => {
+      if (authLoading || !user) return;
 
-        setAllCourses(courses.filter(Boolean));
+      const cachedCourses = localStorage.getItem('courses');
+      const cachedProgress = localStorage.getItem('progress');
+
+      if (cachedCourses && cachedProgress) {
+        const allCourses = JSON.parse(cachedCourses);
+        const progress = JSON.parse(cachedProgress);
+        const courseIds = user.accessible_course_ids || [];
+        const enrolledCourses = allCourses.filter((course: any) =>
+          courseIds.includes(course.id)
+        );
+        setAllCourses(enrolledCourses);
         setUserProgress(progress);
+      } else {
+        const fetchCoursesAndProgress = async () => {
+          let courseIds: string[] = user.accessible_course_ids || [];
+
+          if (user.accessible_internship_ids && user.accessible_internship_ids.length > 0) {
+            const courseMapping = await api.get('/api/course-mapping');
+            const internshipCourseIds = user.accessible_internship_ids.flatMap(
+              (internshipId: string) => courseMapping[internshipId] || []
+            );
+            courseIds = [...new Set([...courseIds, ...internshipCourseIds])];
+          }
+
+          if (courseIds.length > 0) {
+            const [allCoursesResponse, progress] = await Promise.all([
+              api.get('/api/courses'),
+              api.get('/api/progress'),
+            ]);
+
+            const enrolledCourses = allCoursesResponse.filter((course: any) =>
+              courseIds.includes(course.id)
+            );
+
+            setAllCourses(enrolledCourses);
+            setUserProgress(progress);
+            localStorage.setItem('courses', JSON.stringify(allCoursesResponse));
+            localStorage.setItem('progress', JSON.stringify(progress));
+          }
+        };
+        fetchCoursesAndProgress();
       }
     };
 
-    fetchCoursesAndProgress();
+    loadCoursesAndProgress();
   }, [user, authLoading]);
 
   const CourseCard = ({ course }: { course: any }) => {
-    const nextLesson = userProgress ? getNextLesson(userProgress, course as Course) : null;
-    const continueLink = nextLesson
-      ? `/courses/${course.id}/${nextLesson.moduleId}/${nextLesson.lessonId}`
-      : `/courses/${course.id}`;
+    const continueLink = `/courses/${course.id}`;
 
     return (
       <Link href={continueLink}>
-        <div className="group relative bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-slate-700 hover:border-gray-200 dark:hover:border-slate-600">
+        <div className="group relative bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-slate-700 hover:border-gray-200 dark:hover:border-slate-600 flex flex-col h-[420px] overflow-hidden">
           {/* Course Header */}
       <div className="flex items-start justify-between mb-4">
         <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${course.color} flex items-center justify-center text-white text-xl shadow-lg`}>
@@ -85,11 +114,11 @@ const MyCoursesPage = () => {
       </div>
 
       {/* Course Info */}
-      <div className="mb-4">
-        <h3 className="font-bold text-lg text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+      <div className="mb-4 flex-grow min-h-[150px]">
+        <h3 className="font-bold text-lg text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2">
           {course.title}
         </h3>
-        <p className="text-gray-600 dark:text-gray-400 text-sm mb-3 line-clamp-2">{course.description}</p>
+        <p className="text-gray-600 dark:text-gray-400 text-sm mb-3 line-clamp-2 min-h-[40px]">{course.description}</p>
         
         <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400 mb-3">
           <div className="flex items-center gap-1">
@@ -134,13 +163,13 @@ const MyCoursesPage = () => {
           />
         </div>
         {course.completed ? (
-          <div className="flex items-center gap-2 text-green-600 dark:text-green-400 text-sm font-medium">
+          <div className="flex items-center gap-2 text-green-600 dark:text-green-400 text-sm font-medium min-h-[20px]"> {/* Added min-h for consistent height */}
             <Trophy className="w-4 h-4" />
             Course Completed!
           </div>
         ) : (
-          <div className="text-sm text-gray-600 dark:text-gray-400">
-            Next: <span className="font-medium text-gray-800 dark:text-gray-200">{course.nextLesson}</span>
+          <div className="text-sm text-gray-600 dark:text-gray-400 min-h-[20px]"> {/* Added min-h for consistent height */}
+            Next: <span className="font-medium text-gray-800 dark:text-gray-200 line-clamp-1">{course.nextLesson}</span> {/* Added line-clamp-1 */}
           </div>
         )}
       </div>
@@ -291,7 +320,7 @@ const MyCoursesPage = () => {
               }`}>
                 {achievement.earned && (
                   <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                    <Award className="w-3 h-3 text-white" />
+                    <Award className="w-3 h-3" />
                   </div>
                 )}
                 

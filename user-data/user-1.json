@@ -1,5 +1,8 @@
 {
   "userId": "user-1",
   "enrolledCourses": ["html5-mastery", "css3-mastery", "javascript-mastery"],
-  "enrolledInternships": ["full-stack-developer"]
+  "enrolledInternships": ["full-stack-web-development-internship"],
+  "completedLessons": [
+    "html5-mastery-module-1-html-fundamentals-lesson-1-html-structure-and-elements"
+  ]
 }

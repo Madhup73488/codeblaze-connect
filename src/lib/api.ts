@@ -1,15 +1,17 @@
 import Cookies from "js-cookie";
 
-const baseURL = "http://localhost:5000";
+const baseURL = "http://localhost:3005";
+const authBaseURL = "http://localhost:5000";
 
 const api = {
-  get: async (url: string, useBaseURL = false) => {
+  get: async (url: string) => {
     const token = Cookies.get("auth_token");
     const headers: { [key: string]: string } = {};
     if (token) {
       headers["Authorization"] = `Bearer ${token}`;
     }
-    const response = await fetch(useBaseURL ? `${baseURL}${url}` : url, {
+    const targetURL = url.startsWith('/connect/auth') || url.startsWith('/connect/user/profile') ? `${authBaseURL}${url}` : `${baseURL}${url}`;
+    const response = await fetch(targetURL, {
       headers,
     });
     if (!response.ok) {
@@ -25,7 +27,8 @@ const api = {
     if (token) {
       headers["Authorization"] = `Bearer ${token}`;
     }
-    const response = await fetch(`${baseURL}${url}`, {
+    const targetURL = url.startsWith('/connect/auth') || url.startsWith('/connect/user/profile') ? `${authBaseURL}${url}` : `${baseURL}${url}`;
+    const response = await fetch(targetURL, {
       method: "POST",
       headers,
       body: JSON.stringify(data),

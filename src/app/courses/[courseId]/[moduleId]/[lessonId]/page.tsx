@@ -12,11 +12,12 @@ interface LessonPageProps {
 }
 
 const LessonPage = async ({ params }: LessonPageProps) => {
-  const course = await getCourseStructure(params.courseId);
+  const { courseId, moduleId, lessonId } = params;
+  const course = await getCourseStructure(courseId);
   const lesson = await getLesson(
-    params.courseId,
-    params.moduleId,
-    params.lessonId
+    courseId,
+    moduleId,
+    lessonId
   );
 
   if (!course || !lesson) {
@@ -25,9 +26,9 @@ const LessonPage = async ({ params }: LessonPageProps) => {
 
   return (
     <LessonContent
-      courseId={params.courseId}
-      moduleId={params.moduleId}
-      lessonId={params.lessonId}
+      courseId={courseId}
+      moduleId={moduleId}
+      lessonId={lessonId}
       lesson={lesson}
       course={course}
     />

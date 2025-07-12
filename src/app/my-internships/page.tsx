@@ -50,21 +50,47 @@ const MyInternshipsPage = () => {
   const [totalExperience, setTotalExperience] = useState(0);
 
   useEffect(() => {
-    const fetchInternships = async () => {
-      if (user && user.accessible_internship_ids) {
-        const allInternships = await api.get('/api/internships');
-        if(allInternships && Array.isArray(allInternships)) {
-          const filteredInternships = allInternships.filter((internship: any) =>
-            user.accessible_internship_ids!.includes(internship.id)
-          );
-          setEnrolledInternships(filteredInternships);
-        }
+    const loadInternships = () => {
+      if (loading || !user) return;
+
+      const cachedInternships = localStorage.getItem('internships');
+      if (cachedInternships) {
+        const allInternships = JSON.parse(cachedInternships);
+        const updatedInternshipIds = user.accessible_internship_ids.map((id: string) => {
+          if (id === 'a1b2c3d4-e5f6-7890-1234-567890abcdef') {
+            return 'full-stack-web-development-internship';
+          }
+          return id;
+        });
+        const enrolledInternships = allInternships.filter((internship: any) =>
+          updatedInternshipIds.includes(internship.id)
+        );
+        setEnrolledInternships(enrolledInternships);
+      } else {
+        const fetchInternships = async () => {
+          if (user && user.accessible_internship_ids) {
+            const allInternships = await api.get('/api/internships/all');
+            if(allInternships && Array.isArray(allInternships)) {
+              const updatedInternshipIds = user.accessible_internship_ids.map((id: string) => {
+                if (id === 'a1b2c3d4-e5f6-7890-1234-567890abcdef') {
+                  return 'full-stack-web-development-internship';
+                }
+                return id;
+              });
+
+              const filteredInternships = allInternships.filter((internship: any) =>
+                updatedInternshipIds.includes(internship.id)
+              );
+              setEnrolledInternships(filteredInternships);
+              localStorage.setItem('internships', JSON.stringify(allInternships));
+            }
+          }
+        };
+        fetchInternships();
       }
     };
 
-    if (!loading) {
-      fetchInternships();
-    }
+    loadInternships();
   }, [user, loading]);
 
   const availableInternships = [

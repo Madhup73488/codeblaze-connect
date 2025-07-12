@@ -5,12 +5,27 @@ import path from 'path';
 export async function GET() {
   try {
     const internshipsPath = path.join(process.cwd(), 'internships');
-    const internshipFiles = await fs.readdir(internshipsPath);
+    const internshipFolders = await fs.readdir(internshipsPath, { withFileTypes: true });
 
     const allItems = [];
-    for (const file of internshipFiles) {
-      if (file.endsWith('.json')) {
-        const filePath = path.join(internshipsPath, file);
+    for (const dirent of internshipFolders) {
+      if (dirent.isDirectory()) {
+        const internshipId = dirent.name;
+        const internshipPath = path.join(internshipsPath, internshipId);
+        try {
+          const filePath = path.join(internshipPath, 'internship.json');
+          const fileContent = await fs.readFile(filePath, 'utf8');
+          const jsonData = JSON.parse(fileContent);
+          if (Array.isArray(jsonData)) {
+            allItems.push(...jsonData);
+          } else {
+            allItems.push(jsonData);
+          }
+        } catch (e) {
+          // ignore folders that don't contain an internship.json
+        }
+      } else if (dirent.isFile() && dirent.name.endsWith('.json')) {
+        const filePath = path.join(internshipsPath, dirent.name);
         const fileContent = await fs.readFile(filePath, 'utf8');
         const jsonData = JSON.parse(fileContent);
         if (Array.isArray(jsonData)) {

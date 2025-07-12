@@ -3,7 +3,7 @@ import "./globals.css";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import Layout from "@/components/layout/Layout";
-import NextTopLoader from "nextjs-toploader";
+import NextNProgress from "nextjs-toploader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,9 +29,9 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
+        <NextNProgress color="#29D" showSpinner={false} />
         <AuthProvider>
           <ThemeProvider>
-            <NextTopLoader height={6} />
             <Layout>{children}</Layout>
           </ThemeProvider>
         </AuthProvider>
