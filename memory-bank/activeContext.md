@@ -27,3 +27,4 @@ The login page has been implemented on the frontend and is now connected to the 
 - The `Toaster` component has been added to the layout.
 - Removed the `pages` directory.
 - Fixed the manifest error.
+- Fixed the `params` awaiting warning in the lesson layout and page.

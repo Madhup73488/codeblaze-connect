@@ -32,3 +32,4 @@ The lesson page layout has been updated to meet the new requirements. The main s
 - The `Toaster` component has been added to the layout.
 - Removed the `pages` directory.
 - Fixed the manifest error.
+- Fixed the `params` awaiting warning in the lesson layout and page.
