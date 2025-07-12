@@ -1,37 +1,36 @@
 "use client";
 import { usePathname } from "next/navigation";
-import NavigationBar from "@/components/layout/NavigationBar"; // Keep for mobile header
-import Sidebar from "@/components/layout/Sidebar"; // Import the Sidebar
+import NavigationBar from "@/components/layout/NavigationBar";
+import Sidebar from "@/components/layout/Sidebar";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const { theme } = useTheme();
+  const { isAuthenticated } = useAuth();
   const pathname = usePathname();
+
   const isAuthPage =
     pathname.startsWith("/login") ||
     pathname.startsWith("/forgot-password") ||
-    pathname.startsWith("/reset-password") ||
-    pathname.startsWith("/terms") ||
-    pathname.startsWith("/privacy");
+    pathname.startsWith("/reset-password");
 
   const isLessonPage =
     pathname.startsWith("/courses/") &&
     pathname.includes("/module-") &&
     pathname.includes("/lesson-");
 
+  const showSidebar = isAuthenticated && !isAuthPage && !isLessonPage;
+  const showNavbar = isAuthenticated && !isAuthPage;
+  const mainContentMargin = showSidebar ? "lg:ml-64" : "";
+
   return (
     <div className={`flex h-screen ${theme}`}>
-      {!isAuthPage && !isLessonPage && <Sidebar />} {/* Render Sidebar on desktop, hide on auth and lesson pages */}
-      <div className={`flex flex-col flex-1 ${!isAuthPage && !isLessonPage ? 'lg:ml-64' : ''}`}> {/* Conditionally apply margin */}
-        {" "}
-        {/* Main content wrapper */}
-        {!isAuthPage && <NavigationBar />}{" "} {/* Keep NavigationBar for mobile header */}
+      {showSidebar && <Sidebar />}
+      <div className={`flex flex-col flex-1 ${mainContentMargin}`}>
+        {showNavbar && <NavigationBar />}
         <main className="flex-1 overflow-y-auto">
-          <div className=" ">
-            {" "}
-            {/* Moved padding here */}
-            {children}
-          </div>
+          <div className=" ">{children}</div>
         </main>
       </div>
     </div>

@@ -11,15 +11,6 @@ const NavigationBar = () => {
   const menuRef = useRef(null); // Ref for the mobile menu
   const pathname = usePathname(); // Get current pathname
 
-  // Check if it's a lesson page
-  const isLessonPage =
-    pathname.startsWith("/courses/") &&
-    pathname.includes("/module-") &&
-    pathname.includes("/lesson-");
-
-  if (isLessonPage) {
-    return null; // Do not render NavigationBar on lesson pages
-  }
 
   // Close mobile menu when clicking outside
   useEffect(() => {

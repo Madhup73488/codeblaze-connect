@@ -23,6 +23,7 @@ const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const authContext = useContext(AuthContext);
   const router = useRouter();
 
@@ -35,15 +36,15 @@ const LoginForm = () => {
         rememberMe,
       });
 
-      if (data) {
+      if (data && data.token) {
         if (authContext) {
-          await authContext.login(data.token, rememberMe);
-          router.push("/dashboard");
+          authContext.login(data.token, rememberMe);
         }
       } else {
-        console.error("Login failed");
+        setError(data.message || "Login failed");
       }
     } catch (error) {
+      setError("An error occurred during login.");
       console.error("An error occurred:", error);
     }
   };
@@ -140,6 +141,7 @@ const LoginForm = () => {
          
         </div>
       </div>
+      {error && <p className="text-red-500 text-sm text-center">{error}</p>}
       <div>
         <button
           onClick={handleSubmit}

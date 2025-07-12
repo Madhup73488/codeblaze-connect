@@ -21,11 +21,12 @@ const MarkdownComponents: { [key: string]: FC<any> } = {
         {String(children).replace(/\n$/, '')}
       </SyntaxHighlighter>
     ) : (
-      <code className={`${className || ''} bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded-md text-blue-600 dark:text-blue-300 whitespace-nowrap`} {...props}>
+      <code className={`${className || ''} bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded-md text-blue-600 dark:text-blue-300`} {...props}>
         {children}
       </code>
     );
   },
+  pre: ({ children }) => <pre className="bg-slate-100 dark:bg-slate-800 p-4 rounded-md overflow-x-auto">{children}</pre>,
 };
 
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {

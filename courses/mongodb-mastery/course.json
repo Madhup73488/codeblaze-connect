@@ -1,6 +1,6 @@
 {
   "id": "mongodb-mastery",
   "title": "MongoDB Mastery",
-  "description": "Learn how to use MongoDB to build scalable and high-performance databases.",
-  "thumbnail": "/images/courses/mongodb-mastery.png"
+  "description": "This comprehensive course will guide you through MongoDB, the 'M' in MERN. You will learn to store, manage, and query data efficiently using this popular NoSQL database, integrating it seamlessly with your Node.js and Express.js backend applications.",
+  "icon": "https://www.svgrepo.com/show/303232/mongodb-logo.svg"
 }

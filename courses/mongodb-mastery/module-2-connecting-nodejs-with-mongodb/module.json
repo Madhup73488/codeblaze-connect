@@ -1,0 +1,5 @@
+{
+  "id": "module-2-connecting-nodejs-with-mongodb",
+  "title": "Module 2: Connecting Node.js with MongoDB (Mongoose)",
+  "description": "This module covers how to connect your Node.js applications to MongoDB using Mongoose, a powerful Object Data Modeling (ODM) library."
+}

@@ -32,11 +32,6 @@ const Sidebar = () => {
     }
   }, [user]);
 
-  const isLessonPage =
-    pathname.includes("/courses/") && pathname.split("/").length > 3;
-  if (isLessonPage) {
-    return null;
-  }
 
   return (
     <aside

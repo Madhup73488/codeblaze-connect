@@ -1,0 +1,5 @@
+{
+  "id": "module-2-application-security",
+  "title": "Module 2: Application Security",
+  "description": "This module covers the most common security vulnerabilities in web applications and provides practical guidance on how to secure a MERN stack application from these threats."
+}

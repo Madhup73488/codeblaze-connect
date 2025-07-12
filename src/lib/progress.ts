@@ -43,14 +43,14 @@ export const canAccessLesson = (
 };
 
 export const getNextLesson = (
-  userProgress: UserProgress,
-  course: Course
-): { moduleId: string; lessonId: string } | null => {
+  course: Course,
+  completedLessons: string[]
+): { moduleId: string; lessonId: string; title: string } | null => {
   for (const module of course.modules) {
     for (const lesson of module.lessons) {
       const progressKey = `${course.id}-${module.id}-${lesson.id}`;
-      if (!userProgress.completedLessons.includes(progressKey)) {
-        return { moduleId: module.id, lessonId: lesson.id };
+      if (!completedLessons.includes(progressKey)) {
+        return { moduleId: module.id, lessonId: lesson.id, title: lesson.title };
       }
     }
   }

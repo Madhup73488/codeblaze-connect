@@ -1,0 +1,16 @@
+{
+  "id": "frontend-development-engineer-intern",
+  "title": "Frontend Development Engineer Intern (React & Next.js)",
+  "description": "This internship is designed to provide you with the skills and experience needed to become a successful frontend developer. You will learn to build modern, responsive, and performant web applications using React, Next.js, and other modern technologies.",
+  "technologies": [
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Tailwind CSS",
+    "Framer Motion",
+    "Figma",
+    "Storybook",
+    "Vercel"
+  ],
+  "weeks": []
+}

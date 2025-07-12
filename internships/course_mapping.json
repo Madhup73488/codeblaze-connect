@@ -7,5 +7,12 @@
     "node-js-and-express-js-mastery",
     "mongodb-mastery",
     "deployment-and-best-practices"
+  ],
+  "frontend-development-engineer-intern": [
+    "html5-mastery",
+    "css3-mastery",
+    "javascript-mastery",
+    "react-js-mastery",
+    "deployment-and-best-practices"
   ]
 }

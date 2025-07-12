@@ -1,6 +1,6 @@
 {
   "id": "deployment-and-best-practices",
   "title": "Deployment and Best Practices",
-  "description": "Learn how to deploy your applications and follow best practices for professional development.",
-  "thumbnail": "/images/courses/deployment-and-best-practices.png"
+  "description": "Learn how to deploy your applications and follow best practices for professional development. This course is designed for MERN stack web development interns, providing in-depth knowledge and practical skills to transition from development to production-ready applications.",
+  "icon": "https://static.vecteezy.com/system/resources/previews/021/236/247/non_2x/campaign-production-deployment-marketing-color-icon-illustration-vector.jpg"
 }

@@ -10,7 +10,7 @@ const api = {
     if (token) {
       headers["Authorization"] = `Bearer ${token}`;
     }
-    const targetURL = url.startsWith('/connect/auth') || url.startsWith('/connect/user/profile') ? `${authBaseURL}${url}` : `${baseURL}${url}`;
+    const targetURL = url.startsWith('/connect/auth') || url.startsWith('/connect/user') ? `${authBaseURL}${url}` : `${baseURL}${url}`;
     const response = await fetch(targetURL, {
       headers,
     });
@@ -27,15 +27,12 @@ const api = {
     if (token) {
       headers["Authorization"] = `Bearer ${token}`;
     }
-    const targetURL = url.startsWith('/connect/auth') || url.startsWith('/connect/user/profile') ? `${authBaseURL}${url}` : `${baseURL}${url}`;
+    const targetURL = url.startsWith('/connect/auth') || url.startsWith('/connect/user') ? `${authBaseURL}${url}` : `${baseURL}${url}`;
     const response = await fetch(targetURL, {
       method: "POST",
       headers,
       body: JSON.stringify(data),
     });
-    if (!response.ok) {
-      return null;
-    }
     return response.json();
   },
   put: async (url: string, data: any) => {
@@ -46,7 +43,7 @@ const api = {
     if (token) {
       headers["Authorization"] = `Bearer ${token}`;
     }
-    const targetURL = url.startsWith('/connect/auth') || url.startsWith('/connect/user/profile') ? `${authBaseURL}${url}` : `${baseURL}${url}`;
+    const targetURL = url.startsWith('/connect/auth') || url.startsWith('/connect/user') ? `${authBaseURL}${url}` : `${baseURL}${url}`;
     const response = await fetch(targetURL, {
       method: "PUT",
       headers,

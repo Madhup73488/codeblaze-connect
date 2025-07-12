@@ -1,6 +1,6 @@
 {
   "id": "react-js-mastery",
   "title": "React.js Mastery",
-  "description": "Master the fundamentals of React.js and build modern, interactive web applications.",
-  "thumbnail": "/images/courses/react-js-mastery.png"
+  "description": "This comprehensive course will teach you React.js, the 'R' in MERN, enabling you to build dynamic, interactive, and efficient user interfaces. You will learn component-based architecture, state management, routing, and how to connect your frontend with the backend APIs.",
+  "icon": "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"
 }

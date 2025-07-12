@@ -1,0 +1,5 @@
+{
+  "id": "module-3-advanced-mongodb-and-mongoose-features",
+  "title": "Module 3: Advanced MongoDB & Mongoose Features",
+  "description": "This module covers advanced features of MongoDB and Mongoose, including the aggregation pipeline and indexing for performance optimization."
+}

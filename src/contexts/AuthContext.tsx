@@ -52,6 +52,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 if (id === 'a1b2c3d4-e5f6-7890-1234-567890abcdef') {
                   return 'full-stack-web-development-internship';
                 }
+                if (id === 'b2c3d4e5-f6a7-8901-2345-67890abcdef1') {
+                  return 'frontend-development-engineer-intern';
+                }
                 return id;
               });
 
@@ -93,61 +96,32 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     loadUserFromStorage();
   }, []);
 
-  const login = async (token: string, rememberMe: boolean) => {
+  const login = (token: string, rememberMe: boolean) => {
     const options = rememberMe ? { expires: 7 } : {};
     Cookies.set("auth_token", token, options);
-    try {
-      const userProfile = await api.get("/connect/user/profile");
-      if (userProfile) {
-        const courseMapping = await api.get('/api/course-mapping');
-        
-        let accessibleCourseIds = userProfile.accessible_course_ids || [];
-        if (userProfile.accessible_internship_ids) {
-          const updatedInternshipIds = userProfile.accessible_internship_ids.map((id: string) => {
-            if (id === 'a1b2c3d4-e5f6-7890-1234-567890abcdef') {
-              return 'full-stack-web-development-internship';
-            }
-            return id;
-          });
-
-          updatedInternshipIds.forEach((internshipId: string) => {
-            if (courseMapping[internshipId]) {
-              accessibleCourseIds = [...new Set([...accessibleCourseIds, ...courseMapping[internshipId]])];
-            }
-          });
-        }
-        
-        const updatedUserProfile = { ...userProfile, accessible_course_ids: accessibleCourseIds };
-        localStorage.setItem("user", JSON.stringify(updatedUserProfile));
-        setUser(updatedUserProfile);
-
-        const allCourses = await api.get('/api/courses');
-        const allInternships = await api.get('/api/internships/all');
-
-        localStorage.setItem('courses', JSON.stringify(allCourses));
-        localStorage.setItem('internships', JSON.stringify(allInternships));
-        localStorage.setItem('courseMapping', JSON.stringify(courseMapping));
-        setIsAuthenticated(true);
-        window.location.href = "/dashboard";
-      } else {
-        throw new Error("Failed to fetch user profile");
-      }
-    } catch (error) {
-      console.error("Failed to fetch user profile", error);
-      Cookies.remove("auth_token");
-      localStorage.removeItem("user");
-      setIsAuthenticated(false);
-      setUser(null);
-    }
+    localStorage.removeItem("user");
+    window.location.href = "/dashboard";
   };
 
   const logout = () => {
     Cookies.remove("auth_token");
     localStorage.removeItem("user");
-    setIsAuthenticated(false);
-    setUser(null);
     window.location.href = "/login";
   };
+
+  const [isInitialRender, setIsInitialRender] = useState(true);
+
+  useEffect(() => {
+    setIsInitialRender(false);
+  }, []);
+
+  if (loading || (isInitialRender && !isAuthenticated)) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, user, login, logout, loading }}>

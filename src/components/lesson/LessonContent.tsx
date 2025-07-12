@@ -179,7 +179,7 @@ const LessonContent = ({
       </div>
 
       {/* Content Section */}
-      <div className="max-w-[100%] mx-auto px-6 pb-12 lg:ml-0">
+      <div className="max-w-6xl mx-auto px-6 pb-12 lg:ml-0">
         <div
           className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-md rounded-3xl border border-white/40 dark:border-slate-700/40 shadow-2xl shadow-slate-200/50 dark:shadow-slate-900/50 overflow-hidden animate-slideUp"
           style={{ animationDelay: "0.5s" }}
@@ -301,7 +301,6 @@ const LessonContent = ({
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
           background: linear-gradient(to bottom, #2563eb, #7c3aed);
         }
-
       `}</style>
     </div>
   );
