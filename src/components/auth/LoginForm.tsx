@@ -2,7 +2,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import {
   ChevronLeft,
   ChevronRight,
@@ -12,8 +11,6 @@ import {
   Award,
   Zap,
   Target,
-  Mail,
-  Lock,
 } from "lucide-react";
 import { AuthContext } from "@/contexts/AuthContext";
 import api from "@/lib/api";
@@ -25,7 +22,6 @@ const LoginForm = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const authContext = useContext(AuthContext);
-  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

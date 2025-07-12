@@ -1,18 +1,35 @@
 'use client';
 import React, { useState } from "react";
+import Image from "next/image";
 import {
   Search,
-  Filter,
   BookOpen,
   Clock,
   Star,
   Users,
   ChevronRight,
-  Play,
-  CheckCircle2,
   TrendingUp,
   Award,
 } from "lucide-react";
+
+interface Course {
+  id: number;
+  title: string;
+  description: string;
+  iconUrl: string;
+  lessons: number;
+  hours: number;
+  progress: number;
+  instructor: string;
+  difficulty: string;
+  rating: number;
+  students: number;
+  price: number;
+  category: string;
+  tags: string[];
+  trending: boolean;
+  featured: boolean;
+}
 
 const CoursesPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -247,7 +264,7 @@ const CoursesPage = () => {
     }
   };
 
-  const CourseCard = ({ course }: { course: any }) => (
+  const CourseCard = ({ course }: { course: Course }) => (
     <div className="group bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 hover:border-gray-200 dark:hover:border-gray-600 hover:shadow-lg transition-all duration-300 overflow-hidden relative cursor-pointer">
       {/* Badges */}
       <div className="absolute top-3 left-3 z-10 flex gap-1">
@@ -267,7 +284,7 @@ const CoursesPage = () => {
 
       {/* Course Image/Header */}
       <div className="relative h-32 lg:h-36 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-700 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center">
-        <img src={course.iconUrl} alt={course.title} className="w-16 h-16" />
+        <Image src={course.iconUrl} alt={course.title} width={64} height={64} />
         <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
       </div>
 

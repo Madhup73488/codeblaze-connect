@@ -36,7 +36,7 @@ const PrivacyPolicyPage = () => {
             <h2 className="text-2xl font-semibold mt-6">1. Information we collect</h2>
             <p>
               We only ask for personal information when we truly need it to provide a service to you. We collect it by
-              fair and lawful means, with your knowledge and consent. We also let you know why we’re collecting it and
+              fair and lawful means, with your knowledge and consent. We also let you know why we're collecting it and
               how it will be used.
             </p>
             <h2 className="text-2xl font-semibold mt-6">2. How we use your information</h2>

@@ -6,51 +6,58 @@ import {
   Play,
   Clock,
   Users,
-  BookOpen,
-  Trophy,
   Star,
   ChevronRight,
-  Calendar,
   Target,
-  Award,
-  TrendingUp,
   MoreHorizontal,
   MapPin,
   Building,
   DollarSign,
-  Briefcase,
   CheckCircle,
   AlertCircle,
   User,
-  Mail,
-  Phone,
-  ExternalLink,
   FileText,
-  Upload
 } from 'lucide-react';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
 import api from '@/lib/api';
 
-const iconMap: { [key: string]: React.ElementType } = {
-  Briefcase,
-  Clock,
-  CheckCircle,
-  TrendingUp,
-};
+interface Internship {
+  id: string;
+  title: string;
+  company: string;
+  description: string;
+  duration: string;
+  stipend: string;
+  location: string;
+  color: string;
+  logo: string;
+  rating: number;
+  type: string;
+  skills: string[];
+  applicants: number;
+  deadline: string;
+  requirements: string[];
+  mentor?: string;
+  progress?: number;
+  weeksPassed?: number;
+  totalWeeks?: number;
+  tasksCompleted?: number;
+  totalTasks?: number;
+  nextTask?: string;
+  status?: 'In Progress' | 'Nearly Complete' | 'Completed';
+  goal?: string;
+}
 
 const MyInternshipsPage = () => {
   const { user, loading } = useAuth();
   const [searchTerm, setSearchTerm] = useState('');
   const [filterOpen, setFilterOpen] = useState(false);
   const [selectedTab, setSelectedTab] = useState('enrolled');
-  const [enrolledInternships, setEnrolledInternships] = useState<any[]>([]);
-  const [achievements, setAchievements] = useState<any[]>([]);
-  const [stats, setStats] = useState<any[]>([]);
-  const [totalExperience, setTotalExperience] = useState(0);
+  const [enrolledInternships, setEnrolledInternships] = useState<Internship[]>([]);
 
   useEffect(() => {
-    const loadInternships = () => {
+    const loadInternships = async () => {
       if (loading || !user) return;
 
       const cachedInternships = localStorage.getItem('internships');
@@ -62,31 +69,28 @@ const MyInternshipsPage = () => {
           }
           return id;
         });
-        const enrolledInternships = allInternships.filter((internship: any) =>
+        const enrolled = allInternships.filter((internship: Internship) =>
           updatedInternshipIds.includes(internship.id)
         );
-        setEnrolledInternships(enrolledInternships);
+        setEnrolledInternships(enrolled);
       } else {
-        const fetchInternships = async () => {
-          if (user && user.accessible_internship_ids) {
-            const allInternships = await api.get('/api/internships/all');
-            if(allInternships && Array.isArray(allInternships)) {
-              const updatedInternshipIds = user.accessible_internship_ids.map((id: string) => {
-                if (id === 'a1b2c3d4-e5f6-7890-1234-567890abcdef') {
-                  return 'full-stack-web-development-internship';
-                }
-                return id;
-              });
+        if (user && user.accessible_internship_ids) {
+          const allInternships = await api.get('/api/internships/all');
+          if(allInternships && Array.isArray(allInternships)) {
+            const updatedInternshipIds = user.accessible_internship_ids.map((id: string) => {
+              if (id === 'a1b2c3d4-e5f6-7890-1234-567890abcdef') {
+                return 'full-stack-web-development-internship';
+              }
+              return id;
+            });
 
-              const filteredInternships = allInternships.filter((internship: any) =>
-                updatedInternshipIds.includes(internship.id)
-              );
-              setEnrolledInternships(filteredInternships);
-              localStorage.setItem('internships', JSON.stringify(allInternships));
-            }
+            const filteredInternships = allInternships.filter((internship: Internship) =>
+              updatedInternshipIds.includes(internship.id)
+            );
+            setEnrolledInternships(filteredInternships);
+            localStorage.setItem('internships', JSON.stringify(allInternships));
           }
-        };
-        fetchInternships();
+        }
       }
     };
 
@@ -164,7 +168,7 @@ const MyInternshipsPage = () => {
     }
   ];
 
-  const InternshipCard = ({ internship, isEnrolled = false }: { internship: any, isEnrolled: boolean }) => (
+  const InternshipCard = ({ internship, isEnrolled = false }: { internship: Internship, isEnrolled: boolean }) => (
     <div className="group relative bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-slate-700 hover:border-gray-200 dark:hover:border-slate-600">
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
@@ -323,29 +327,10 @@ const MyInternshipsPage = () => {
             </div>
             <div className="flex items-center gap-3">
               <div className="text-right">
-                <div className="text-2xl font-bold text-gray-900 dark:text-white">{totalExperience}h</div>
+                <div className="text-2xl font-bold text-gray-900 dark:text-white">0h</div>
                 <div className="text-sm text-gray-500 dark:text-gray-400">Total Experience</div>
               </div>
             </div>
-          </div>
-
-          {/* Stats Cards */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            {stats.map((stat, index) => {
-              const Icon = stat.icon;
-              return (
-              <div key={index} className="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm border border-gray-100 dark:border-slate-700">
-                <div className="flex items-center gap-3">
-                  <div className={`p-2 rounded-lg bg-gray-50 dark:bg-slate-700`}>
-                    <Icon className={`w-5 h-5 ${stat.color}`} />
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-gray-900 dark:text-white">{stat.value}</div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">{stat.label}</div>
-                  </div>
-                </div>
-              </div>
-            )})}
           </div>
         </div>
 
@@ -399,107 +384,107 @@ const MyInternshipsPage = () => {
           <>
             {/* Active Internships */}
             <div className="mb-12">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Active Internships</h2>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Active Internships</h2>
+              <button className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium flex items-center gap-1">
+                View All
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+              
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {loading ? (
+                <div className="col-span-full text-center text-gray-500 dark:text-gray-400">
+                  Loading...
+                </div>
+              ) : enrolledInternships.length > 0 ? (
+                enrolledInternships
+                  .filter((internship) =>
+                    internship.title
+                      .toLowerCase()
+                      .includes(searchTerm.toLowerCase()),
+                  )
+                  .map((internship) => (
+                    <InternshipCard
+                      key={internship.id}
+                      internship={internship}
+                      isEnrolled={true}
+                    />
+                  ))
+              ) : (
+                <div className="col-span-full text-center text-gray-500 dark:text-gray-400">
+                  No internship program enrolled.
+                </div>
+              )}
+            </div>
+          </div>
+
+
+        </>
+      ) : (
+        <>
+          {/* Available Internships */}
+          <div className="mb-12">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Available Internship Programs</h2>
+              <div className="flex items-center gap-4">
+                <span className="text-sm text-gray-600 dark:text-gray-400">{availableInternships.length} programs available</span>
                 <button className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium flex items-center gap-1">
                   View All
                   <ChevronRight className="w-4 h-4" />
                 </button>
               </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {loading ? (
-                  <div className="col-span-full text-center text-gray-500 dark:text-gray-400">
-                    Loading...
-                  </div>
-                ) : enrolledInternships.length > 0 ? (
-                  enrolledInternships
-                    .filter((internship) =>
-                      internship.title
-                        .toLowerCase()
-                        .includes(searchTerm.toLowerCase()),
-                    )
-                    .map((internship) => (
-                      <InternshipCard
-                        key={internship.id}
-                        internship={internship}
-                        isEnrolled={true}
-                      />
-                    ))
-                ) : (
-                  <div className="col-span-full text-center text-gray-500 dark:text-gray-400">
-                    No internship program enrolled.
-                  </div>
-                )}
-              </div>
             </div>
-
-
-          </>
-        ) : (
-          <>
-            {/* Available Internships */}
-            <div className="mb-12">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Available Internship Programs</h2>
-                <div className="flex items-center gap-4">
-                  <span className="text-sm text-gray-600 dark:text-gray-400">{availableInternships.length} programs available</span>
-                  <button className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium flex items-center gap-1">
-                    View All
-                    <ChevronRight className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {availableInternships
-                  .filter(internship => internship.title.toLowerCase().includes(searchTerm.toLowerCase()))
-                  .map((internship) => (
-                    <InternshipCard key={internship.id} internship={internship} isEnrolled={false} />
-                  ))}
-              </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {availableInternships
+                .filter(internship => internship.title.toLowerCase().includes(searchTerm.toLowerCase()))
+                .map((internship) => (
+                  <InternshipCard key={internship.id} internship={internship} isEnrolled={false} />
+                ))}
             </div>
+          </div>
 
-            {/* Application Tips */}
-            <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white mb-8">
-              <h3 className="text-2xl font-bold mb-4">Application Tips</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
-                    <FileText className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-1">Perfect Your Resume</h4>
-                    <p className="text-blue-100 text-sm">Tailor your resume to highlight relevant skills and projects</p>
-                  </div>
+          {/* Application Tips */}
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white mb-8">
+            <h3 className="text-2xl font-bold mb-4">Application Tips</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="flex items-start gap-3">
+                <div className="w-8 h-8 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
+                  <FileText className="w-4 h-4" />
                 </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
-                    <User className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-1">Build Your Portfolio</h4>
-                    <p className="text-blue-100 text-sm">Showcase your best work and demonstrate your capabilities</p>
-                  </div>
+                <div>
+                  <h4 className="font-semibold mb-1">Perfect Your Resume</h4>
+                  <p className="text-blue-100 text-sm">Tailor your resume to highlight relevant skills and projects</p>
                 </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
-                    <Target className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-1">Apply Early</h4>
-                    <p className="text-blue-100 text-sm">Don't wait until the deadline - early applications get more attention</p>
-                  </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-8 h-8 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
+                  <User className="w-4 h-4" />
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-1">Build Your Portfolio</h4>
+                  <p className="text-blue-100 text-sm">Showcase your best work and demonstrate your capabilities</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-8 h-8 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
+                  <Target className="w-4 h-4" />
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-1">Apply Early</h4>
+                  <p className="text-blue-100 text-sm">Don't wait until the deadline - early applications get more attention</p>
                 </div>
               </div>
             </div>
-          </>
-        )}
+          </div>
+        </>
+      )}
 
 
-      </div>
     </div>
-  );
+  </div>
+);
 };
 
 export default MyInternshipsPage;

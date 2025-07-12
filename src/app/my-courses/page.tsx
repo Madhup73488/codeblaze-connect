@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import {
   Filter,
   Search,
@@ -7,36 +8,59 @@ import {
   Clock,
   Users,
   BookOpen,
-  Book,
   Trophy,
   Star,
   ChevronRight,
   Calendar,
-  Target,
   Award,
-  TrendingUp,
   MoreHorizontal,
 } from "lucide-react";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
 import api from "@/lib/api";
 import { getNextLesson } from "@/lib/progress";
-import { Course } from "@/lib/course-loader";
 
-const iconMap: { [key: string]: React.ElementType } = {
-  BookOpen,
-  Trophy,
-  TrendingUp,
-  Target,
-  Book,
-};
+interface CourseData {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  rating: number;
+  lessons: number;
+  hours: number;
+  instructor: string;
+  difficulty: string;
+  color: string;
+  modules: Module[];
+  thumbnail: string;
+}
+
+interface Module {
+  id: string;
+  title: string;
+  description: string;
+  order: number;
+  lessons: any[];
+}
+
+interface UserProgress {
+  courseProgress: {
+    [courseId: string]: {
+      completedLessons: number;
+      totalLessons: number;
+      timeSpent: number;
+      lastAccessed: string;
+    };
+  };
+  completedLessons: string[];
+}
 
 const MyCoursesPage = () => {
   const { user, loading: authLoading } = useAuth();
   const [searchTerm, setSearchTerm] = useState("");
   const [filterOpen, setFilterOpen] = useState(false);
-  const [allCourses, setAllCourses] = useState<any[]>([]);
-  const [userProgress, setUserProgress] = useState<any>(null);
+  const [allCourses, setAllCourses] = useState<CourseData[]>([]);
+  const [userProgress, setUserProgress] = useState<UserProgress | null>(null);
 
   useEffect(() => {
     const fetchCoursesAndProgress = async () => {
@@ -61,7 +85,7 @@ const MyCoursesPage = () => {
           api.get("/api/progress"),
         ]);
 
-        const enrolledCourses = allCoursesResponse.filter((course: any) =>
+        const enrolledCourses = allCoursesResponse.filter((course: CourseData) =>
           courseIds.includes(course.id)
         );
 
@@ -73,7 +97,7 @@ const MyCoursesPage = () => {
     fetchCoursesAndProgress();
   }, [user, authLoading]);
 
-  const CourseCard = ({ course }: { course: any }) => {
+  const CourseCard = ({ course }: { course: CourseData }) => {
     const courseProgress = userProgress?.courseProgress?.[course.id];
     const progressPercentage = courseProgress
       ? (courseProgress.completedLessons / courseProgress.totalLessons) * 100
@@ -93,7 +117,7 @@ const MyCoursesPage = () => {
             <div
               className={`w-12 h-12 rounded-xl bg-white flex items-center justify-center text-white text-xl shadow-lg`}
             >
-              <img src={course.icon} alt={course.title} className="w-8 h-8 rounded-md" />
+              <Image src={course.icon} alt={course.title} width={32} height={32} className="rounded-md" />
             </div>
             <div className="flex items-center gap-2">
               <div className="flex items-center gap-1 text-sm text-gray-600 dark:text-gray-400">
@@ -231,7 +255,7 @@ const MyCoursesPage = () => {
                     ? (() => {
                         let totalSeconds = 0;
                         Object.values(userProgress.courseProgress).forEach(
-                          (course: any) => {
+                          (course) => {
                             totalSeconds += course.timeSpent || 0;
                           }
                         );

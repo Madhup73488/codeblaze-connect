@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getAllCourses } from '@/lib/course-loader';
 
-export async function GET(request: Request) {
+export async function GET() {
   try {
     const courses = await getAllCourses();
     return NextResponse.json(courses);

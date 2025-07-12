@@ -1,15 +1,14 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 import { useAuth } from "@/contexts/AuthContext";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation"; // Import usePathname
 
 const NavigationBar = () => {
   const { user, logout } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef(null); // Ref for the mobile menu
-  const pathname = usePathname(); // Get current pathname
 
 
   // Close mobile menu when clicking outside
@@ -56,10 +55,12 @@ const NavigationBar = () => {
               href="/dashboard"
               className="flex items-center space-x-2 group"
             >
-              <img
+              <Image
                 src="/logo.png"
                 alt="Codeblaze Connect Logo"
-                className="w-9 h-9 transition-transform group-hover:scale-105"
+                width={36}
+                height={36}
+                className="transition-transform group-hover:scale-105"
               />
               <h1 className="text-xl sm:text-2xl font-extrabold text-gray-900 dark:text-white tracking-tight">
                 Codeblaze{" "}

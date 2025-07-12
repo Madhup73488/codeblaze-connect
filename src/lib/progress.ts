@@ -46,11 +46,11 @@ export const getNextLesson = (
   course: Course,
   completedLessons: string[]
 ): { moduleId: string; lessonId: string; title: string } | null => {
-  for (const module of course.modules) {
-    for (const lesson of module.lessons) {
-      const progressKey = `${course.id}-${module.id}-${lesson.id}`;
+  for (const m of course.modules) {
+    for (const lesson of m.lessons) {
+      const progressKey = `${course.id}-${m.id}-${lesson.id}`;
       if (!completedLessons.includes(progressKey)) {
-        return { moduleId: module.id, lessonId: lesson.id, title: lesson.title };
+        return { moduleId: m.id, lessonId: lesson.id, title: lesson.title };
       }
     }
   }

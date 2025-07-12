@@ -25,7 +25,7 @@ export const FocusModeProvider = ({ children }: { children: ReactNode }) => {
         }
         setIsFocusMode(false);
       }
-    } catch (error) {
+    } catch {
       console.log('Fullscreen not supported or blocked');
       setIsFocusMode(prev => !prev);
     }

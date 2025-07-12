@@ -1,10 +1,7 @@
 'use client';
 import React, { useState } from 'react';
-import { useSearchParams } from 'next/navigation';
 
 const ResetPasswordForm = () => {
-  const searchParams = useSearchParams();
-  const token = searchParams.get('token');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');

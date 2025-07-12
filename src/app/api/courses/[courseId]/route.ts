@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { getCourseStructure } from '@/lib/course-loader';
 
 export async function GET(
-  request: Request,
+  _request: Request,
   { params }: { params: { courseId: string } }
 ) {
   try {
@@ -11,7 +11,7 @@ export async function GET(
       return new NextResponse('Course not found', { status: 404 });
     }
     return NextResponse.json(course);
-  } catch (error) {
+  } catch {
     return new NextResponse('Internal Server Error', { status: 500 });
   }
 }

@@ -24,3 +24,10 @@ The lesson page layout has been updated to meet the new requirements. The main s
 - Configured `api.ts` to route PUT requests for `/connect/user/profile` to `http://localhost:5000`.
 - Updated the profile page to fetch the full user profile from the backend, including the phone number, to correctly populate the form fields.
 - Corrected the API endpoint URL in the profile page to ensure that profile updates are sent to the correct endpoint.
+- The favicons have been updated and the `layout.tsx` file has been updated to include the new favicons.
+- The profile page has been updated to use `react-hook-form` and `zod` for form validation.
+- The `AuthContext` has been updated to include a `fetchUser` function.
+- All the missing UI components have been added.
+- Fixed the casing issue with the `Button` component.
+- The `Toaster` component has been added to the layout.
+- Removed the `pages` directory.

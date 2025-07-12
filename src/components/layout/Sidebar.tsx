@@ -2,15 +2,13 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, BookOpen, Play, User, Settings, LogOut } from "lucide-react"; // Added LogOut icon
+import { Home, BookOpen, Play, User, LogOut } from "lucide-react"; // Added LogOut icon
 import { useAuth } from "@/contexts/AuthContext";
-import { useTheme } from "@/contexts/ThemeContext";
 import Image from "next/image"; // Import Image component
-import logo from "@/../public/logo.png"; // Import logo image
+import logo from "../../../public/logo.png"; // Import logo image
 
 const Sidebar = () => {
   const { user, logout } = useAuth();
-  const { theme } = useTheme();
   const pathname = usePathname();
 
   const [navItems, setNavItems] = useState([

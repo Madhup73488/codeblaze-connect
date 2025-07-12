@@ -1,179 +1,159 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useAuth } from "@/contexts/AuthContext";
-import apiClient from "@/lib/api";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { Button } from "@/components/ui/Button";
 import {
-  Save,
-  Camera,
-  Phone,
-  MapPin,
-} from "lucide-react";
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/use-toast";
+import api from "@/lib/api";
+import { useAuth } from "@/contexts/AuthContext";
+
+const profileFormSchema = z.object({
+  username: z.string().min(1, { message: "Username is required" }),
+  email: z.string().email({ message: "Invalid email address" }),
+  phone: z.string().min(10, { message: "Phone number must be at least 10 digits" }),
+  password: z.string().optional(),
+});
+
+type ProfileFormValues = z.infer<typeof profileFormSchema>;
+
 const ProfilePage = () => {
-  const { user } = useAuth();
-  const [profileForm, setProfileForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    location: "",
-    bio: "",
+  const { user, loading, fetchUser } = useAuth();
+  const { toast } = useToast();
+  const [isEditing, setIsEditing] = useState(false);
+
+  const form = useForm<ProfileFormValues>({
+    resolver: zodResolver(profileFormSchema),
+    defaultValues: {
+      username: "",
+      email: "",
+      phone: "",
+      password: "",
+    },
   });
 
   useEffect(() => {
-    const fetchProfile = async () => {
-      if (user) {
-        try {
-          const profileData = await apiClient.get('/connect/user/profile');
-          if (profileData) {
-            setProfileForm({
-              name: profileData.name || user.name || "",
-              email: profileData.email || user.email || "",
-              phone: profileData.phone || "",
-              location: profileData.location || "",
-              bio: profileData.bio || "",
-            });
-          } else {
-            setProfileForm({
-              name: user.name || "",
-              email: user.email || "",
-              phone: "",
-              location: "",
-              bio: "",
-            });
-          }
-        } catch (error) {
-          console.error("Failed to fetch profile:", error);
-          setProfileForm({
-            name: user.name || "",
-            email: user.email || "",
-            phone: "",
-            location: "",
-            bio: "",
-          });
-        }
-      }
-    };
+    if (user) {
+      form.reset({
+        username: user.username || "",
+        email: user.email || "",
+        phone: user.phone || "",
+        password: "",
+      });
+    }
+  }, [user, form]);
 
-    fetchProfile();
-  }, [user]);
-
-  const handleSave = async () => {
+  const onSubmit = async (data: ProfileFormValues) => {
     try {
-      await apiClient.put('/connect/user/profile', profileForm);
-      alert('Profile updated successfully!');
+      const res = await api.put("/connect/user/profile", data);
+      if (res.status === 200) {
+        toast({
+          title: "Profile updated successfully",
+        });
+        fetchUser();
+        setIsEditing(false);
+      }
     } catch (error) {
-      console.error("Failed to update profile:", error);
-      alert("Failed to update profile.");
+      toast({
+        title: "Failed to update profile",
+        variant: "destructive",
+      });
     }
   };
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!user) {
+    return <div>Please log in to view your profile.</div>;
+  }
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 p-6">
-      <div className="max-w-4xl mx-auto">
-        <div className="mb-8">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-            Profile
-          </h2>
-          <p className="text-gray-600 dark:text-gray-400">
-            Manage your account information
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2">
-            <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 p-6 mb-6">
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
-                Personal Information
-              </h3>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    value={profileForm.name}
-                    onChange={(e) =>
-                      setProfileForm({ ...profileForm, name: e.target.value })
-                    }
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    value={profileForm.email}
-                    onChange={(e) =>
-                      setProfileForm({ ...profileForm, email: e.target.value })
-                    }
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    value={profileForm.phone}
-                    onChange={(e) =>
-                      setProfileForm({ ...profileForm, phone: e.target.value })
-                    }
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  />
-                </div>
-                <button
-                  onClick={handleSave}
-                  className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
-                >
-                  <Save size={16} />
-                  Save Changes
-                </button>
-              </div>
+    <div className="min-h-screen bg-background text-foreground">
+      <div className="container mx-auto py-8">
+        <h1 className="text-3xl font-bold mb-6">Profile</h1>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <FormField
+              control={form.control}
+              name="username"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Username</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Username" {...field} disabled={!isEditing} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Email" {...field} disabled />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="phone"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Phone</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Phone" {...field} disabled={!isEditing} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {isEditing && (
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>New Password (optional)</FormLabel>
+                    <FormControl>
+                      <Input type="password" placeholder="New Password" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
+            <div className="flex justify-end space-x-4">
+              {isEditing ? (
+                <>
+                  <Button type="button" variant="secondary" onClick={() => setIsEditing(false)}>
+                    Cancel
+                  </Button>
+                  <Button type="submit">Save</Button>
+                </>
+              ) : (
+                <Button type="button" onClick={() => setIsEditing(true)}>
+                  Edit Profile
+                </Button>
+              )}
             </div>
-            <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 p-6">
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
-                Certificates
-              </h3>
-              <div className="text-center text-gray-500 dark:text-gray-400">
-                No certificates available.
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 p-6 mb-6">
-              <div className="text-center">
-                <div className="relative inline-block">
-                  <div className="w-24 h-24 bg-gradient-to-br from-purple-500 to-blue-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mb-4">
-                    JD
-                  </div>
-                  <button className="absolute bottom-0 right-0 bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-full p-2 hover:bg-gray-50 dark:hover:bg-slate-600 transition-colors">
-                    <Camera
-                      size={16}
-                      className="text-gray-700 dark:text-gray-300"
-                    />
-                  </button>
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  {profileForm.name}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-4">
-                  {profileForm.email}
-                </p>
-                <div className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-                  <div className="flex items-center justify-center gap-2">
-                    <Phone size={14} />
-                    {profileForm.phone}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
+          </form>
+        </Form>
       </div>
     </div>
   );

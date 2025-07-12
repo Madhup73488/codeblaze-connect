@@ -2,12 +2,40 @@ import { NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
 
+interface Internship {
+  id: string;
+  week?: number;
+  title?: string;
+  company?: string;
+  description?: string;
+  duration?: string;
+  stipend?: string;
+  location?: string;
+  color?: string;
+  logo?: string;
+  rating?: number;
+  type?: string;
+  skills?: string[];
+  applicants?: number;
+  deadline?: string;
+  requirements?: string[];
+  weeks?: Internship[];
+  progress?: number;
+  weeksPassed?: number;
+  totalWeeks?: number;
+  tasksCompleted?: number;
+  totalTasks?: number;
+  nextTask?: string;
+  status?: string;
+  mentor?: string;
+}
+
 export async function GET() {
   try {
     const internshipsPath = path.join(process.cwd(), 'internships');
     const internshipFolders = await fs.readdir(internshipsPath, { withFileTypes: true });
 
-    const allItems = [];
+    const allItems: Internship[] = [];
     for (const dirent of internshipFolders) {
       if (dirent.isDirectory()) {
         const internshipId = dirent.name;
@@ -15,19 +43,19 @@ export async function GET() {
         try {
           const filePath = path.join(internshipPath, 'internship.json');
           const fileContent = await fs.readFile(filePath, 'utf8');
-          const jsonData = JSON.parse(fileContent);
+          const jsonData: Internship | Internship[] = JSON.parse(fileContent);
           if (Array.isArray(jsonData)) {
             allItems.push(...jsonData);
           } else {
             allItems.push(jsonData);
           }
-        } catch (e) {
+        } catch {
           // ignore folders that don't contain an internship.json
         }
       } else if (dirent.isFile() && dirent.name.endsWith('.json')) {
         const filePath = path.join(internshipsPath, dirent.name);
         const fileContent = await fs.readFile(filePath, 'utf8');
-        const jsonData = JSON.parse(fileContent);
+        const jsonData: Internship | Internship[] = JSON.parse(fileContent);
         if (Array.isArray(jsonData)) {
           allItems.push(...jsonData);
         } else {
@@ -36,7 +64,7 @@ export async function GET() {
       }
     }
 
-    const groupedById: Record<string, any[]> = {};
+    const groupedById: Record<string, Internship[]> = {};
     for (const item of allItems) {
       if (item && item.id) {
         if (!groupedById[item.id]) {
@@ -46,13 +74,13 @@ export async function GET() {
       }
     }
 
-    const processedInternships = [];
+    const processedInternships: Internship[] = [];
     for (const id in groupedById) {
       const items = groupedById[id];
       const isMultiWeek = items.length > 1 && items.every(item => typeof item.week === 'number');
 
       if (isMultiWeek) {
-        const sortedWeeks = items.sort((a, b) => a.week - b.week);
+        const sortedWeeks = items.sort((a, b) => (a.week ?? 0) - (b.week ?? 0));
         processedInternships.push({
           id: items[0].id,
           title: 'Full-Stack Web Development Internship',

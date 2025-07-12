@@ -4,7 +4,6 @@ import { useParams } from "next/navigation";
 import { Course, Module } from "@/lib/course-loader";
 import ModuleList from "@/components/course/ModuleList";
 import CourseProgress from "@/components/course/CourseProgress";
-import { notFound } from "next/navigation";
 import { BookOpen, Clock, Users } from "lucide-react";
 import api from "@/lib/api";
 

@@ -4,11 +4,26 @@ import { useParams } from "next/navigation";
 import { Internship } from "@/lib/internship-loader";
 import api from "@/lib/api";
 
+interface Week {
+  week: number;
+  title: string;
+  goal: string;
+  concepts: string[];
+  dailyPlan: {
+    days: string;
+    focus: string;
+    task: string;
+    courseLink?: string;
+  }[];
+  checklist: string[];
+  tips: string[];
+}
+
 const InternshipWeekPage = () => {
   const params = useParams() as { internshipId: string; weekId: string };
   const { internshipId, weekId } = params;
   const [internship, setInternship] = useState<Internship | null>(null);
-  const [week, setWeek] = useState<any | null>(null);
+  const [week, setWeek] = useState<Week | null>(null);
 
   useEffect(() => {
     if (!internshipId) return;
@@ -17,7 +32,7 @@ const InternshipWeekPage = () => {
       setInternship(internshipData);
       if (internshipData && internshipData.weeks) {
         const weekData = internshipData.weeks.find(
-          (w: any) => w.week.toString() === weekId
+          (w: Week) => w.week.toString() === weekId
         );
         setWeek(weekData);
       }
@@ -58,7 +73,7 @@ const InternshipWeekPage = () => {
         <div className="space-y-4">
           {week.dailyPlan &&
             Array.isArray(week.dailyPlan) &&
-            week.dailyPlan.map((day: any, index: number) => (
+            week.dailyPlan.map((day, index: number) => (
               <div
                 key={index}
                 className="p-4 border rounded-lg bg-gray-50 dark:bg-slate-700"

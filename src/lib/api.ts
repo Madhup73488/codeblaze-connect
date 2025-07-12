@@ -22,7 +22,7 @@ const api = {
     }
     return response.json();
   },
-  post: async (url: string, data: any) => {
+  post: async (url: string, data: unknown) => {
     const token = Cookies.get("auth_token");
     const headers: { [key: string]: string } = {
       "Content-Type": "application/json",
@@ -41,7 +41,7 @@ const api = {
     });
     return response.json();
   },
-  put: async (url: string, data: any) => {
+  put: async (url: string, data: unknown) => {
     const token = Cookies.get("auth_token");
     const headers: { [key: string]: string } = {
       "Content-Type": "application/json",

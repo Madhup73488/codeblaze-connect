@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Lesson, Course } from "@/lib/course-loader";
 import VideoPlayer from "@/components/lesson/VideoPlayer";
 import InteractiveCode from "@/components/lesson/InteractiveCode";
@@ -10,7 +10,6 @@ import {
   Clock,
   Target,
   BookOpen,
-  Trophy,
   ChevronRight,
 } from "lucide-react";
 import MarkdownRenderer from "./MarkdownRenderer";
@@ -34,14 +33,6 @@ const LessonContent = ({
   lessonId,
   course,
 }: LessonContentProps) => {
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    // Simulate progress loading
-    const timer = setTimeout(() => setProgress(65), 500);
-    return () => clearTimeout(timer);
-  }, []);
-
   const getTypeIcon = (type: LessonType) => {
     switch (type) {
       case "video":
@@ -82,9 +73,6 @@ const LessonContent = ({
   };
 
   const currentModule = course.modules.find((m) => m.id === moduleId);
-  const currentLessonIndex =
-    currentModule?.lessons.findIndex((l) => l.id === lessonId) ?? 0;
-  const totalLessons = currentModule?.lessons.length ?? 0;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-100/50 dark:from-slate-900 dark:via-blue-900/30 dark:to-indigo-900/50">

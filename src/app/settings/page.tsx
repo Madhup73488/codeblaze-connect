@@ -10,15 +10,14 @@ import {
   Moon,
   Sun
 } from 'lucide-react';
-import { useContext } from 'react';
-import { AuthContext } from '@/contexts/AuthContext';
+import { useAuth } from '@/contexts/AuthContext';
 import { useTheme } from '@/contexts/ThemeContext';
-import Button from '@/components/ui/Button';
+import { Button } from '@/components/ui/Button';
 import Link from 'next/link';
 
 const SettingsPage = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { user, logout } = useContext(AuthContext);
+  const { user, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
 
   return (
@@ -74,7 +73,7 @@ const SettingsPage = () => {
               </Button>
             ) : (
               <Link href="/login">
-                <Button variant="primary" className="w-full">
+                <Button variant="default" className="w-full">
                   <LogIn className="mr-2" />
                   Login
                 </Button>

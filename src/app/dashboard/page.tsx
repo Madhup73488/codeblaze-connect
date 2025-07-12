@@ -2,16 +2,12 @@
 import React, { useState, useEffect } from "react";
 import {
   BookOpen,
-  Clock,
   TrendingUp,
   CheckCircle,
   Briefcase,
   ChevronRight,
-  Menu,
-  X,
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
-import api from "@/lib/api";
 
 // Simplified interfaces
 interface Course {
@@ -19,6 +15,14 @@ interface Course {
   title: string;
   instructor: string;
   progress: number;
+}
+
+interface CourseData {
+  id: string;
+}
+
+interface InternshipData {
+  id: string;
 }
 
 interface Stat {
@@ -31,7 +35,6 @@ const Dashboard = () => {
   const { user } = useAuth();
   const [courses, setCourses] = useState<Course[]>([]);
   const [stats, setStats] = useState<Stat[]>([]);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const loadDashboardData = () => {
@@ -46,11 +49,11 @@ const Dashboard = () => {
           const progress = JSON.parse(cachedProgress);
 
           const courseIds = user.accessible_course_ids || [];
-          const enrolledCourses = allCourses.filter((course: any) =>
+          const enrolledCourses = allCourses.filter((course: CourseData) =>
             courseIds.includes(course.id)
           );
 
-          const coursesWithProgress = enrolledCourses.map((course: any) => {
+          const coursesWithProgress = enrolledCourses.map((course: Course) => {
             const courseProgress = progress.courseProgress[course.id] || { completedLessons: 0, totalLessons: 0 };
             return {
               ...course,
@@ -61,20 +64,20 @@ const Dashboard = () => {
           setCourses(coursesWithProgress);
 
           const internshipIds = user.accessible_internship_ids || [];
-          const enrolledInternships = allInternships.filter((internship: any) =>
+          const enrolledInternships = allInternships.filter((internship: InternshipData) =>
             internshipIds.includes(internship.id)
           );
 
           const newStats: Stat[] = [
             {
               label: "In Progress",
-              value: coursesWithProgress.filter((c: any) => c.progress > 0 && c.progress < 100)
+              value: coursesWithProgress.filter((c) => c.progress > 0 && c.progress < 100)
                 .length,
               icon: <BookOpen className="w-6 h-6 text-blue-500" />,
             },
             {
               label: "Completed",
-              value: coursesWithProgress.filter((c: any) => c.progress === 100).length,
+              value: coursesWithProgress.filter((c) => c.progress === 100).length,
               icon: <CheckCircle className="w-6 h-6 text-green-500" />,
             },
             {

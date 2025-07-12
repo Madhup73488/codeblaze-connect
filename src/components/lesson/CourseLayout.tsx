@@ -1,16 +1,9 @@
 "use client";
 import React, { useEffect } from "react";
 import {
-  ChevronLeft,
-  ChevronRight,
-  Menu,
-  X,
   Play,
-  CheckCircle,
   Circle,
-  Book,
   Clock,
-  User,
   Maximize,
   Minimize,
   Home,
