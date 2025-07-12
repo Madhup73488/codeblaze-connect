@@ -6,7 +6,13 @@ import api from '@/lib/api';
 
 interface AuthContextType {
   isAuthenticated: boolean;
-  user: { id: string; name: string; email: string } | null;
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    accessible_course_ids?: string[];
+    accessible_internship_ids?: string[];
+  } | null;
   login: (token: string, rememberMe: boolean) => void;
   logout: () => void;
   loading: boolean;
@@ -16,20 +22,42 @@ export const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState<{ id: string; name: string; email: string } | null>(null);
+  const [user, setUser] = useState<{
+    id: string;
+    name: string;
+    email: string;
+    accessible_course_ids?: string[];
+    accessible_internship_ids?: string[];
+  } | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadUserFromStorage = () => {
+    const loadUserFromStorage = async () => {
       const token = Cookies.get("auth_token");
-      const storedUser = localStorage.getItem("user");
-
-      if (token && storedUser) {
+      if (token) {
         try {
-          setUser(JSON.parse(storedUser));
-          setIsAuthenticated(true);
+          const userProfile = await api.get("/connect/user/profile", true);
+          if (userProfile) {
+            const courseMapping = await api.get('/api/course-mapping');
+            
+            let accessibleCourseIds = userProfile.accessible_course_ids || [];
+            if (userProfile.accessible_internship_ids) {
+              userProfile.accessible_internship_ids.forEach((internshipId: string) => {
+                if (courseMapping[internshipId]) {
+                  accessibleCourseIds = [...new Set([...accessibleCourseIds, ...courseMapping[internshipId]])];
+                }
+              });
+            }
+            
+            const updatedUserProfile = { ...userProfile, accessible_course_ids: accessibleCourseIds };
+            localStorage.setItem("user", JSON.stringify(updatedUserProfile));
+            setUser(updatedUserProfile);
+            setIsAuthenticated(true);
+          } else {
+            throw new Error("Failed to fetch user profile");
+          }
         } catch (error) {
-          // Handle potential JSON parsing errors
+          console.error("Failed to fetch user profile", error);
           Cookies.remove("auth_token");
           localStorage.removeItem("user");
           setIsAuthenticated(false);

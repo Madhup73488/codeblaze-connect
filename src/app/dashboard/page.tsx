@@ -34,8 +34,8 @@ import {
   Download,
   Briefcase,
 } from "lucide-react";
-import CourseCard from "@/components/course/CourseCard";
-import apiClient from "@/lib/api";
+import { useAuth } from "@/contexts/AuthContext";
+import api from "@/lib/api";
 
 interface Course {
   id: number;
@@ -82,10 +82,12 @@ interface Deadline {
 }
 
 const Dashboard = () => {
+  const { user } = useAuth();
   const [selectedTab, setSelectedTab] = useState("overview");
   const [timeOfDay, setTimeOfDay] = useState("morning");
   const [isAnimating, setIsAnimating] = useState(false);
-  const [courses, setCourses] = useState<Course[]>([]);
+  const [courses, setCourses] = useState<any[]>([]);
+  const [internships, setInternships] = useState<any[]>([]);
   const [stats, setStats] = useState<Stat[]>([]);
   const [recentActivity, setRecentActivity] = useState<Activity[]>([]);
   const [upcomingDeadlines, setUpcomingDeadlines] = useState<Deadline[]>([]);
@@ -97,45 +99,72 @@ const Dashboard = () => {
     else setTimeOfDay("evening");
 
     const fetchData = async () => {
-      try {
-        const response = await apiClient.get("/connect/user/data");
-        const data = await response.data;
+      if (user) {
+        if (user.accessible_course_ids) {
+          const allCourses = await api.get('/api/courses');
+          if (allCourses) {
+            const filteredCourses = allCourses.filter((course: any) =>
+              user.accessible_course_ids!.includes(course.id)
+            );
+            setCourses(filteredCourses);
+          }
+        }
 
-        setCourses(data.enrolledInternships[0].courses);
-        setStats(
-          data.stats.map((stat: any) => ({
-            ...stat,
-            icon:
-              stat.label === "Active Internships" ? (
-                <Briefcase className="w-6 h-6" />
-              ) : stat.label === "Hours Learned" ? (
-                <Clock className="w-6 h-6" />
-              ) : stat.label === "Tasks Done" ? (
-                <CheckCircle className="w-6 h-6" />
-              ) : (
-                <TrendingUp className="w-6 h-6" />
-              ),
-          }))
-        );
-        setRecentActivity(
-          data.achievements.map((achievement: any) => ({
-            action: "Achievement Unlocked",
-            item: achievement.title,
-            time: achievement.date,
-            type: "certificate",
-            icon: <Trophy className="w-5 h-5" />,
-          }))
-        );
-        setUpcomingDeadlines([]);
-      } catch (error) {
-        console.error("Failed to fetch dashboard data:", error);
+        if (user.accessible_internship_ids) {
+          const internshipPromises = user.accessible_internship_ids.map(
+            (internshipId) => api.get(`/internships/${internshipId}`)
+          );
+          const fetchedInternships = await Promise.all(internshipPromises);
+          setInternships(fetchedInternships.filter(Boolean));
+        }
       }
     };
 
     fetchData();
+
     // Trigger initial animation
     setTimeout(() => setIsAnimating(true), 100);
-  }, []);
+  }, [user]);
+
+  useEffect(() => {
+    if (courses.length > 0 || internships.length > 0) {
+      const newStats = [
+        {
+          label: 'Active Internships',
+          value: internships.length,
+          change: '',
+          icon: <Briefcase className="w-6 h-6" />,
+          color: 'from-purple-500 to-indigo-500',
+          bgColor: 'bg-purple-100',
+        },
+        {
+          label: 'Courses in Progress',
+          value: courses.filter(c => c.progress > 0 && c.progress < 100).length,
+          change: '',
+          icon: <BookOpen className="w-6 h-6" />,
+          color: 'from-blue-500 to-cyan-500',
+          bgColor: 'bg-blue-100',
+        },
+        {
+          label: 'Completed Courses',
+          value: courses.filter(c => c.progress === 100).length,
+          change: '',
+          icon: <CheckCircle className="w-6 h-6" />,
+          color: 'from-green-500 to-emerald-500',
+          bgColor: 'bg-green-100',
+        },
+        {
+          label: 'Learning Streak',
+          value: '12', // This can be dynamic later
+          change: 'Keep it up!',
+          icon: <TrendingUp className="w-6 h-6" />,
+          color: 'from-orange-500 to-red-500',
+          bgColor: 'bg-orange-100',
+        },
+      ];
+      setStats(newStats);
+    }
+  }, [courses, internships]);
 
   const getLevelColor = (level: string) => {
     switch (level) {

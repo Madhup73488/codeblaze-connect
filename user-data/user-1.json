@@ -1,0 +1,5 @@
+{
+  "userId": "user-1",
+  "enrolledCourses": ["html5-mastery", "css3-mastery", "javascript-mastery"],
+  "enrolledInternships": ["full-stack-developer"]
+}

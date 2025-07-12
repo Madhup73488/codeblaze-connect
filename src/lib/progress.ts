@@ -41,3 +41,18 @@ export const canAccessLesson = (
   
   return false;
 };
+
+export const getNextLesson = (
+  userProgress: UserProgress,
+  course: Course
+): { moduleId: string; lessonId: string } | null => {
+  for (const module of course.modules) {
+    for (const lesson of module.lessons) {
+      const progressKey = `${course.id}-${module.id}-${lesson.id}`;
+      if (!userProgress.completedLessons.includes(progressKey)) {
+        return { moduleId: module.id, lessonId: lesson.id };
+      }
+    }
+  }
+  return null;
+};

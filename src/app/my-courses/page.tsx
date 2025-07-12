@@ -18,7 +18,10 @@ import {
   MoreHorizontal
 } from 'lucide-react';
 import Link from 'next/link';
-import apiClient from '@/lib/api';
+import { useAuth } from '@/contexts/AuthContext';
+import api from '@/lib/api';
+import { getNextLesson } from '@/lib/progress';
+import { Course } from '@/lib/course-loader';
 
 const iconMap: { [key: string]: React.ElementType } = {
   BookOpen,
@@ -29,38 +32,43 @@ const iconMap: { [key: string]: React.ElementType } = {
 };
 
 const MyCoursesPage = () => {
+  const { user, loading: authLoading } = useAuth();
   const [searchTerm, setSearchTerm] = useState('');
   const [filterOpen, setFilterOpen] = useState(false);
   const [allCourses, setAllCourses] = useState<any[]>([]);
   const [achievements, setAchievements] = useState<any[]>([]);
   const [stats, setStats] = useState<any[]>([]);
+  const [userProgress, setUserProgress] = useState<any>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await apiClient.get('/api/connect/user/data');
-      const data = await response.data;
-      if (data.enrolledInternships.length > 0) {
-        const courses = data.enrolledInternships.flatMap((internship: any) => internship.courses);
-        setAllCourses(courses);
-      } else {
-        setAllCourses([]);
+    const fetchCoursesAndProgress = async () => {
+      if (!authLoading && user && user.accessible_course_ids && user.accessible_course_ids.length > 0) {
+        const coursePromises = user.accessible_course_ids.map((courseId: string) =>
+          api.get(`/api/courses/${courseId}`)
+        );
+        const [courses, progress] = await Promise.all([
+          Promise.all(coursePromises),
+          api.get('/api/progress'),
+        ]);
+
+        setAllCourses(courses.filter(Boolean));
+        setUserProgress(progress);
       }
-      setAchievements(data.achievements);
-      
-      const transformedStats = data.stats.map((stat: any) => ({
-        ...stat,
-        icon: iconMap[stat.icon] || MoreHorizontal,
-      }));
-      setStats(transformedStats);
     };
 
-    fetchData();
-  }, []);
+    fetchCoursesAndProgress();
+  }, [user, authLoading]);
 
-  const CourseCard = ({ course }: { course: any }) => (
-    <Link href={`/courses/${course.id}`}>
-    <div className="group relative bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-slate-700 hover:border-gray-200 dark:hover:border-slate-600">
-      {/* Course Header */}
+  const CourseCard = ({ course }: { course: any }) => {
+    const nextLesson = userProgress ? getNextLesson(userProgress, course as Course) : null;
+    const continueLink = nextLesson
+      ? `/courses/${course.id}/${nextLesson.moduleId}/${nextLesson.lessonId}`
+      : `/courses/${course.id}`;
+
+    return (
+      <Link href={continueLink}>
+        <div className="group relative bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-slate-700 hover:border-gray-200 dark:hover:border-slate-600">
+          {/* Course Header */}
       <div className="flex items-start justify-between mb-4">
         <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${course.color} flex items-center justify-center text-white text-xl shadow-lg`}>
           {course.icon}
@@ -157,7 +165,8 @@ const MyCoursesPage = () => {
       </button>
     </div>
     </Link>
-  );
+    )
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-900 p-6">
@@ -230,7 +239,11 @@ const MyCoursesPage = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {allCourses.length > 0 ? (
+            {authLoading ? (
+              <div className="col-span-full text-center text-gray-500 dark:text-gray-400">
+                Loading courses...
+              </div>
+            ) : allCourses.length > 0 ? (
               allCourses
                 .filter(course => !course.completed)
                 .filter(course => course.title.toLowerCase().includes(searchTerm.toLowerCase()))

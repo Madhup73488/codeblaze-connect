@@ -1,13 +1,16 @@
+'use client';
 import React from "react";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 
 const InternshipLayout = ({
   children,
-  params,
 }: {
   children: React.ReactNode;
-  params: { internshipId: string };
 }) => {
+  const params = useParams() as { internshipId: string };
+  const { internshipId } = params;
+
   return (
     <div className="flex h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800">
       <aside className="w-80 flex flex-col bg-white dark:bg-slate-900 shadow-xl border-r border-gray-200 dark:border-gray-700">
@@ -23,7 +26,7 @@ const InternshipLayout = ({
             {[...Array(12)].map((_, i) => (
               <li key={i}>
                 <Link
-                  href={`/internships/full-stack-developer/weeks/${i + 1}`}
+                  href={`/internships/${internshipId}/weeks/${i + 1}`}
                   className="group flex items-center p-4 rounded-xl bg-gray-50 dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-slate-700 hover:shadow-md transition-all duration-200 border border-gray-200 dark:border-gray-700 hover:border-blue-200 dark:hover:border-blue-700"
                 >
                   <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-sm mr-4 group-hover:scale-105 transition-transform">

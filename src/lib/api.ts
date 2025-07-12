@@ -1,16 +1,21 @@
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 
-const baseURL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+const baseURL = "http://localhost:5000";
 
 const api = {
-  get: async (url: string) => {
+  get: async (url: string, useBaseURL = false) => {
     const token = Cookies.get("auth_token");
     const headers: { [key: string]: string } = {};
     if (token) {
       headers["Authorization"] = `Bearer ${token}`;
     }
-    const response = await fetch(`${baseURL}${url}`, { headers });
-    return response;
+    const response = await fetch(useBaseURL ? `${baseURL}${url}` : url, {
+      headers,
+    });
+    if (!response.ok) {
+      return null;
+    }
+    return response.json();
   },
   post: async (url: string, data: any) => {
     const token = Cookies.get("auth_token");

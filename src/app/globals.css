@@ -81,6 +81,15 @@ body {
   color: var(--text-primary);
 }
 
+.dark .sidebar {
+  background: var(--surface);
+  border-right-color: var(--border);
+}
+
+.dark .logo-text {
+  color: var(--text-primary);
+}
+
 .nav-menu {
   list-style: none;
   padding: 0 1rem;
@@ -105,6 +114,16 @@ body {
 .nav-link:hover,
 .nav-link.active {
   background: rgba(99, 102, 241, 0.1);
+  color: var(--primary);
+}
+
+.dark .nav-link {
+  color: var(--text-secondary);
+}
+
+.dark .nav-link:hover,
+.dark .nav-link.active {
+  background: rgba(99, 102, 241, 0.15);
   color: var(--primary);
 }
 

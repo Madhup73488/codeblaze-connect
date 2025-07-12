@@ -29,7 +29,8 @@ import {
   Upload
 } from 'lucide-react';
 import Link from 'next/link';
-import apiClient from '@/lib/api';
+import { useAuth } from '@/contexts/AuthContext';
+import api from '@/lib/api';
 
 const iconMap: { [key: string]: React.ElementType } = {
   Briefcase,
@@ -39,6 +40,7 @@ const iconMap: { [key: string]: React.ElementType } = {
 };
 
 const MyInternshipsPage = () => {
+  const { user, loading } = useAuth();
   const [searchTerm, setSearchTerm] = useState('');
   const [filterOpen, setFilterOpen] = useState(false);
   const [selectedTab, setSelectedTab] = useState('enrolled');
@@ -48,26 +50,22 @@ const MyInternshipsPage = () => {
   const [totalExperience, setTotalExperience] = useState(0);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await apiClient.get('/api/connect/user/data');
-      const data = await response.data;
-      setEnrolledInternships(data.enrolledInternships);
-      setAchievements(data.achievements);
-      
-      const transformedStats = data.stats.map((stat: any) => ({
-        ...stat,
-        icon: iconMap[stat.icon] || MoreHorizontal,
-      }));
-      setStats(transformedStats);
-
-      const hoursStat = data.stats.find((stat: any) => stat.label === 'Hours Completed');
-      if (hoursStat) {
-        setTotalExperience(hoursStat.value);
+    const fetchInternships = async () => {
+      if (user && user.accessible_internship_ids) {
+        const allInternships = await api.get('/api/internships');
+        if(allInternships && Array.isArray(allInternships)) {
+          const filteredInternships = allInternships.filter((internship: any) =>
+            user.accessible_internship_ids!.includes(internship.id)
+          );
+          setEnrolledInternships(filteredInternships);
+        }
       }
     };
 
-    fetchData();
-  }, []);
+    if (!loading) {
+      fetchInternships();
+    }
+  }, [user, loading]);
 
   const availableInternships = [
     {
@@ -172,7 +170,7 @@ const MyInternshipsPage = () => {
         <h3 className="font-bold text-lg text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
           {internship.title}
         </h3>
-        <p className="text-gray-600 dark:text-gray-400 text-sm mb-3 line-clamp-2">{internship.description}</p>
+        <p className="text-gray-600 dark:text-gray-400 text-sm mb-3 line-clamp-2">{internship.description || internship.goal}</p>
       </div>
 
       {/* Details */}
@@ -203,20 +201,22 @@ const MyInternshipsPage = () => {
       </div>
 
       {/* Skills */}
-      <div className="mb-4">
-        <div className="flex flex-wrap gap-1">
-          {internship.skills.slice(0, 3).map((skill: string, index: number) => (
-            <span key={index} className="px-2 py-1 bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-300 text-xs rounded-md font-medium">
-              {skill}
-            </span>
-          ))}
-          {internship.skills.length > 3 && (
-            <span className="px-2 py-1 bg-gray-100 dark:bg-slate-700 text-gray-500 dark:text-gray-400 text-xs rounded-md">
-              +{internship.skills.length - 3} more
-            </span>
-          )}
+      {internship.skills && internship.skills.length > 0 && (
+        <div className="mb-4">
+          <div className="flex flex-wrap gap-1">
+            {internship.skills.slice(0, 3).map((skill: string, index: number) => (
+              <span key={index} className="px-2 py-1 bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-300 text-xs rounded-md font-medium">
+                {skill}
+              </span>
+            ))}
+            {internship.skills.length > 3 && (
+              <span className="px-2 py-1 bg-gray-100 dark:bg-slate-700 text-gray-500 dark:text-gray-400 text-xs rounded-md">
+                +{internship.skills.length - 3} more
+              </span>
+            )}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Progress (for enrolled) or Deadline (for available) */}
       {isEnrolled ? (
@@ -382,7 +382,11 @@ const MyInternshipsPage = () => {
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {enrolledInternships.length > 0 ? (
+                {loading ? (
+                  <div className="col-span-full text-center text-gray-500 dark:text-gray-400">
+                    Loading...
+                  </div>
+                ) : enrolledInternships.length > 0 ? (
                   enrolledInternships
                     .filter((internship) =>
                       internship.title

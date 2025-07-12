@@ -1,8 +1,11 @@
 "use client";
 import { usePathname } from "next/navigation";
 import Sidebar from "@/components/layout/Sidebar";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
+  const { theme } = useTheme();
+  console.log('Layout theme:', theme);
   const pathname = usePathname();
   const isAuthPage =
     pathname.startsWith("/login") ||
@@ -15,10 +18,10 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const showSidebar = !isAuthPage && !isLessonPage;
 
   return (
-    <div className="flex h-screen">
+    <div className={`flex h-screen ${theme}`}>
       {showSidebar && <Sidebar />}
       <div
-        className={`flex-1 flex flex-col bg-white dark:bg-slate-800 ${
+        className={`flex-1 flex flex-col ${
           showSidebar ? "lg:ml-[280px]" : ""
         }`}
       >

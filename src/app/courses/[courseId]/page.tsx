@@ -1,44 +1,48 @@
-'use client';
-import React from 'react';
-import { Course, Module } from '@/lib/course-loader';
-import ModuleList from '@/components/course/ModuleList';
-import CourseProgress from '@/components/course/CourseProgress';
-import { notFound } from 'next/navigation';
-import { BookOpen, Clock, Users } from 'lucide-react';
+"use client";
+import React, { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
+import { Course, Module } from "@/lib/course-loader";
+import ModuleList from "@/components/course/ModuleList";
+import CourseProgress from "@/components/course/CourseProgress";
+import { notFound } from "next/navigation";
+import { BookOpen, Clock, Users } from "lucide-react";
+import api from "@/lib/api";
 
-interface CoursePageProps {
-  params: {
-    courseId: string;
-  };
-}
+const CoursePage = () => {
+  const params = useParams() as { courseId: string };
+  const { courseId } = params;
+  const [course, setCourse] = useState<Course | null>(null);
 
-const CoursePage = ({ params }: CoursePageProps) => {
-  const { courseId }: { courseId: string } = React.use(params as any);
-  const [course, setCourse] = React.useState<Course | null>(null);
-
-  React.useEffect(() => {
+  useEffect(() => {
+    if (!courseId) return;
     const fetchCourse = async () => {
-      const res = await fetch(`/api/courses/${courseId}`);
-      const courseData = await res.json();
+      const courseData = await api.get(`/api/courses/${courseId}`);
       setCourse(courseData);
     };
     fetchCourse();
   }, [courseId]);
 
-  if (!course) {
+  if (!course || !Array.isArray(course.modules)) {
     return null;
   }
 
-  const totalLessons = course.modules.reduce((acc: number, module: Module) => acc + module.lessons.length, 0);
+  const totalLessons = course.modules.reduce(
+    (acc: number, module: Module) => acc + module.lessons.length,
+    0
+  );
   const estimatedHours = Math.ceil(totalLessons * 0.5);
 
   return (
     <div className="max-w-4xl px-4 py-8 bg-white dark:bg-slate-800 rounded-lg">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">{course.title}</h1>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">{course.description}</p>
-        
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">
+          {course.title}
+        </h1>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
+          {course.description}
+        </p>
+
         {/* Course Stats */}
         <div className="flex items-center gap-6 text-sm text-gray-500 dark:text-gray-400">
           <div className="flex items-center gap-1">
