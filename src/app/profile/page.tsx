@@ -22,20 +22,46 @@ const ProfilePage = () => {
   });
 
   useEffect(() => {
-    if (user) {
-      setProfileForm({
-        name: user.name || "",
-        email: user.email || "",
-        phone: "", // These fields are not in the user object
-        location: "", // These fields are not in the user object
-        bio: "", // These fields are not in the user object
-      });
-    }
+    const fetchProfile = async () => {
+      if (user) {
+        try {
+          const profileData = await apiClient.get('/connect/user/profile');
+          if (profileData) {
+            setProfileForm({
+              name: profileData.name || user.name || "",
+              email: profileData.email || user.email || "",
+              phone: profileData.phone || "",
+              location: profileData.location || "",
+              bio: profileData.bio || "",
+            });
+          } else {
+            setProfileForm({
+              name: user.name || "",
+              email: user.email || "",
+              phone: "",
+              location: "",
+              bio: "",
+            });
+          }
+        } catch (error) {
+          console.error("Failed to fetch profile:", error);
+          setProfileForm({
+            name: user.name || "",
+            email: user.email || "",
+            phone: "",
+            location: "",
+            bio: "",
+          });
+        }
+      }
+    };
+
+    fetchProfile();
   }, [user]);
 
   const handleSave = async () => {
     try {
-      await apiClient.put('/api/connect/user/profile', profileForm);
+      await apiClient.put('/connect/user/profile', profileForm);
       alert('Profile updated successfully!');
     } catch (error) {
       console.error("Failed to update profile:", error);

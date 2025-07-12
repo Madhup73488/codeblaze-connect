@@ -16,3 +16,6 @@ The login page has been implemented on the frontend and is now connected to the 
 - Refactored the layout to use a left-side sidebar for desktop view and a mobile-only header.
 - Removed the "Settings" navigation item from the sidebar.
 - Applied consistent background styling to the `/profile` page.
+- Configured `api.ts` to route PUT requests for `/connect/user/profile` to `http://localhost:5000`.
+- Updated the profile page to fetch the full user profile from the backend, including the phone number, to correctly populate the form fields.
+- Corrected the API endpoint URL in the profile page to ensure that profile updates are sent to the correct endpoint.

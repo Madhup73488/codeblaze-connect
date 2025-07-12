@@ -46,7 +46,8 @@ const api = {
     if (token) {
       headers["Authorization"] = `Bearer ${token}`;
     }
-    const response = await fetch(`${baseURL}${url}`, {
+    const targetURL = url.startsWith('/connect/auth') || url.startsWith('/connect/user/profile') ? `${authBaseURL}${url}` : `${baseURL}${url}`;
+    const response = await fetch(targetURL, {
       method: "PUT",
       headers,
       body: JSON.stringify(data),
