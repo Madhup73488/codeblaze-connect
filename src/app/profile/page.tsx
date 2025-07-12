@@ -62,7 +62,7 @@ const ProfilePage = () => {
         fetchUser();
         setIsEditing(false);
       }
-    } catch (error) {
+    } catch (err) {
       toast({
         title: "Failed to update profile",
         variant: "destructive",

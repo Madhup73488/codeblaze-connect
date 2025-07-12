@@ -168,7 +168,7 @@ const MyCoursesPage = () => {
               </span>
               <span className="flex items-center gap-1">
                 <Calendar className="w-3 h-3" />
-                {new Date(courseProgress?.lastAccessed).toLocaleDateString()}
+                {courseProgress?.lastAccessed ? new Date(courseProgress.lastAccessed).toLocaleDateString() : 'N/A'}
               </span>
             </div>
           </div>
@@ -328,7 +328,7 @@ const MyCoursesPage = () => {
                 .filter((course) =>
                   course.title.toLowerCase().includes(searchTerm.toLowerCase())
                 )
-                .map((course) => <CourseCard key={course.id} course={course} />)
+                .map((course: CourseData) => <CourseCard key={course.id} course={course} />)
             ) : (
               <div className="col-span-full text-center text-gray-500 dark:text-gray-400">
                 No courses enrolled.

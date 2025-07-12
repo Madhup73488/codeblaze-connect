@@ -63,21 +63,21 @@ const MyInternshipsPage = () => {
       const cachedInternships = localStorage.getItem('internships');
       if (cachedInternships) {
         const allInternships = JSON.parse(cachedInternships);
-        const updatedInternshipIds = user.accessible_internship_ids.map((id: string) => {
+        const updatedInternshipIds = user.accessible_internship_ids?.map((id: string) => {
           if (id === 'a1b2c3d4-e5f6-7890-1234-567890abcdef') {
             return 'full-stack-web-development-internship';
           }
           return id;
         });
         const enrolled = allInternships.filter((internship: Internship) =>
-          updatedInternshipIds.includes(internship.id)
+          updatedInternshipIds?.includes(internship.id)
         );
         setEnrolledInternships(enrolled);
       } else {
         if (user && user.accessible_internship_ids) {
           const allInternships = await api.get('/api/internships/all');
           if(allInternships && Array.isArray(allInternships)) {
-            const updatedInternshipIds = user.accessible_internship_ids.map((id: string) => {
+            const updatedInternshipIds = user.accessible_internship_ids?.map((id: string) => {
               if (id === 'a1b2c3d4-e5f6-7890-1234-567890abcdef') {
                 return 'full-stack-web-development-internship';
               }
@@ -85,7 +85,7 @@ const MyInternshipsPage = () => {
             });
 
             const filteredInternships = allInternships.filter((internship: Internship) =>
-              updatedInternshipIds.includes(internship.id)
+              updatedInternshipIds?.includes(internship.id)
             );
             setEnrolledInternships(filteredInternships);
             localStorage.setItem('internships', JSON.stringify(allInternships));
