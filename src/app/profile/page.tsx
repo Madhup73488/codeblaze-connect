@@ -5,9 +5,6 @@ import apiClient from "@/lib/api";
 import {
   Save,
   Camera,
-  Download,
-  Award,
-  Calendar,
   Phone,
   MapPin,
 } from "lucide-react";
@@ -127,32 +124,6 @@ const ProfilePage = () => {
                     className="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Location
-                  </label>
-                  <input
-                    type="text"
-                    value={profileForm.location}
-                    onChange={(e) =>
-                      setProfileForm({ ...profileForm, location: e.target.value })
-                    }
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Bio
-                  </label>
-                  <textarea
-                    value={profileForm.bio}
-                    onChange={(e) =>
-                      setProfileForm({ ...profileForm, bio: e.target.value })
-                    }
-                    rows={3}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  />
-                </div>
                 <button
                   onClick={handleSave}
                   className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
@@ -162,44 +133,12 @@ const ProfilePage = () => {
                 </button>
               </div>
             </div>
-
             <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 p-6">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
-                Learning Statistics
+                Certificates
               </h3>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/50 rounded-lg">
-                  <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">
-                    4
-                  </p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    Courses Enrolled
-                  </p>
-                </div>
-                <div className="text-center p-4 bg-green-50 dark:bg-green-900/50 rounded-lg">
-                  <p className="text-2xl font-bold text-green-600 dark:text-green-400">
-                    1
-                  </p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    Courses Completed
-                  </p>
-                </div>
-                <div className="text-center p-4 bg-purple-50 dark:bg-purple-900/50 rounded-lg">
-                  <p className="text-2xl font-bold text-purple-600 dark:text-purple-400">
-                    41
-                  </p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    Hours Learned
-                  </p>
-                </div>
-                <div className="text-center p-4 bg-yellow-50 dark:bg-yellow-900/50 rounded-lg">
-                  <p className="text-2xl font-bold text-yellow-600 dark:text-yellow-400">
-                    3
-                  </p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    Achievements
-                  </p>
-                </div>
+              <div className="text-center text-gray-500 dark:text-gray-400">
+                No certificates available.
               </div>
             </div>
           </div>
@@ -229,45 +168,10 @@ const ProfilePage = () => {
                     <Phone size={14} />
                     {profileForm.phone}
                   </div>
-                  <div className="flex items-center justify-center gap-2">
-                    <MapPin size={14} />
-                    {profileForm.location}
-                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 p-6">
-              <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                Quick Actions
-              </h4>
-              <div className="space-y-3">
-                <button className="w-full flex items-center gap-3 p-3 text-left hover:bg-gray-50 dark:hover:bg-slate-700 rounded-lg transition-colors">
-                  <Download
-                    size={16}
-                    className="text-gray-500 dark:text-gray-400"
-                  />
-                  <span className="text-gray-700 dark:text-gray-300">
-                    Download Certificates
-                  </span>
-                </button>
-                <button className="w-full flex items-center gap-3 p-3 text-left hover:bg-gray-50 dark:hover:bg-slate-700 rounded-lg transition-colors">
-                  <Award size={16} className="text-gray-500 dark:text-gray-400" />
-                  <span className="text-gray-700 dark:text-gray-300">
-                    View Achievements
-                  </span>
-                </button>
-                <button className="w-full flex items-center gap-3 p-3 text-left hover:bg-gray-50 dark:hover:bg-slate-700 rounded-lg transition-colors">
-                  <Calendar
-                    size={16}
-                    className="text-gray-500 dark:text-gray-400"
-                  />
-                  <span className="text-gray-700 dark:text-gray-300">
-                    Learning Schedule
-                  </span>
-                </button>
-              </div>
-            </div>
           </div>
         </div>
       </div>

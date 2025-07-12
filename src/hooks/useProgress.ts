@@ -6,11 +6,15 @@ import apiClient from '@/lib/api';
 
 interface UserProgress {
   completedLessons: string[];
-  courseProgress: Record<string, {
-    completedLessons: number;
-    totalLessons: number;
-    lastAccessed: string;
-  }>;
+  courseProgress: Record<
+    string,
+    {
+      completedLessons: number;
+      totalLessons: number;
+      lastAccessed: string;
+      timeSpent: number;
+    }
+  >;
 }
 
 export const useProgress = () => {
@@ -77,11 +81,14 @@ export const useProgress = () => {
   };
   
   const getCourseProgress = (courseId: string) => {
-    return progress.courseProgress[courseId] || {
-      completedLessons: 0,
-      totalLessons: 0,
-      lastAccessed: new Date().toISOString()
-    };
+    return (
+      progress.courseProgress[courseId] || {
+        completedLessons: 0,
+        totalLessons: 0,
+        lastAccessed: new Date().toISOString(),
+        timeSpent: 0,
+      }
+    );
   };
   
   return {
