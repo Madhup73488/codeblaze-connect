@@ -31,3 +31,4 @@ The lesson page layout has been updated to meet the new requirements. The main s
 - Fixed the casing issue with the `Button` component.
 - The `Toaster` component has been added to the layout.
 - Removed the `pages` directory.
+- Fixed the manifest error.

@@ -26,3 +26,4 @@ The login page has been implemented on the frontend and is now connected to the 
 - Fixed the casing issue with the `Button` component.
 - The `Toaster` component has been added to the layout.
 - Removed the `pages` directory.
+- Fixed the manifest error.
