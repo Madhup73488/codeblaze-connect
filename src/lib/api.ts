@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 
 const baseURL = "http://localhost:3005";
-const authBaseURL = "http://localhost:5000";
+const authBaseURL = "https://codeblaze-web-backend.onrender.com";
 
 const api = {
   get: async (url: string) => {
@@ -10,7 +10,10 @@ const api = {
     if (token) {
       headers["Authorization"] = `Bearer ${token}`;
     }
-    const targetURL = url.startsWith('/connect/auth') || url.startsWith('/connect/user') ? `${authBaseURL}${url}` : `${baseURL}${url}`;
+    const targetURL =
+      url.startsWith("/connect/auth") || url.startsWith("/connect/user")
+        ? `${authBaseURL}${url}`
+        : `${baseURL}${url}`;
     const response = await fetch(targetURL, {
       headers,
     });
@@ -27,7 +30,10 @@ const api = {
     if (token) {
       headers["Authorization"] = `Bearer ${token}`;
     }
-    const targetURL = url.startsWith('/connect/auth') || url.startsWith('/connect/user') ? `${authBaseURL}${url}` : `${baseURL}${url}`;
+    const targetURL =
+      url.startsWith("/connect/auth") || url.startsWith("/connect/user")
+        ? `${authBaseURL}${url}`
+        : `${baseURL}${url}`;
     const response = await fetch(targetURL, {
       method: "POST",
       headers,
@@ -43,7 +49,10 @@ const api = {
     if (token) {
       headers["Authorization"] = `Bearer ${token}`;
     }
-    const targetURL = url.startsWith('/connect/auth') || url.startsWith('/connect/user') ? `${authBaseURL}${url}` : `${baseURL}${url}`;
+    const targetURL =
+      url.startsWith("/connect/auth") || url.startsWith("/connect/user")
+        ? `${authBaseURL}${url}`
+        : `${baseURL}${url}`;
     const response = await fetch(targetURL, {
       method: "PUT",
       headers,

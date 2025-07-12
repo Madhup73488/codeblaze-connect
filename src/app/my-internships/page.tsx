@@ -434,56 +434,7 @@ const MyInternshipsPage = () => {
               </div>
             </div>
 
-            {/* Achievements */}
-            <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-sm border border-gray-100 dark:border-slate-700 mb-8">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Achievements</h2>
-                <button className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium flex items-center gap-1">
-                  View All
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {achievements.map((achievement) => (
-                  <div key={achievement.id} className={`relative p-6 rounded-xl border-2 transition-all duration-300 ${
-                    achievement.earned 
-                      ? 'border-yellow-200 bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-900/50 dark:to-orange-900/50 dark:border-yellow-800/50 shadow-md' 
-                      : 'border-gray-200 bg-gray-50 dark:border-slate-700 dark:bg-slate-800 opacity-70'
-                  }`}>
-                    {achievement.earned && (
-                      <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                        <Award className="w-3 h-3 text-white" />
-                      </div>
-                    )}
-                    
-                    <div className="text-3xl mb-3">{achievement.icon}</div>
-                    <h3 className="font-bold text-gray-900 dark:text-white mb-2">{achievement.title}</h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">{achievement.description}</p>
-                    
-                    {achievement.earned ? (
-                      <div className="text-xs text-green-600 dark:text-green-400 font-medium flex items-center gap-1">
-                        <Trophy className="w-3 h-3" />
-                        Earned {achievement.date}
-                      </div>
-                    ) : achievement.progress && (
-                      <div className="text-xs text-gray-500 dark:text-gray-400">
-                        <div className="flex items-center justify-between mb-1">
-                          <span>Progress</span>
-                          <span>{achievement.progress}%</span>
-                        </div>
-                        <div className="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-1">
-                          <div 
-                            className="h-1 bg-blue-500 rounded-full transition-all duration-300"
-                            style={{ width: `${achievement.progress}%` }}
-                          />
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
+
           </>
         ) : (
           <>
@@ -545,39 +496,7 @@ const MyInternshipsPage = () => {
           </>
         )}
 
-        {/* Call to Action */}
-        <div className="text-center mt-12">
-          <div className="bg-gradient-to-r from-green-600 to-teal-600 rounded-2xl p-8 text-white">
-            <h3 className="text-2xl font-bold mb-2">Ready to Level Up?</h3>
-            <p className="text-green-100 mb-6">
-              {selectedTab === 'enrolled' 
-                ? "Keep up the great work on your current internships and explore new opportunities!"
-                : "Found an internship that interests you? Don't wait - applications are competitive!"
-              }
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              {selectedTab === 'enrolled' ? (
-                <>
-                  <Link href="/internships" className="bg-white text-green-600 px-8 py-3 rounded-xl font-semibold hover:bg-gray-100 dark:hover:bg-slate-200 transition-colors shadow-lg">
-                    View All Opportunities
-                  </Link>
-                  <button className="border-2 border-white text-white px-8 py-3 rounded-xl font-semibold hover:bg-white hover:text-green-600 transition-all">
-                    Update Profile
-                  </button>
-                </>
-              ) : (
-                <>
-                  <button className="bg-white text-green-600 px-8 py-3 rounded-xl font-semibold hover:bg-gray-100 dark:hover:bg-slate-200 transition-colors shadow-lg">
-                    Apply to Programs
-                  </button>
-                  <button className="border-2 border-white text-white px-8 py-3 rounded-xl font-semibold hover:bg-white hover:text-green-600 transition-all">
-                    Get Application Help
-                  </button>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
+
       </div>
     </div>
   );
