@@ -1,7 +1,11 @@
 import Cookies from "js-cookie";
 
-const baseURL = "http://localhost:3005";
-const authBaseURL = "https://codeblaze-web-backend.onrender.com";
+const baseURL =
+  process.env.NEXT_PUBLIC_API_BASE_URL ||
+  "https://codeblaze-connect.vercel.app";
+const authBaseURL =
+  process.env.NEXT_PUBLIC_BACKEND_BASE_URL ||
+  "https://codeblaze-web-backend.onrender.com";
 
 const api = {
   get: async (url: string) => {
