@@ -66,10 +66,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
           const allCourses = await api.get('/api/courses');
           const allInternships = await api.get('/api/internships/all');
+          const userProgress = await api.get('/api/connect/user/progress');
 
           localStorage.setItem('courses', JSON.stringify(allCourses));
           localStorage.setItem('internships', JSON.stringify(allInternships));
           localStorage.setItem('courseMapping', JSON.stringify(courseMapping));
+          if (userProgress) {
+            localStorage.setItem('progress', JSON.stringify(userProgress.data));
+          }
           setIsAuthenticated(true);
         } else {
           throw new Error("Failed to fetch user profile");

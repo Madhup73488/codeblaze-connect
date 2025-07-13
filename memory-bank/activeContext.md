@@ -29,3 +29,4 @@ The login page has been implemented on the frontend and is now connected to the 
 - Fixed the manifest error.
 - Fixed the `params` awaiting warning in the lesson layout and page.
 - Corrected the production API endpoint configuration in `src/lib/api.ts` to prevent incorrect URL fallback.
+- Updated `AuthContext.tsx` to fetch and store user progress in `localStorage` to resolve the empty dashboard issue.
