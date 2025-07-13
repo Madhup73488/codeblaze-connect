@@ -28,3 +28,4 @@ The login page has been implemented on the frontend and is now connected to the 
 - Removed the `pages` directory.
 - Fixed the manifest error.
 - Fixed the `params` awaiting warning in the lesson layout and page.
+- Corrected the production API endpoint configuration in `src/lib/api.ts` to prevent incorrect URL fallback.
