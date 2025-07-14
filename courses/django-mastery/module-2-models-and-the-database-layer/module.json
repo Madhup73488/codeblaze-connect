@@ -1,0 +1,4 @@
+{
+  "title": "Module 2: Models and the Database Layer",
+  "description": "Learn to define your data structure using Python code and interact with the database using Django's powerful Object-Relational Mapper (ORM)."
+}

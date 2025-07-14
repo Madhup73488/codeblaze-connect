@@ -13,6 +13,40 @@
     "css3-mastery",
     "javascript-mastery",
     "react-js-mastery",
+    "next-js-mastery",
+    "typescript-mastery",
+    "tailwind-css-mastery",
+    "framer-motion-mastery",
     "deployment-and-best-practices"
+  ],
+  "backend-development-internship": [
+    "node-js-and-express-js-mastery",
+    "postgresql-mastery",
+    "redis-mastery",
+    "docker-mastery",
+    "kubernetes-mastery",
+    "aws-mastery",
+    "graphql-mastery"
+  ],
+  "python-full-stack-development-internship": [
+    "python-mastery",
+    "django-mastery",
+    "react-js-mastery",
+    "postgresql-mastery",
+    "redis-mastery",
+    "celery-mastery",
+    "docker-mastery",
+    "pandas-mastery",
+    "numpy-mastery"
+  ],
+  "java-full-stack-development-internship": [
+    "java-mastery",
+    "spring-boot-mastery",
+    "angular-mastery",
+    "typescript-mastery",
+    "mysql-mastery",
+    "mongodb-mastery",
+    "apache-kafka-mastery",
+    "jenkins-mastery"
   ]
 }

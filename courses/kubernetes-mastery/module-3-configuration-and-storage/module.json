@@ -1,0 +1,4 @@
+{
+  "title": "Module 3: Configuration and Storage",
+  "description": "Learn how to manage application configuration and persist data outside of a container's lifecycle."
+}

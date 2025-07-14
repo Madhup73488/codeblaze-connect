@@ -1,0 +1,4 @@
+{
+  "title": "Celery Mastery",
+  "description": "A complete, deep-dive guide to Celery, the industry-standard distributed task queue for Python. This course covers everything from the fundamentals of asynchronous tasks and message brokers to building complex, reliable, and scalable background job processing systems."
+}

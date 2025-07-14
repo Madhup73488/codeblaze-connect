@@ -1,6 +1,7 @@
 The login page has been implemented on the frontend and is now connected to the backend running on port 5000. The `apiClient` has been updated to reflect the new backend URL. The root layout has been updated to conditionally render the sidebar based on the user's authentication status, and the middleware has been updated to correctly handle route protection. The `AuthContext` has been updated to use `js-cookie` for storing the authentication token. The issue with redirection after login has been resolved by updating the `AuthContext`, `LoginForm`, and `middleware` to correctly handle the redirection. The `Layout` component has been refactored into its own file to prevent re-rendering issues.
 
 **Recent Updates (Internship Section Fixes):**
+
 - Resolved "Route not found" errors for internship pages.
 - Corrected the API route handler at `src/app/api/internships/[internshipId]/route.ts` to dynamically use `internshipId` and extract the internship title from `internship.json`.
 - Updated `src/middleware.ts` to correctly exclude API routes from middleware processing.
@@ -30,3 +31,34 @@ The login page has been implemented on the frontend and is now connected to the 
 - Fixed the `params` awaiting warning in the lesson layout and page.
 - Corrected the production API endpoint configuration in `src/lib/api.ts` to prevent incorrect URL fallback.
 - Updated `AuthContext.tsx` to fetch and store user progress in `localStorage` to resolve the empty dashboard issue.
+- Renamed `Button.tsx` to `button.tsx` to resolve the import casing conflict and fix the broken UI on the profile page.
+- Added padding to the main content area in `Layout.tsx` to fix the broken UI on the profile page.
+- Corrected the `onSubmit` function in `src/app/profile/page.tsx` to properly handle the API response and update the UI.
+- Improved the styling of the `Button`, `Input`, `Card`, and `Label` components to create a more polished and consistent look and feel across the application.
+- Updated the background of the profile page to be consistent with other sections of the application.
+- Created a new, more focused 12-week curriculum for the "Frontend Development Internship" that specifically incorporates React, Next.js, TypeScript, Tailwind CSS, Framer Motion, Figma, Storybook, and Vercel.
+- Updated the course mapping to reflect the new curriculum.
+- Added `framer.com` to the list of allowed image domains in `next.config.ts` to resolve the image loading error.
+- Corrected the hardcoded internship ID in `src/app/my-internships/page.tsx` to ensure the "Frontend Development Internship" card is displayed correctly.
+- Corrected the filtering logic in `src/app/my-internships/page.tsx` to ensure the correct internship cards are displayed.
+- Corrected the logic in `AuthContext.tsx` to properly handle multiple internship IDs.
+- Corrected the logic in `AuthContext.tsx` to properly update the user's accessible internship IDs and remove duplicate code.
+- Refactored the internship data loading process to use individual `metadata.json` files for each internship, removing hardcoded data from the API.
+- Updated the Framer Motion logo to the one provided by the user.
+- Updated the `InternshipCard` component to render logos from URLs.
+- Fixed an infinite loop in the `my-internships` page by wrapping `fetchUser` in `useCallback` and updating the `useEffect` dependencies.
+- Created a new "Backend Development Internship" and mapped it to the user.
+- Created a new "Python Full Stack Development Internship" and mapped it to the user.
+- Created a new "Java Full Stack Development Internship" and mapped it to the user.
+- Created the "PostgreSQL Mastery" course.
+- Created the "Redis Mastery" course.
+- Created the "Docker Mastery" course.
+- Created the "Kubernetes Mastery" course.
+- Created the "AWS Mastery" course.
+- Created the "Python Mastery" course.
+- Created the "GraphQL Mastery" course.
+- Created the "Django Mastery" course.
+- Created the "Celery Mastery" course.
+- Created the "pandas Mastery" course.
+- Created the "Java Mastery" course.
+- Created the "Spring Boot Mastery" course.

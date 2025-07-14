@@ -1,0 +1,110 @@
+[
+  {
+    "id": "backend-development-internship",
+    "week": 1,
+    "title": "Node.js and Express.js Fundamentals",
+    "goal": "Understand the fundamentals of Node.js and Express.js to build a basic server.",
+    "concepts": ["Node.js Basics", "NPM", "Express.js Setup", "Routing"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "backend-development-internship",
+    "week": 2,
+    "title": "RESTful APIs and Middleware",
+    "goal": "Learn to build RESTful APIs with Express.js and understand middleware.",
+    "concepts": ["RESTful API Design", "CRUD Operations", "Middleware"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "backend-development-internship",
+    "week": 3,
+    "title": "Introduction to PostgreSQL",
+    "goal": "Learn the basics of PostgreSQL and how to interact with it.",
+    "concepts": ["SQL Fundamentals", "PostgreSQL Setup", "CRUD Operations in SQL"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "backend-development-internship",
+    "week": 4,
+    "title": "Connecting Node.js with PostgreSQL",
+    "goal": "Learn how to connect a Node.js application to a PostgreSQL database.",
+    "concepts": ["Node.js PostgreSQL Driver", "Connection Pooling", "Querying the Database"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "backend-development-internship",
+    "week": 5,
+    "title": "Introduction to Redis",
+    "goal": "Learn the basics of Redis and how to use it for caching.",
+    "concepts": ["Redis Data Structures", "Caching Strategies", "Connecting Node.js with Redis"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "backend-development-internship",
+    "week": 6,
+    "title": "Introduction to GraphQL",
+    "goal": "Learn the fundamentals of GraphQL and how to build a GraphQL server.",
+    "concepts": ["GraphQL Schema", "Queries and Mutations", "Resolvers"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "backend-development-internship",
+    "week": 7,
+    "title": "Building a GraphQL API with Node.js",
+    "goal": "Build a complete GraphQL API with Node.js and Express.js.",
+    "concepts": ["Apollo Server", "Connecting to a Database", "Authentication and Authorization"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "backend-development-internship",
+    "week": 8,
+    "title": "Introduction to Docker",
+    "goal": "Learn how to containerize your application with Docker.",
+    "concepts": ["Docker Images and Containers", "Dockerfiles", "Docker Compose"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "backend-development-internship",
+    "week": 9,
+    "title": "Introduction to Kubernetes",
+    "goal": "Learn the basics of Kubernetes for orchestrating containers.",
+    "concepts": ["Pods, Services, and Deployments", "kubectl", "Minikube"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "backend-development-internship",
+    "week": 10,
+    "title": "Introduction to AWS",
+    "goal": "Learn the fundamentals of AWS and how to deploy your application.",
+    "concepts": ["EC2, S3, and RDS", "IAM", "Deploying a Node.js application to AWS"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "backend-development-internship",
+    "week": 11,
+    "title": "Advanced Backend Concepts",
+    "goal": "Learn advanced backend concepts like microservices and message queues.",
+    "concepts": ["Microservices Architecture", "Message Queues (RabbitMQ/SQS)", "Service Discovery"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "backend-development-internship",
+    "week": 12,
+    "title": "Capstone Project",
+    "goal": "Build a complete backend application from scratch, applying all the skills you've learned.",
+    "concepts": ["Project Planning", "Architecture Design", "API Development", "Deployment"],
+    "dailyPlan": [],
+    "checklist": []
+  }
+]

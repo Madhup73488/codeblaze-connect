@@ -1,0 +1,110 @@
+[
+  {
+    "id": "python-full-stack-development-internship",
+    "week": 1,
+    "title": "Python Fundamentals",
+    "goal": "Understand the fundamentals of Python to build a solid foundation.",
+    "concepts": ["Python Basics", "Data Structures", "Functions", "OOP"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "python-full-stack-development-internship",
+    "week": 2,
+    "title": "Introduction to Django",
+    "goal": "Learn the basics of Django and set up a new project.",
+    "concepts": ["Django Setup", "Models", "Views", "Templates"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "python-full-stack-development-internship",
+    "week": 3,
+    "title": "Django Models and Admin",
+    "goal": "Learn to create and manage database models and use the Django admin.",
+    "concepts": ["Django Models", "Migrations", "Django Admin"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "python-full-stack-development-internship",
+    "week": 4,
+    "title": "Django Views and Templates",
+    "goal": "Learn to create views and templates to render dynamic data.",
+    "concepts": ["Function-Based Views", "Class-Based Views", "Django Template Language"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "python-full-stack-development-internship",
+    "week": 5,
+    "title": "Django Forms and Authentication",
+    "goal": "Learn to create forms and handle user authentication.",
+    "concepts": ["Django Forms", "User Authentication", "Permissions"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "python-full-stack-development-internship",
+    "week": 6,
+    "title": "Introduction to React",
+    "goal": "Learn the fundamentals of React and how to build a basic application.",
+    "concepts": ["React Basics", "Components", "State and Props"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "python-full-stack-development-internship",
+    "week": 7,
+    "title": "Connecting Django with React",
+    "goal": "Learn how to connect a Django backend with a React frontend.",
+    "concepts": ["Django REST Framework", "CORS", "Fetching Data in React"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "python-full-stack-development-internship",
+    "week": 8,
+    "title": "Introduction to PostgreSQL and Redis",
+    "goal": "Learn the basics of PostgreSQL and Redis.",
+    "concepts": ["PostgreSQL Setup", "Redis Data Structures", "Connecting to Django"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "python-full-stack-development-internship",
+    "week": 9,
+    "title": "Introduction to Celery",
+    "goal": "Learn how to use Celery for asynchronous tasks.",
+    "concepts": ["Celery Setup", "Task Queues", "Running Background Tasks"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "python-full-stack-development-internship",
+    "week": 10,
+    "title": "Introduction to Docker",
+    "goal": "Learn how to containerize your application with Docker.",
+    "concepts": ["Docker Images and Containers", "Dockerfiles", "Docker Compose"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "python-full-stack-development-internship",
+    "week": 11,
+    "title": "Data Analysis with Pandas and NumPy",
+    "goal": "Learn the basics of data analysis with Pandas and NumPy.",
+    "concepts": ["DataFrames", "Series", "NumPy Arrays", "Data Manipulation"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "python-full-stack-development-internship",
+    "week": 12,
+    "title": "Capstone Project",
+    "goal": "Build a complete Python full-stack application from scratch.",
+    "concepts": ["Project Planning", "Architecture Design", "API Development", "Deployment"],
+    "dailyPlan": [],
+    "checklist": []
+  }
+]

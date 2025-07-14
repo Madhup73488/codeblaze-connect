@@ -1,0 +1,4 @@
+{
+  "title": "Module 1: Introduction to Celery and Task Queues",
+  "description": "This module introduces the core problem Celery solves, its architecture, and how to get your first task running."
+}

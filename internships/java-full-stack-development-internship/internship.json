@@ -1,0 +1,110 @@
+[
+  {
+    "id": "java-full-stack-development-internship",
+    "week": 1,
+    "title": "Java Fundamentals",
+    "goal": "Understand the fundamentals of Java to build a solid foundation.",
+    "concepts": ["Java Basics", "Data Structures", "OOP in Java"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "java-full-stack-development-internship",
+    "week": 2,
+    "title": "Introduction to Spring Boot",
+    "goal": "Learn the basics of Spring Boot and set up a new project.",
+    "concepts": ["Spring Boot Setup", "Spring MVC", "Dependency Injection"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "java-full-stack-development-internship",
+    "week": 3,
+    "title": "Spring Boot Data and REST",
+    "goal": "Learn to build RESTful APIs with Spring Boot and connect to a database.",
+    "concepts": ["Spring Data JPA", "REST Controllers", "MySQL Integration"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "java-full-stack-development-internship",
+    "week": 4,
+    "title": "Introduction to Angular",
+    "goal": "Learn the fundamentals of Angular and how to build a basic application.",
+    "concepts": ["Angular Basics", "Components", "Services and Dependency Injection"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "java-full-stack-development-internship",
+    "week": 5,
+    "title": "Angular Forms and Routing",
+    "goal": "Learn to create forms and handle routing in Angular.",
+    "concepts": ["Template-Driven Forms", "Reactive Forms", "Angular Router"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "java-full-stack-development-internship",
+    "week": 6,
+    "title": "Connecting Spring Boot with Angular",
+    "goal": "Learn how to connect a Spring Boot backend with an Angular frontend.",
+    "concepts": ["CORS", "HTTP Client", "Fetching Data in Angular"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "java-full-stack-development-internship",
+    "week": 7,
+    "title": "Introduction to TypeScript",
+    "goal": "Learn the fundamentals of TypeScript and how to use it with Angular.",
+    "concepts": ["TypeScript Basics", "Types and Interfaces", "Decorators"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "java-full-stack-development-internship",
+    "week": 8,
+    "title": "Introduction to MongoDB",
+    "goal": "Learn the basics of MongoDB and how to use it with Spring Boot.",
+    "concepts": ["MongoDB Setup", "Spring Data MongoDB", "NoSQL Concepts"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "java-full-stack-development-internship",
+    "week": 9,
+    "title": "Introduction to Apache Kafka",
+    "goal": "Learn the basics of Apache Kafka for building event-driven applications.",
+    "concepts": ["Kafka Topics and Partitions", "Producers and Consumers", "Spring for Kafka"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "java-full-stack-development-internship",
+    "week": 10,
+    "title": "Introduction to Jenkins",
+    "goal": "Learn how to use Jenkins for continuous integration and deployment.",
+    "concepts": ["Jenkins Setup", "Pipelines", "CI/CD Concepts"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "java-full-stack-development-internship",
+    "week": 11,
+    "title": "Advanced Java Concepts",
+    "goal": "Learn advanced Java concepts like concurrency and streams.",
+    "concepts": ["Java Streams API", "Concurrency", "Lambda Expressions"],
+    "dailyPlan": [],
+    "checklist": []
+  },
+  {
+    "id": "java-full-stack-development-internship",
+    "week": 12,
+    "title": "Capstone Project",
+    "goal": "Build a complete Java full-stack application from scratch.",
+    "concepts": ["Project Planning", "Architecture Design", "API Development", "Deployment"],
+    "dailyPlan": [],
+    "checklist": []
+  }
+]

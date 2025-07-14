@@ -1,0 +1,4 @@
+{
+  "title": "Module 5: Transactions and Concurrency",
+  "description": "Learn how PostgreSQL handles simultaneous operations safely and reliably."
+}

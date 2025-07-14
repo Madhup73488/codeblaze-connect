@@ -1,16 +1,538 @@
-{
-  "id": "frontend-development-engineer-intern",
-  "title": "Frontend Development Engineer Intern (React & Next.js)",
-  "description": "This internship is designed to provide you with the skills and experience needed to become a successful frontend developer. You will learn to build modern, responsive, and performant web applications using React, Next.js, and other modern technologies.",
-  "technologies": [
-    "React",
-    "Next.js",
-    "TypeScript",
-    "Tailwind CSS",
-    "Framer Motion",
-    "Figma",
-    "Storybook",
-    "Vercel"
-  ],
-  "weeks": []
-}
+[
+  {
+    "id": "frontend-development-engineer-intern",
+    "week": 1,
+    "title": "Foundations: HTML, CSS, & Git",
+    "goal": "Build a strong foundation in web fundamentals. By the end of this week, you will be able to structure a semantic webpage with HTML, style it with modern CSS, and manage your code using Git.",
+    "concepts": [
+      "Semantic HTML5: Structuring content logically with tags like <header>, <main>, <article>.",
+      "CSS Fundamentals: Selectors, the Box Model, and basic styling properties.",
+      "Flexbox & CSS Grid: Creating robust one-dimensional and two-dimensional layouts.",
+      "Responsive Design: Using media queries to build layouts that adapt to any screen size.",
+      "Version Control with Git: Core commands (add, commit, push, pull) and branching strategies."
+    ],
+    "dailyPlan": [
+      {
+        "days": "1-2",
+        "focus": "HTML & CSS Basics",
+        "courseLink": "/courses/html5-mastery/module-1-html-fundamentals/lesson-1-html-structure-and-elements",
+        "task": "Create a semantic HTML structure for a personal portfolio page. Style it with basic CSS, focusing on colors, typography, and the box model."
+      },
+      {
+        "days": "3-4",
+        "focus": "Layouts & Responsive Design",
+        "courseLink": "/courses/css3-mastery/module-3-layouts-with-flexbox-and-css-grid/lesson-2-flexbox-one-dimensional-layout",
+        "task": "Refactor your portfolio page to use Flexbox for component alignment and CSS Grid for the main page layout. Add media queries to ensure it's mobile-responsive."
+      },
+      {
+        "days": "5-6",
+        "focus": "Git & Project Setup",
+        "courseLink": "/courses/deployment-and-best-practices/module-1-foundations-of-professional-development/lesson-3-version-control-with-git-and-github",
+        "task": "Initialize a Git repository for your portfolio project. Create a new branch for a 'features' section, add the content, and merge it back into the main branch. Push your project to a new GitHub repository."
+      },
+      {
+        "days": "7",
+        "focus": "Rest & Prepare for Advanced Styling",
+        "task": ""
+      }
+    ],
+    "checklist": [
+      "Built a responsive, semantically structured HTML/CSS page.",
+      "Used both Flexbox and CSS Grid for layout.",
+      "Initialized a Git repository and used basic commands.",
+      "Pushed a project to GitHub."
+    ]
+  },
+  {
+    "id": "frontend-development-engineer-intern",
+    "week": 2,
+    "title": "Advanced Styling: From Figma to Tailwind CSS",
+    "goal": "Learn to translate professional designs into code and master the utility-first workflow with Tailwind CSS. You will be able to build complex, responsive UIs efficiently.",
+    "concepts": [
+      "Figma for Developers: Inspecting designs, extracting assets (icons, images), and understanding design tokens (colors, spacing, typography).",
+      "Introduction to Tailwind CSS: Core concepts, utility-first workflow, and setup.",
+      "Responsive Design with Tailwind: Using Tailwind's responsive prefixes (sm, md, lg).",
+      "Theming & Customization: Customizing Tailwind's theme (tailwind.config.js) to match a design system.",
+      "Dark Mode: Implementing dark mode with Tailwind's `dark:` variant."
+    ],
+    "dailyPlan": [
+      {
+        "days": "1-2",
+        "focus": "Figma & Tailwind Setup",
+        "courseLink": "/courses/tailwind-css-mastery/module-1-getting-started-with-tailwind-css/lesson-1-what-is-tailwind-css",
+        "task": "Given a Figma design file, inspect its properties. Set up a new project with Tailwind CSS and configure the `tailwind.config.js` file to match the colors and fonts from the Figma design."
+      },
+      {
+        "days": "3-4",
+        "focus": "Building Components with Tailwind",
+        "courseLink": "/courses/tailwind-css-mastery/module-2-core-concepts-and-utilities/lesson-1-understanding-utility-first",
+        "task": "Rebuild your portfolio page from Week 1 using only Tailwind CSS utility classes. Focus on creating reusable component styles."
+      },
+      {
+        "days": "5-6",
+        "focus": "Advanced Tailwind & Dark Mode",
+        "courseLink": "/courses/tailwind-css-mastery/module-2-core-concepts-and-utilities/lesson-3-responsive-design-and-dark-mode",
+        "task": "Weekly Project: Build a pixel-perfect clone of a component from a provided Figma design. It must be fully responsive and include a working dark mode toggle."
+      },
+      {
+        "days": "7",
+        "focus": "Rest & Prepare for JavaScript",
+        "task": ""
+      }
+    ],
+    "checklist": [
+      "Inspected a Figma file to extract design specifications.",
+      "Set up and configured Tailwind CSS.",
+      "Built a responsive layout using Tailwind's utility classes.",
+      "Customized the Tailwind theme.",
+      "Implemented a dark mode feature.",
+      "Completed the Figma-to-Tailwind project."
+    ]
+  },
+  {
+    "id": "frontend-development-engineer-intern",
+    "week": 3,
+    "title": "JavaScript & TypeScript Fundamentals",
+    "goal": "Master the core language of the web and enhance it with static typing. You will be able to write interactive, bug-resistant code.",
+    "concepts": [
+      "JavaScript Fundamentals: Variables (let, const), data types, functions, and control flow.",
+      "DOM Manipulation: Interacting with the webpage using JavaScript.",
+      "Modern JavaScript (ES6+): Arrow functions, destructuring, modules, and async/await.",
+      "TypeScript Introduction: Understanding the benefits of static typing.",
+      "Basic Types: Using `string`, `number`, `boolean`, `array`, and `object` types.",
+      "Interfaces & Types: Defining custom types for your data structures."
+    ],
+    "dailyPlan": [
+      {
+        "days": "1-2",
+        "focus": "JavaScript Basics & DOM",
+        "courseLink": "/courses/javascript-mastery/module-1-javascript-fundamentals/lesson-1-variables-data-types-and-operators",
+        "task": "Build an interactive tip calculator. Use DOM manipulation to get user input and display the result."
+      },
+      {
+        "days": "3-4",
+        "focus": "Async JS & TypeScript Setup",
+        "courseLink": "/courses/typescript-mastery/module-1-typescript-fundamentals/lesson-1-introduction-to-typescript",
+        "task": "Build a simple weather app that fetches data from a public API using async/await. Set up a new project with TypeScript and convert the weather app's code to be type-safe. Define an interface for the weather API response."
+      },
+      {
+        "days": "5-6",
+        "focus": "Applying TypeScript",
+        "courseLink": "/courses/typescript-mastery/module-1-typescript-fundamentals/lesson-2-types-in-typescript",
+        "task": "Weekly Project: A Type-Safe To-Do List. Build a to-do list application using only HTML, Tailwind CSS, and TypeScript. All data structures and functions must be fully typed. Use localStorage to persist the to-do items."
+      },
+      {
+        "days": "7",
+        "focus": "Rest & Prepare for React",
+        "task": ""
+      }
+    ],
+    "checklist": [
+      "Manipulated the DOM with vanilla JavaScript.",
+      "Fetched data from an API using async/await.",
+      "Set up a project with TypeScript.",
+      "Used basic TypeScript types and interfaces.",
+      "Completed the Type-Safe To-Do List project."
+    ]
+  },
+  {
+    "id": "frontend-development-engineer-intern",
+    "week": 4,
+    "title": "React Fundamentals with TypeScript",
+    "goal": "Learn the most popular frontend library. You will understand the component model, JSX, and how to manage component state in a type-safe way.",
+    "concepts": [
+      "Thinking in React: Component-based architecture.",
+      "JSX with TypeScript: Writing type-safe UI code.",
+      "Functional Components & Props: Creating reusable components and passing typed props.",
+      "State & Hooks: Managing state with `useState` and performing side effects with `useEffect` in a type-safe manner.",
+      "Event Handling: Typing event handlers for user interactions."
+    ],
+    "dailyPlan": [
+      {
+        "days": "1-2",
+        "focus": "Intro to React & JSX",
+        "courseLink": "/courses/react-js-mastery/module-1-react-fundamentals/lesson-1-introduction-to-react-and-jsx",
+        "task": "Set up a React + TypeScript project using Vite. Create a `UserProfile` component that accepts typed props (name, age, avatarUrl) and renders them."
+      },
+      {
+        "days": "3-4",
+        "focus": "State, Effects, and Events",
+        "courseLink": "/courses/react-js-mastery/module-2-react-hooks/lesson-1-usestate-hook",
+        "task": "Build a simple counter component with increment/decrement buttons. Fetch user data from an API using `useEffect` when the component mounts. Ensure all state and event handlers are typed."
+      },
+      {
+        "days": "5-6",
+        "focus": "Project: Interactive Components",
+        "task": "Weekly Project: A Type-Safe Interactive Form. Build a multi-step form in React and TypeScript. Manage the form's state using `useState`. All input fields and submission handlers must be fully typed."
+      },
+      {
+        "days": "7",
+        "focus": "Rest & Prepare for Next.js",
+        "task": ""
+      }
+    ],
+    "checklist": [
+      "Set up a React + TypeScript project.",
+      "Created functional components with typed props.",
+      "Managed state with a typed `useState` hook.",
+      "Fetched data with a typed `useEffect` hook.",
+      "Handled user events with typed handlers.",
+      "Completed the Type-Safe Interactive Form project."
+    ]
+  },
+  {
+    "id": "frontend-development-engineer-intern",
+    "week": 5,
+    "title": "Building Applications with Next.js",
+    "goal": "Level up from React to a full-featured framework. You will learn file-based routing, different rendering methods, and data fetching strategies in Next.js.",
+    "concepts": [
+      "Next.js Introduction: Why use a framework? Pages vs. App Router.",
+      "File-Based Routing: Creating pages and dynamic routes.",
+      "Rendering Methods: SSR, SSG, and CSR explained.",
+      "Data Fetching: `getStaticProps`, `getServerSideProps`, and using `fetch` in Server Components.",
+      "Layouts: Creating shared layouts for different parts of your application.",
+      "API Routes: Building simple backend endpoints within your Next.js app."
+    ],
+    "dailyPlan": [
+      {
+        "days": "1-2",
+        "focus": "Getting Started with Next.js",
+        "courseLink": "/courses/next-js-mastery/module-1-getting-started-with-nextjs/lesson-1-what-is-next-js",
+        "task": "Create a new Next.js application. Build a simple blog with a homepage (listing posts) and dynamic routes for individual post pages (`/posts/[id]`)."
+      },
+      {
+        "days": "3-4",
+        "focus": "Data Fetching & Rendering",
+        "courseLink": "/courses/next-js-mastery/module-2-the-app-router-and-core-concepts/lesson-2-data-fetching-and-rendering",
+        "task": "Fetch your blog posts from a public API. Use SSG (`getStaticProps`) for the blog list and individual posts. Create a 'dashboard' page that uses SSR (`getServerSideProps`) to fetch user-specific data."
+      },
+      {
+        "days": "5-6",
+        "focus": "Layouts & API Routes",
+        "courseLink": "/courses/next-js-mastery/module-2-the-app-router-and-core-concepts/lesson-1-understanding-the-app-router",
+        "task": "Weekly Project: A Blog with a CMS. Extend your Next.js blog. Create a shared layout component. Build a simple API route that returns a list of comments for a post. Fetch and display these comments on the client-side."
+      },
+      {
+        "days": "7",
+        "focus": "Rest & Prepare for Advanced State",
+        "task": ""
+      }
+    ],
+    "checklist": [
+      "Created a multi-page application using Next.js file-based routing.",
+      "Implemented dynamic routes.",
+      "Fetched data using both SSG and SSR methods.",
+      "Created a shared layout for multiple pages.",
+      "Built and consumed a simple API route."
+    ]
+  },
+  {
+    "id": "frontend-development-engineer-intern",
+    "week": 6,
+    "title": "Advanced State Management",
+    "goal": "Learn to manage complex application state that is shared across many components, using modern state management libraries.",
+    "concepts": [
+      "The Problem of Prop Drilling.",
+      "React Context API: For simple global state.",
+      "Redux Toolkit: The standard for robust, scalable state management.",
+      "Core Redux Concepts: Store, slices, reducers, actions.",
+      "Async Thunks: Handling asynchronous logic like API calls in Redux.",
+      "State Management Patterns: Deciding when to use local state vs. global state."
+    ],
+    "dailyPlan": [
+      {
+        "days": "1-2",
+        "focus": "React Context & Redux Intro",
+        "courseLink": "/courses/react-js-mastery/module-2-react-hooks/lesson-3-usecontext-hook",
+        "task": "Create a theme switcher (light/dark mode) for your Next.js blog using the Context API."
+      },
+      {
+        "days": "3-4",
+        "focus": "Redux Toolkit Fundamentals",
+        "courseLink": "/courses/react-js-mastery/module-3-state-management/lesson-2-redux-toolkit",
+        "task": "Integrate Redux Toolkit into your app. Create a `cartSlice` to manage a shopping cart. Add 'Add to Cart' buttons to your blog posts (as if they were products) that dispatch actions."
+      },
+      {
+        "days": "5-6",
+        "focus": "Async Redux & Project",
+        "task": "Weekly Project: A Shopping Cart Application. Build a simple e-commerce interface. Fetch products from an API and store them in your Redux store using an async thunk. Allow users to add/remove items from the cart. The cart state must be managed entirely by Redux Toolkit."
+      },
+      {
+        "days": "7",
+        "focus": "Rest & Prepare for Animations",
+        "task": ""
+      }
+    ],
+    "checklist": [
+      "Used React Context for simple global state.",
+      "Set up a Redux Toolkit store.",
+      "Created a slice with reducers and actions.",
+      "Used `useSelector` and `useDispatch` to interact with the store.",
+      "Fetched data using an async thunk in Redux.",
+      "Completed the Shopping Cart project."
+    ]
+  },
+  {
+    "id": "frontend-development-engineer-intern",
+    "week": 7,
+    "title": "UI Animations with Framer Motion",
+    "goal": "Bring your applications to life with fluid animations. You will learn how to use Framer Motion to create declarative, powerful animations in React.",
+    "concepts": [
+      "Animation Principles: Understanding timing, easing, and choreography.",
+      "Framer Motion Basics: The `motion` component and the `animate` prop.",
+      "Gestures: Handling hover, tap, and drag animations.",
+      "Variants: Creating complex, reusable animation sequences.",
+      "Page Transitions: Animating between pages with `AnimatePresence`.",
+      "Scroll-Triggered Animations: Animating elements as they enter the viewport."
+    ],
+    "dailyPlan": [
+      {
+        "days": "1-2",
+        "focus": "Basic Animations & Gestures",
+        "courseLink": "/courses/framer-motion-mastery/module-1-getting-started-with-framer-motion/lesson-2-setting-up-and-your-first-animation",
+        "task": "Add Framer Motion to your portfolio project. Make your project cards scale up on hover. Add a button that animates when tapped."
+      },
+      {
+        "days": "3-4",
+        "focus": "Variants & Page Transitions",
+        "courseLink": "/courses/framer-motion-mastery/module-3-advanced-animation-techniques/lesson-1-variants",
+        "task": "Create a staggered animation for a list of items using variants. Wrap your Next.js app's layout with `AnimatePresence` to create a fade-in/fade-out transition between pages."
+      },
+      {
+        "days": "5-6",
+        "focus": "Scroll Animations & Project",
+        "courseLink": "/courses/framer-motion-mastery/module-2-gestures-and-interactive-animations/lesson-3-scroll-triggered-animations",
+        "task": "Weekly Project: An Animated Landing Page. Build a new landing page that heavily features animations. Use scroll-triggered animations to fade in sections as the user scrolls. Create a draggable card component. Animate the presentation of a modal window."
+      },
+      {
+        "days": "7",
+        "focus": "Rest & Prepare for Component Libraries",
+        "task": ""
+      }
+    ],
+    "checklist": [
+      "Created basic animations with the `motion` component.",
+      "Handled hover, tap, and drag gestures.",
+      "Orchestrated animations with variants.",
+      "Implemented page transitions with `AnimatePresence`.",
+      "Created scroll-triggered animations.",
+      "Completed the Animated Landing Page project."
+    ]
+  },
+  {
+    "id": "frontend-development-engineer-intern",
+    "week": 8,
+    "title": "Component-Driven Development with Storybook",
+    "goal": "Learn to build, test, and document UI components in isolation, creating a robust and reusable component library for your applications.",
+    "concepts": [
+      "Component-Driven Development (CDD): The methodology.",
+      "Setting up Storybook: Integrating Storybook into a Next.js project.",
+      "Writing Stories: Creating stories for your components in different states.",
+      "Controls & Addons: Using addons like Controls, Viewport, and A11y to interact with and test components.",
+      "Documenting Components: Using MDX to write documentation alongside your stories.",
+      "Testing with Storybook: Visual regression testing and interaction testing concepts."
+    ],
+    "dailyPlan": [
+      {
+        "days": "1-2",
+        "focus": "Setup & First Stories",
+        "task": "Integrate Storybook into your portfolio project. Write stories for your basic `Button` and `Card` components. Ensure they appear correctly in the Storybook UI."
+      },
+      {
+        "days": "3-4",
+        "focus": "Controls & Addons",
+        "task": "Enhance your stories by adding controls that allow you to change props dynamically (e.g., button text, card content). Use the Viewport addon to test component responsiveness and the A11y addon to check for accessibility issues."
+      },
+      {
+        "days": "5-6",
+        "focus": "Documentation & Project",
+        "task": "Weekly Project: A Documented Component Library. For your portfolio project, create stories for every single component. Write a main documentation page in MDX explaining your design system's principles (colors, typography). Ensure every component is interactive and well-documented in Storybook."
+      },
+      {
+        "days": "7",
+        "focus": "Rest & Prepare for Capstone Project",
+        "task": ""
+      }
+    ],
+    "checklist": [
+      "Set up Storybook in a React/Next.js project.",
+      "Wrote stories for multiple components.",
+      "Used Storybook Controls to manipulate component props.",
+      "Used at least two other addons (e.g., Viewport, A11y).",
+      "Created a documentation page using MDX.",
+      "Built a complete component library for a project."
+    ]
+  },
+  {
+    "id": "frontend-development-engineer-intern",
+    "week": 9,
+    "title": "Capstone Project - Part 1: Planning & Core Features",
+    "goal": "Begin building a large, portfolio-worthy application from scratch, applying all the skills you've learned so far. This week focuses on project setup, architecture, and core feature implementation.",
+    "concepts": [
+      "Project Scoping: Defining the MVP (Minimum Viable Product).",
+      "Architecture Planning: Deciding on folder structure, state management strategy, and component breakdown.",
+      "API Integration: Planning how to interact with a third-party or mock API.",
+      "Core UI Development: Building the main layout and key components.",
+      "Initial State Management Setup: Setting up the Redux store or Context providers."
+    ],
+    "dailyPlan": [
+      {
+        "days": "1",
+        "focus": "Project Planning",
+        "task": "Define your capstone project (e.g., a movie database browser, an e-commerce site, a project management tool). Break it down into features and plan your component architecture."
+      },
+      {
+        "days": "2-3",
+        "focus": "Project Setup & Core UI",
+        "task": "Set up the Next.js + TypeScript + Tailwind CSS + Redux Toolkit project. Build the main layout (header, footer, sidebar) and the primary UI components (cards, buttons, inputs) in Storybook."
+      },
+      {
+        "days": "4-6",
+        "focus": "Implement Core Feature",
+        "task": "Implement the main feature of your application. For a movie app, this would be fetching and displaying a list of popular movies from an API (like TMDB). For an e-commerce site, it would be displaying products. Ensure all data fetching and state is handled by Redux."
+      },
+      {
+        "days": "7",
+        "focus": "Review & Refactor",
+        "task": "Review your code, refactor for clarity, and ensure your project structure is clean. Prepare for next week's features."
+      }
+    ],
+    "checklist": [
+      "Created a detailed project plan.",
+      "Set up a well-structured project repository.",
+      "Built and documented the core UI components in Storybook.",
+      "Implemented the primary data-fetching and display feature.",
+      "Set up the global state management solution."
+    ]
+  },
+  {
+    "id": "frontend-development-engineer-intern",
+    "week": 10,
+    "title": "Capstone Project - Part 2: Interactivity & Advanced Features",
+    "goal": "Add depth and interactivity to your capstone project, focusing on user interaction, animations, and more complex state logic.",
+    "concepts": [
+      "Client-Side Routing: Implementing navigation between pages.",
+      "Forms & User Input: Handling complex forms with validation.",
+      "Advanced State Logic: Managing filters, search queries, and user-specific data.",
+      "UI/UX Polish: Adding animations and transitions to improve the user experience.",
+      "Error Handling: Gracefully handling API errors and displaying feedback to the user."
+    ],
+    "dailyPlan": [
+      {
+        "days": "1-2",
+        "focus": "Routing & Detail Pages",
+        "task": "Implement routing to a detail page. For a movie app, this would be clicking a movie to see its details (`/movie/[id]`). Fetch and display the detailed data for the selected item."
+      },
+      {
+        "days": "3-4",
+        "focus": "Search & Filtering",
+        "task": "Add a search bar and filter options (e.g., by genre, by price). Manage the search/filter state in Redux and re-fetch data based on user input."
+      },
+      {
+        "days": "5-6",
+        "focus": "Animations & Polish",
+        "task": "Integrate Framer Motion to add meaningful animations. Animate page transitions. Add hover effects to interactive elements. Create a loading animation for data fetching states."
+      },
+      {
+        "days": "7",
+        "focus": "Review & Refactor",
+        "task": "Test all new features. Ensure the application state is managed correctly and the UI is polished. Handle all potential loading and error states."
+      }
+    ],
+    "checklist": [
+      "Implemented client-side routing for a detail view.",
+      "Built a functional search and/or filtering feature.",
+      "Managed complex UI state with Redux.",
+      "Added animations using Framer Motion.",
+      "Implemented robust loading and error handling states."
+    ]
+  },
+  {
+    "id": "frontend-development-engineer-intern",
+    "week": 11,
+    "title": "Capstone Project - Part 3: Testing",
+    "goal": "Ensure your capstone project is robust and bug-free by implementing a comprehensive testing strategy.",
+    "concepts": [
+      "Testing Strategy: Deciding what and how to test.",
+      "Unit Testing: Testing individual utility functions and hooks.",
+      "Component Testing: Testing React components in isolation.",
+      "Integration Testing: Testing user flows that involve multiple components.",
+      "Mocking API Calls: Using libraries like Mock Service Worker (MSW) or Jest's mocking capabilities.",
+      "Code Coverage: Understanding and aiming for meaningful test coverage."
+    ],
+    "dailyPlan": [
+      {
+        "days": "1-2",
+        "focus": "Setting up Testing & Unit Tests",
+        "task": "Set up Jest and React Testing Library in your project. Write unit tests for any utility functions or custom hooks you've created."
+      },
+      {
+        "days": "3-4",
+        "focus": "Component & Integration Tests",
+        "task": "Write tests for your main components. Test that they render correctly with given props. Write an integration test for your search/filter feature, mocking the API response."
+      },
+      {
+        "days": "5-6",
+        "focus": "Testing User Flows",
+        "task": "Write a test that simulates a full user flow, such as searching for an item, clicking on it to go to the detail page, and interacting with an element there. This will test routing, data fetching, and component interaction together."
+      },
+      {
+        "days": "7",
+        "focus": "Review & Increase Coverage",
+        "task": "Analyze your test coverage and write tests for any critical parts of your application that are missing them. Refactor code to make it more testable if necessary."
+      }
+    ],
+    "checklist": [
+      "Configured a testing environment with Jest and React Testing Library.",
+      "Wrote unit tests for utility functions/hooks.",
+      "Wrote component tests to verify rendering.",
+      "Wrote integration tests for user flows.",
+      "Mocked API calls in your tests.",
+      "Achieved meaningful test coverage for the project."
+    ]
+  },
+  {
+    "id": "frontend-development-engineer-intern",
+    "week": 12,
+    "title": "Deployment & Portfolio Polish",
+    "goal": "Prepare your capstone project for the world by deploying it and polishing your portfolio to showcase your skills as a professional frontend developer.",
+    "concepts": [
+      "Production Builds: Creating an optimized build of your application.",
+      "Deployment Platforms: Using Vercel for seamless Next.js deployment.",
+      "Environment Variables: Managing secret keys and environment-specific configuration for production.",
+      "Performance Auditing: Using Lighthouse to check for performance, accessibility, and SEO issues.",
+      "Code Refactoring & Cleanup: Final review of the codebase for quality.",
+      "Portfolio & README: Creating a professional README for your project and adding it to your portfolio."
+    ],
+    "dailyPlan": [
+      {
+        "days": "1-2",
+        "focus": "Deployment to Vercel",
+        "courseLink": "/courses/deployment-and-best-practices/module-1-foundations-of-professional-development/lesson-2-environment-and-configuration-management",
+        "task": "Create a production build of your capstone project. Deploy it to Vercel. Configure all necessary environment variables (e.g., API keys) in the Vercel dashboard."
+      },
+      {
+        "days": "3-4",
+        "focus": "Performance & Accessibility Audit",
+        "task": "Run a Lighthouse audit on your deployed project. Address any major performance or accessibility issues that it flags. Optimize images and review your semantic HTML."
+      },
+      {
+        "days": "5-6",
+        "focus": "Final Code Polish & Documentation",
+        "task": "Do a final refactor of your entire project. Remove any console logs, add comments where necessary, and ensure consistent code style. Write a comprehensive `README.md` file on GitHub, including a project description, screenshots, a list of features, the tech stack used, and a link to the live demo."
+      },
+      {
+        "days": "7",
+        "focus": "Internship Wrap-up & Celebrate!",
+        "task": "Congratulations! You've completed the internship. Update your personal portfolio and resume with your new project and skills."
+      }
+    ],
+    "checklist": [
+      "Successfully deployed the capstone project to Vercel.",
+      "Configured production environment variables.",
+      "Audited and improved the site's performance and accessibility.",
+      "Written a high-quality, professional README for the project.",
+      "Prepared the project to be showcased in a portfolio."
+    ]
+  }
+]

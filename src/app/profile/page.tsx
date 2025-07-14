@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -20,7 +20,9 @@ import { useAuth } from "@/contexts/AuthContext";
 const profileFormSchema = z.object({
   username: z.string().min(1, { message: "Username is required" }),
   email: z.string().email({ message: "Invalid email address" }),
-  phone: z.string().min(10, { message: "Phone number must be at least 10 digits" }),
+  phone: z
+    .string()
+    .min(10, { message: "Phone number must be at least 10 digits" }),
   password: z.string().optional(),
 });
 
@@ -55,7 +57,7 @@ const ProfilePage = () => {
   const onSubmit = async (data: ProfileFormValues) => {
     try {
       const res = await api.put("/connect/user/profile", data);
-      if (res.status === 200) {
+      if (res) {
         toast({
           title: "Profile updated successfully",
         });
@@ -79,9 +81,9 @@ const ProfilePage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 p-6">
       <div className="container mx-auto py-8">
-        <h1 className="text-3xl font-bold mb-6">Profile</h1>
+        <h1 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Profile</h1>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField
@@ -91,7 +93,11 @@ const ProfilePage = () => {
                 <FormItem>
                   <FormLabel>Username</FormLabel>
                   <FormControl>
-                    <Input placeholder="Username" {...field} disabled={!isEditing} />
+                    <Input
+                      placeholder="Username"
+                      {...field}
+                      disabled={!isEditing}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -117,7 +123,11 @@ const ProfilePage = () => {
                 <FormItem>
                   <FormLabel>Phone</FormLabel>
                   <FormControl>
-                    <Input placeholder="Phone" {...field} disabled={!isEditing} />
+                    <Input
+                      placeholder="Phone"
+                      {...field}
+                      disabled={!isEditing}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -131,7 +141,11 @@ const ProfilePage = () => {
                   <FormItem>
                     <FormLabel>New Password (optional)</FormLabel>
                     <FormControl>
-                      <Input type="password" placeholder="New Password" {...field} />
+                      <Input
+                        type="password"
+                        placeholder="New Password"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -141,7 +155,11 @@ const ProfilePage = () => {
             <div className="flex justify-end space-x-4">
               {isEditing ? (
                 <>
-                  <Button type="button" variant="secondary" onClick={() => setIsEditing(false)}>
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    onClick={() => setIsEditing(false)}
+                  >
                     Cancel
                   </Button>
                   <Button type="submit">Save</Button>

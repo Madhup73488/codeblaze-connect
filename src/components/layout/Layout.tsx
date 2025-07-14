@@ -30,7 +30,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <div className={`flex flex-col flex-1 ${mainContentMargin}`}>
         {showNavbar && <NavigationBar />}
         <main className="flex-1 overflow-y-auto">
-          <div className=" ">{children}</div>
+          <div className="">{children}</div>
         </main>
       </div>
     </div>
