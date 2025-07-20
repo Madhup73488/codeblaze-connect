@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
+import { Button } from "../../components/ui/button";
 import {
   Form,
   FormControl,
@@ -11,12 +11,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { PasswordInput } from "@/components/ui/password-input";
-import { useToast } from "@/components/ui/use-toast";
-import api from "@/lib/api";
-import { useAuth } from "@/contexts/AuthContext";
+} from "../../components/ui/form";
+import { Input } from "../../components/ui/input";
+import { PasswordInput } from "../../components/ui/password-input";
+import { useToast } from "../../components/ui/use-toast";
+import api from "../../lib/api";
+import { useAuth } from "../../contexts/AuthContext";
 
 const profileFormSchema = z.object({
   name: z.string().min(1, { message: "Name is required" }),

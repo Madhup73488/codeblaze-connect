@@ -10,9 +10,9 @@ import {
   Moon,
   Sun
 } from 'lucide-react';
-import { useAuth } from '@/contexts/AuthContext';
-import { useTheme } from '@/contexts/ThemeContext';
-import { Button } from '@/components/ui/button';
+import { useAuth } from '../../contexts/AuthContext';
+import { useTheme } from '../../contexts/ThemeContext';
+import { Button } from '../../components/ui/button';
 import Link from 'next/link';
 
 const SettingsPage = () => {

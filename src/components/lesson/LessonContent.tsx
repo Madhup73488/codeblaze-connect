@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import { Lesson, Course } from "@/lib/course-loader";
-import VideoPlayer from "@/components/lesson/VideoPlayer";
-import InteractiveCode from "@/components/lesson/InteractiveCode";
+import { Lesson, Course } from "../../lib/course-loader";
+import VideoPlayer from "./VideoPlayer";
+import InteractiveCode from "./InteractiveCode";
 import {
   Code,
   FileText,
@@ -17,7 +17,7 @@ import MarkdownRenderer from "./MarkdownRenderer";
 import LessonNavigation from "./LessonNavigation";
 import Link from "next/link";
 import TextLessonTracker from "./TextLessonTracker";
-import { useProgress } from "@/hooks/useProgress";
+import { useProgress } from "../../hooks/useProgress";
 
 interface LessonContentProps {
   lesson: Lesson;
