@@ -15,6 +15,7 @@ import {
 import { AuthContext } from "@/contexts/AuthContext";
 import api from "@/lib/api";
 import logo from "@/../public/logo.png";
+import { PasswordInput } from "@/components/ui/password-input";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -103,10 +104,9 @@ const LoginForm = () => {
               <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
             </svg>
           </div>
-          <input
+          <PasswordInput
             id="password"
             name="password"
-            type="password"
             autoComplete="current-password"
             required
             value={password}

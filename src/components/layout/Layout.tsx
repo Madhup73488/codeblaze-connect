@@ -10,6 +10,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated } = useAuth();
   const pathname = usePathname();
 
+  console.log("Layout rendered, pathname:", pathname);
+
   const isAuthPage =
     pathname.startsWith("/login") ||
     pathname.startsWith("/forgot-password") ||

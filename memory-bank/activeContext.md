@@ -62,3 +62,4 @@ The login page has been implemented on the frontend and is now connected to the 
 - Created the "pandas Mastery" course.
 - Created the "Java Mastery" course.
 - Created the "Spring Boot Mastery" course.
+- Corrected the API endpoint for fetching user progress to point to the backend on port 5000.

@@ -1,0 +1,8 @@
+{
+  "title": "Lesson 2.1: useState and Event Handling",
+  "description": "Learn how to manage component state with the useState hook and handle user events.",
+  "order": 1,
+  "duration": 20,
+  "type": "text",
+  "difficulty": "beginner"
+}

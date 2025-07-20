@@ -11,6 +11,7 @@ import {
 import Link from "next/link";
 import { Course, Lesson } from "@/lib/course-loader";
 import { useFocusMode } from "@/contexts/FocusModeContext";
+import { useProgress } from "@/hooks/useProgress";
 
 interface CourseLayoutProps {
   children: React.ReactNode;
@@ -20,6 +21,16 @@ interface CourseLayoutProps {
 
 const CourseLayout = ({ children, course, lesson }: CourseLayoutProps) => {
   const { isFocusMode, toggleFocusMode, setIsFocusMode } = useFocusMode();
+  const { getCourseProgress } = useProgress();
+
+  const courseProgress = getCourseProgress(course.id);
+  const totalLessons = course.modules.reduce(
+    (acc, module) => acc + module.lessons.length,
+    0
+  );
+  const completedLessons = courseProgress?.completedLessons || 0;
+  const progressPercentage =
+    totalLessons > 0 ? (completedLessons / totalLessons) * 100 : 0;
 
   // Listen for fullscreen changes
   useEffect(() => {
@@ -51,12 +62,14 @@ const CourseLayout = ({ children, course, lesson }: CourseLayoutProps) => {
                 {course.title}
               </h3>
               <div className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
-                <span>Progress: 65% Complete</span>
+                <span>
+                  Progress: {Math.round(progressPercentage)}% Complete
+                </span>
               </div>
               <div className="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-2">
                 <div
                   className="bg-gradient-to-r from-indigo-500 to-purple-500 h-2 rounded-full"
-                  style={{ width: "65%" }}
+                  style={{ width: `${progressPercentage}%` }}
                 ></div>
               </div>
             </div>

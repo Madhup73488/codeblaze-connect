@@ -5,13 +5,13 @@ import { useProgress } from '@/hooks/useProgress';
 
 interface VideoPlayerProps {
   src: string;
-  courseId: string;
-  moduleId: string;
-  lessonId: string;
+  course: { id: string; title: string };
+  module: { id: string; title: string };
+  lesson: { id: string; title: string };
   onComplete?: () => void;
 }
 
-export const VideoPlayer = ({ src, courseId, moduleId, lessonId, onComplete }: VideoPlayerProps) => {
+export const VideoPlayer = ({ src, course, module, lesson, onComplete }: VideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [watchTime, setWatchTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -27,9 +27,9 @@ export const VideoPlayer = ({ src, courseId, moduleId, lessonId, onComplete }: V
       // Update progress every 30 seconds
       if (Math.floor(video.currentTime) % 30 === 0) {
         updateProgress(
-          courseId,
-          moduleId,
-          lessonId,
+          course,
+          module,
+          lesson,
           Math.floor(video.currentTime / 60)
         );
       }
@@ -43,7 +43,7 @@ export const VideoPlayer = ({ src, courseId, moduleId, lessonId, onComplete }: V
       // Mark as completed when 90% watched
       const watchPercentage = watchTime / duration;
       if (watchPercentage >= 0.9) {
-        updateProgress(courseId, moduleId, lessonId, Math.ceil(duration / 60), true);
+        updateProgress(course, module, lesson, Math.ceil(duration / 60), true);
         onComplete?.();
       }
     };
@@ -56,8 +56,15 @@ export const VideoPlayer = ({ src, courseId, moduleId, lessonId, onComplete }: V
       video.removeEventListener('timeupdate', handleTimeUpdate);
       video.removeEventListener('loadedmetadata', handleLoadedMetadata);
       video.removeEventListener('ended', handleEnded);
+      // Update progress on unmount
+      updateProgress(
+        course,
+        module,
+        lesson,
+        Math.floor(video.currentTime / 60)
+      );
     };
-  }, [courseId, moduleId, lessonId, watchTime, duration, updateProgress, onComplete]);
+  }, [course, module, lesson, watchTime, duration, updateProgress, onComplete]);
   
   const progressPercentage = duration > 0 ? (watchTime / duration) * 100 : 0;
   

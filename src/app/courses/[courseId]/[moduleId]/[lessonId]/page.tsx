@@ -20,8 +20,12 @@ const LessonPage = async ({ params }: LessonPageProps) => {
     lessonId
   );
 
-  if (!course || !lesson) {
-    notFound();
+  if (!course) {
+    return <div>Course not found</div>;
+  }
+
+  if (!lesson) {
+    return <div>Lesson not found</div>;
   }
 
   return (

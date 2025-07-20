@@ -1,0 +1,8 @@
+{
+  "title": "Lesson 4.2: Introduction to Redux Toolkit",
+  "description": "Learn the basics of Redux Toolkit for state management in React.",
+  "order": 2,
+  "duration": 30,
+  "type": "text",
+  "difficulty": "intermediate"
+}

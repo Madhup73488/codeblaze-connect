@@ -1,0 +1,8 @@
+{
+  "title": "Lesson 2.3: useEffect for Data Fetching and Cleanup",
+  "description": "Learn how to use the useEffect hook to fetch data from an API and perform cleanup.",
+  "order": 3,
+  "duration": 30,
+  "type": "text",
+  "difficulty": "intermediate"
+}

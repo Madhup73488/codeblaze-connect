@@ -13,12 +13,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
 import { useToast } from "@/components/ui/use-toast";
 import api from "@/lib/api";
 import { useAuth } from "@/contexts/AuthContext";
 
 const profileFormSchema = z.object({
-  username: z.string().min(1, { message: "Username is required" }),
+  name: z.string().min(1, { message: "Name is required" }),
   email: z.string().email({ message: "Invalid email address" }),
   phone: z
     .string()
@@ -26,7 +27,21 @@ const profileFormSchema = z.object({
   password: z.string().optional(),
 });
 
+const passwordFormSchema = z
+  .object({
+    oldPassword: z.string().min(1, { message: "Old password is required" }),
+    newPassword: z
+      .string()
+      .min(6, { message: "Password must be at least 6 characters" }),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.newPassword === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ["confirmPassword"],
+  });
+
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
+type PasswordFormValues = z.infer<typeof passwordFormSchema>;
 
 const ProfilePage = () => {
   const { user, loading, fetchUser } = useAuth();
@@ -36,17 +51,26 @@ const ProfilePage = () => {
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
     defaultValues: {
-      username: "",
+      name: "",
       email: "",
       phone: "",
       password: "",
     },
   });
 
+  const passwordForm = useForm<PasswordFormValues>({
+    resolver: zodResolver(passwordFormSchema),
+    defaultValues: {
+      oldPassword: "",
+      newPassword: "",
+      confirmPassword: "",
+    },
+  });
+
   useEffect(() => {
     if (user) {
       form.reset({
-        username: user.username || "",
+        name: user.name || "",
         email: user.email || "",
         phone: user.phone || "",
         password: "",
@@ -72,6 +96,27 @@ const ProfilePage = () => {
     }
   };
 
+  const onPasswordSubmit = async (data: PasswordFormValues) => {
+    try {
+      const res = await api.post("/connect/user/reset-password", {
+        oldPassword: data.oldPassword,
+        newPassword: data.newPassword,
+      });
+      if (res) {
+        toast({
+          title: "Password updated successfully",
+        });
+        passwordForm.reset();
+      }
+    } catch (err) {
+      toast({
+        title: "Failed to update password",
+        description: "Please check your old password and try again.",
+        variant: "destructive",
+      });
+    }
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -83,18 +128,20 @@ const ProfilePage = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-900 p-6">
       <div className="container mx-auto py-8">
-        <h1 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Profile</h1>
+        <h1 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+          Profile
+        </h1>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField
               control={form.control}
-              name="username"
+              name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel>Name</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Username"
+                      placeholder="Name"
                       {...field}
                       disabled={!isEditing}
                     />
@@ -141,8 +188,7 @@ const ProfilePage = () => {
                   <FormItem>
                     <FormLabel>New Password (optional)</FormLabel>
                     <FormControl>
-                      <Input
-                        type="password"
+                      <PasswordInput
                         placeholder="New Password"
                         {...field}
                       />
@@ -172,6 +218,70 @@ const ProfilePage = () => {
             </div>
           </form>
         </Form>
+
+        <div className="mt-8">
+          <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
+            Reset Password
+          </h2>
+          <Form {...passwordForm}>
+            <form
+              onSubmit={passwordForm.handleSubmit(onPasswordSubmit)}
+              className="space-y-6"
+            >
+              <FormField
+                control={passwordForm.control}
+                name="oldPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Old Password</FormLabel>
+                    <FormControl>
+                      <PasswordInput
+                        placeholder="Old Password"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={passwordForm.control}
+                name="newPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>New Password</FormLabel>
+                    <FormControl>
+                      <PasswordInput
+                        placeholder="New Password"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={passwordForm.control}
+                name="confirmPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Confirm New Password</FormLabel>
+                    <FormControl>
+                      <PasswordInput
+                        placeholder="Confirm New Password"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <div className="flex justify-end space-x-4">
+                <Button type="submit">Update Password</Button>
+              </div>
+            </form>
+          </Form>
+        </div>
       </div>
     </div>
   );

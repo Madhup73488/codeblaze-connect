@@ -11,10 +11,13 @@ import {
   Target,
   BookOpen,
   ChevronRight,
+  CheckCircle,
 } from "lucide-react";
 import MarkdownRenderer from "./MarkdownRenderer";
 import LessonNavigation from "./LessonNavigation";
 import Link from "next/link";
+import TextLessonTracker from "./TextLessonTracker";
+import { useProgress } from "@/hooks/useProgress";
 
 interface LessonContentProps {
   lesson: Lesson;
@@ -73,6 +76,8 @@ const LessonContent = ({
   };
 
   const currentModule = course.modules.find((m) => m.id === moduleId);
+  const { isLessonCompleted } = useProgress();
+  const isCompleted = isLessonCompleted(courseId, moduleId, lessonId);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-100/50 dark:from-slate-900 dark:via-blue-900/30 dark:to-indigo-900/50">
@@ -152,6 +157,9 @@ const LessonContent = ({
                 style={{ animationDelay: "0.1s" }}
               >
                 {lesson.title}
+                {isCompleted && (
+                  <CheckCircle className="inline-block w-8 h-8 text-green-500 ml-4" />
+                )}
               </h1>
 
               {/* Description */}
@@ -176,9 +184,12 @@ const LessonContent = ({
             <div className="animate-fadeIn">
               <VideoPlayer
                 src={`/videos/${lesson.id}.mp4`}
-                courseId={courseId}
-                moduleId={moduleId}
-                lessonId={lessonId}
+                course={{ id: course.id, title: course.title }}
+                module={{
+                  id: currentModule?.id || "",
+                  title: currentModule?.title || "",
+                }}
+                lesson={{ id: lesson.id, title: lesson.title }}
               />
             </div>
           )}
@@ -193,9 +204,19 @@ const LessonContent = ({
           )}
 
           {lesson.type === "text" && lesson.content && (
-            <div className="animate-fadeIn prose prose-lg prose-slate max-w-none rounded-2xl p-8 border border-slate-200 dark:border-slate-700 prose-headings:text-slate-900 dark:prose-headings:text-white prose-p:text-slate-600 dark:prose-p:text-white prose-li:text-slate-600 dark:prose-li:text-white prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-strong:text-slate-900 dark:prose-strong:text-white prose-pre:bg-slate-100 dark:prose-pre:bg-slate-800 prose-pre:text-slate-900 dark:prose-pre:text-white">
-              <MarkdownRenderer content={lesson.content} />
-            </div>
+            <>
+              <TextLessonTracker
+                course={{ id: course.id, title: course.title }}
+                module={{
+                  id: currentModule?.id || "",
+                  title: currentModule?.title || "",
+                }}
+                lesson={{ id: lesson.id, title: lesson.title }}
+              />
+              <div className="animate-fadeIn prose prose-lg prose-slate max-w-none rounded-2xl p-8 border border-slate-200 dark:border-slate-700 prose-headings:text-slate-900 dark:prose-headings:text-white prose-p:text-slate-600 dark:prose-p:text-white prose-li:text-slate-600 dark:prose-li:text-white prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-strong:text-slate-900 dark:prose-strong:text-white prose-pre:bg-slate-100 dark:prose-pre:bg-slate-800 prose-pre:text-slate-900 dark:prose-pre:text-white">
+                <MarkdownRenderer content={lesson.content} />
+              </div>
+            </>
           )}
         </div>
 

@@ -33,3 +33,4 @@ The lesson page layout has been updated to meet the new requirements. The main s
 - Removed the `pages` directory.
 - Fixed the manifest error.
 - Fixed the `params` awaiting warning in the lesson layout and page.
+- Corrected the API endpoint for fetching user progress to point to the backend on port 5000.

@@ -1,0 +1,8 @@
+{
+  "title": "Lesson 5.1: Connecting React to Express",
+  "description": "Learn how to make HTTP requests from a React frontend to a Node.js/Express backend.",
+  "order": 1,
+  "duration": 20,
+  "type": "text",
+  "difficulty": "intermediate"
+}

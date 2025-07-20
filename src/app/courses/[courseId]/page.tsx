@@ -62,7 +62,7 @@ const CoursePage = () => {
 
       {/* Progress */}
       <div className="mb-8">
-        <CourseProgress courseId={course.id} variant="compact" />
+        <CourseProgress courseId={course.id} totalLessons={totalLessons} variant="compact" />
       </div>
 
       {/* Modules */}

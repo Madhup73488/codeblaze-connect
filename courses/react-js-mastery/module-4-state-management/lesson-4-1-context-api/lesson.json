@@ -1,0 +1,8 @@
+{
+  "title": "Lesson 4.1: Context API",
+  "description": "Learn how to use the Context API for state management in React.",
+  "order": 1,
+  "duration": 20,
+  "type": "text",
+  "difficulty": "intermediate"
+}

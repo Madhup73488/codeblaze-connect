@@ -21,7 +21,7 @@
   }
 
   .dark {
-    --background: #080b14;
+    --background: var(--color-slate-800);
     --surface: #0f172a;
     --text-primary: #f8fafc;
     --text-secondary: #94a3b8;

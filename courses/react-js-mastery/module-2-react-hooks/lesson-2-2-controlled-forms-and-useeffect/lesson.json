@@ -1,0 +1,8 @@
+{
+  "title": "Lesson 2.2: Controlled Forms and useEffect",
+  "description": "Learn how to create controlled forms and use the useEffect hook for side effects.",
+  "order": 2,
+  "duration": 25,
+  "type": "text",
+  "difficulty": "beginner"
+}

@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
 import Cookies from 'js-cookie';
 import api from '@/lib/api';
 
@@ -7,7 +7,7 @@ interface AuthContextType {
   isAuthenticated: boolean;
   user: {
     id: string;
-    username: string;
+    name: string;
     email: string;
     phone?: string;
     accessible_course_ids?: string[];
@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState<{
     id: string;
-    username: string;
+    name: string;
     email: string;
     phone?: string;
     accessible_course_ids?: string[];
@@ -70,14 +70,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
           const allCourses = await api.get('/api/courses');
           const allInternships = await api.get('/api/internships/all');
-          const userProgress = await api.get('/api/connect/user/progress');
 
           localStorage.setItem('courses', JSON.stringify(allCourses));
           localStorage.setItem('internships', JSON.stringify(allInternships));
           localStorage.setItem('courseMapping', JSON.stringify(courseMapping));
-          if (userProgress) {
-            localStorage.setItem('progress', JSON.stringify(userProgress.data));
-          }
           setIsAuthenticated(true);
         } else {
           throw new Error("Failed to fetch user profile");
@@ -108,7 +104,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       }
     };
     loadUserFromStorage();
-  }, []);
+  }, [fetchUser]);
 
   const login = (token: string, rememberMe: boolean) => {
     const options = rememberMe ? { expires: 7 } : {};
@@ -129,6 +125,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setIsInitialRender(false);
   }, []);
 
+  const authContextValue = useMemo(() => ({
+    isAuthenticated,
+    user,
+    login,
+    logout,
+    loading,
+    fetchUser,
+  }), [isAuthenticated, user, loading, fetchUser]);
+
   if (loading || (isInitialRender && !isAuthenticated)) {
     return (
       <div className="flex h-screen items-center justify-center">
@@ -138,7 +143,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, user, login, logout, loading, fetchUser }}>
+    <AuthContext.Provider value={authContextValue}>
       {children}
     </AuthContext.Provider>
   );

@@ -17,7 +17,11 @@ const api = {
       headers["Authorization"] = `Bearer ${token}`;
     }
     const targetURL =
-      url.startsWith("/connect/auth") || url.startsWith("/connect/user")
+      url.startsWith("/connect/auth") ||
+      url.startsWith("/connect/user") ||
+      url.startsWith("/api/connect/user")
+        ? `${authBaseURL}${url.replace("/api", "")}`
+        : url.startsWith("/api/jobs")
         ? `${authBaseURL}${url}`
         : `${baseURL}${url}`;
     const response = await fetch(targetURL, {
@@ -37,7 +41,11 @@ const api = {
       headers["Authorization"] = `Bearer ${token}`;
     }
     const targetURL =
-      url.startsWith("/connect/auth") || url.startsWith("/connect/user")
+      url.startsWith("/connect/auth") ||
+      url.startsWith("/connect/user") ||
+      url.startsWith("/api/connect/user")
+        ? `${authBaseURL}${url.replace("/api", "")}`
+        : url.startsWith("/api/jobs")
         ? `${authBaseURL}${url}`
         : `${baseURL}${url}`;
     const response = await fetch(targetURL, {
@@ -56,7 +64,11 @@ const api = {
       headers["Authorization"] = `Bearer ${token}`;
     }
     const targetURL =
-      url.startsWith("/connect/auth") || url.startsWith("/connect/user")
+      url.startsWith("/connect/auth") ||
+      url.startsWith("/connect/user") ||
+      url.startsWith("/api/connect/user")
+        ? `${authBaseURL}${url.replace("/api", "")}`
+        : url.startsWith("/api/jobs")
         ? `${authBaseURL}${url}`
         : `${baseURL}${url}`;
     const response = await fetch(targetURL, {

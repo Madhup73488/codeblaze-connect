@@ -30,8 +30,15 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "img.logo.dev",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
+  productionBrowserSourceMaps: true,
 };
 
 export default nextConfig;

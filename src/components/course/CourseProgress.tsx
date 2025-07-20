@@ -5,6 +5,7 @@ import { CheckCircle, BookOpen } from "lucide-react";
 
 interface CourseProgressProps {
   courseId: string;
+  totalLessons: number;
   showStats?: boolean;
   variant?: "default" | "compact" | "detailed";
   className?: string;
@@ -12,12 +13,13 @@ interface CourseProgressProps {
 
 const CourseProgress = ({
   courseId,
+  totalLessons,
   showStats = true,
   variant = "default",
   className = "",
 }: CourseProgressProps) => {
   const { getCourseProgress } = useProgress();
-  const { completedLessons, totalLessons } = getCourseProgress(courseId);
+  const { completedLessons } = getCourseProgress(courseId);
   const progressPercentage =
     totalLessons > 0 ? (completedLessons / totalLessons) * 100 : 0;
   const isCompleted = completedLessons === totalLessons && totalLessons > 0;

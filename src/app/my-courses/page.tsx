@@ -43,27 +43,17 @@ interface Module {
   lessons: any[];
 }
 
-interface UserProgress {
-  courseProgress: {
-    [courseId: string]: {
-      completedLessons: number;
-      totalLessons: number;
-      timeSpent: number;
-      lastAccessed: string;
-    };
-  };
-  completedLessons: string[];
-}
+import { useProgress } from "@/hooks/useProgress";
 
 const MyCoursesPage = () => {
   const { user, loading: authLoading } = useAuth();
+  const { progress: userProgress, loading: progressLoading } = useProgress();
   const [searchTerm, setSearchTerm] = useState("");
   const [filterOpen, setFilterOpen] = useState(false);
   const [allCourses, setAllCourses] = useState<CourseData[]>([]);
-  const [userProgress, setUserProgress] = useState<UserProgress | null>(null);
 
   useEffect(() => {
-    const fetchCoursesAndProgress = async () => {
+    const fetchCourses = async () => {
       if (authLoading || !user) return;
 
       let courseIds: string[] = user.accessible_course_ids || [];
@@ -80,28 +70,26 @@ const MyCoursesPage = () => {
       }
 
       if (courseIds.length > 0) {
-        const [allCoursesResponse, progress] = await Promise.all([
-          api.get("/api/courses"),
-          api.get("/api/progress"),
-        ]);
-
+        const allCoursesResponse = await api.get("/api/courses");
         const enrolledCourses = allCoursesResponse.filter((course: CourseData) =>
           courseIds.includes(course.id)
         );
-
         setAllCourses(enrolledCourses);
-        setUserProgress(progress);
       }
     };
 
-    fetchCoursesAndProgress();
+    fetchCourses();
   }, [user, authLoading]);
 
   const CourseCard = ({ course }: { course: CourseData }) => {
     const courseProgress = userProgress?.courseProgress?.[course.id];
-    const progressPercentage = courseProgress
-      ? (courseProgress.completedLessons / courseProgress.totalLessons) * 100
-      : 0;
+    const totalLessons = course.modules.reduce(
+      (acc, module) => acc + module.lessons.length,
+      0
+    );
+    const completedLessons = courseProgress?.completedLessons || 0;
+    const progressPercentage =
+      totalLessons > 0 ? (completedLessons / totalLessons) * 100 : 0;
     const isCompleted = progressPercentage === 100;
     const nextLesson = getNextLesson(
       course,
@@ -117,7 +105,17 @@ const MyCoursesPage = () => {
             <div
               className={`w-12 h-12 rounded-xl bg-white flex items-center justify-center text-white text-xl shadow-lg`}
             >
-              <Image src={course.icon} alt={course.title} width={32} height={32} className="rounded-md" />
+              {course.icon ? (
+                <Image
+                  src={course.icon}
+                  alt={course.title}
+                  width={32}
+                  height={32}
+                  className="rounded-md"
+                />
+              ) : (
+                <BookOpen size={24} className="text-gray-500" />
+              )}
             </div>
             <div className="flex items-center gap-2">
               <div className="flex items-center gap-1 text-sm text-gray-600 dark:text-gray-400">
@@ -308,21 +306,21 @@ const MyCoursesPage = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {authLoading ? (
+            {authLoading || progressLoading ? (
               <div className="col-span-full text-center text-gray-500 dark:text-gray-400">
                 Loading courses...
               </div>
             ) : allCourses.length > 0 ? (
               allCourses
                 .filter((course) => {
-                  if (!userProgress || !userProgress.courseProgress)
-                    return false;
+                  if (!userProgress || !userProgress.courseProgress) return true; // If no progress data, show all courses
                   const courseProgress = userProgress.courseProgress[course.id];
                   if (!courseProgress) return true; // Not started, so not completed
+                  const totalLessons = course.modules.reduce((acc, module) => acc + module.lessons.length, 0);
                   const progressPercentage =
-                    (courseProgress.completedLessons /
-                      courseProgress.totalLessons) *
-                    100;
+                    totalLessons > 0
+                      ? (courseProgress.completedLessons / totalLessons) * 100
+                      : 0;
                   return progressPercentage !== 100;
                 })
                 .filter((course) =>
@@ -343,9 +341,11 @@ const MyCoursesPage = () => {
           allCourses.some((course) => {
             const courseProgress = userProgress.courseProgress[course.id];
             if (!courseProgress) return false;
+            const totalLessons = course.modules.reduce((acc, module) => acc + module.lessons.length, 0);
             const progressPercentage =
-              (courseProgress.completedLessons / courseProgress.totalLessons) *
-              100;
+              totalLessons > 0
+                ? (courseProgress.completedLessons / totalLessons) * 100
+                : 0;
             return progressPercentage === 100;
           }) && (
             <div className="mb-12">
@@ -360,10 +360,11 @@ const MyCoursesPage = () => {
                     const courseProgress =
                       userProgress.courseProgress[course.id];
                     if (!courseProgress) return false;
+                    const totalLessons = course.modules.reduce((acc, module) => acc + module.lessons.length, 0);
                     const progressPercentage =
-                      (courseProgress.completedLessons /
-                        courseProgress.totalLessons) *
-                      100;
+                      totalLessons > 0
+                        ? (courseProgress.completedLessons / totalLessons) * 100
+                        : 0;
                     return progressPercentage === 100;
                   })
                   .map((course) => (

@@ -4,24 +4,33 @@ import { useState, useEffect, useContext, useCallback } from 'react';
 import { AuthContext } from '@/contexts/AuthContext';
 import apiClient from '@/lib/api';
 
+interface ProgressEntry {
+  course: { id: string; title: string };
+  module: { id: string; title: string };
+  lesson: { id: string; title: string };
+  completed: boolean;
+  timeSpent: number;
+}
+
 interface UserProgress {
   completedLessons: string[];
   courseProgress: Record<
     string,
     {
       completedLessons: number;
-      totalLessons: number;
       lastAccessed: string;
       timeSpent: number;
     }
   >;
 }
 
-export const useProgress = () => {
-  const [progress, setProgress] = useState<UserProgress>({
-    completedLessons: [],
-    courseProgress: {},
-  });
+export const useProgress = (initialProgress?: UserProgress) => {
+  const [progress, setProgress] = useState<UserProgress>(
+    initialProgress || {
+      completedLessons: [],
+      courseProgress: {},
+    }
+  );
   const [loading, setLoading] = useState(true);
   const authContext = useContext(AuthContext);
 
@@ -30,8 +39,25 @@ export const useProgress = () => {
     try {
       setLoading(true);
       const response = await apiClient.get(`/api/connect/user/progress`);
-      if (response) {
-        setProgress(response.data);
+      if (response && Array.isArray(response)) {
+        const completedLessons = response
+          .filter((entry: ProgressEntry) => entry.completed)
+          .map((entry: ProgressEntry) => `${entry.course.id}-${entry.module.id}-${entry.lesson.id}`);
+
+        const courseProgress = response.reduce((acc: any, entry: ProgressEntry) => {
+          if (!acc[entry.course.id]) {
+            acc[entry.course.id] = {
+              completedLessons: 0,
+              timeSpent: 0,
+              lastAccessed: new Date().toISOString(),
+            };
+          }
+          acc[entry.course.id].completedLessons += 1;
+          acc[entry.course.id].timeSpent += entry.timeSpent;
+          return acc;
+        }, {});
+
+        setProgress({ completedLessons, courseProgress });
       }
     } catch (error) {
       console.error("Failed to load progress:", error);
@@ -41,32 +67,59 @@ export const useProgress = () => {
   }, [authContext?.user]);
 
   useEffect(() => {
+    const loadFromStorage = () => {
+      const cachedProgress = localStorage.getItem('progress');
+      if (cachedProgress) {
+        const parsedProgress = JSON.parse(cachedProgress);
+        const completedLessons = parsedProgress
+          .filter((entry: ProgressEntry) => entry.completed)
+          .map((entry: ProgressEntry) => `${entry.course.id}-${entry.module.id}-${entry.lesson.id}`);
+
+        const courseProgress = parsedProgress.reduce((acc: any, entry: ProgressEntry) => {
+          if (!acc[entry.course.id]) {
+            acc[entry.course.id] = {
+              completedLessons: 0,
+              timeSpent: 0,
+              lastAccessed: new Date().toISOString(),
+            };
+          }
+          acc[entry.course.id].completedLessons += 1;
+          acc[entry.course.id].timeSpent += entry.timeSpent;
+          return acc;
+        }, {});
+        
+        setProgress({ completedLessons, courseProgress });
+        setLoading(false);
+      } else if (authContext?.user && !initialProgress) {
+        loadProgress();
+      }
+    };
+
     if (authContext?.user) {
-      loadProgress();
+      loadFromStorage();
     }
-  }, [authContext?.user, loadProgress]);
+  }, [authContext?.user, initialProgress, loadProgress]);
 
   const updateProgress = async (
-    courseId: string,
-    moduleId: string,
-    lessonId: string,
+    course: { id: string; title: string },
+    module: { id: string; title: string },
+    lesson: { id: string; title: string },
     timeSpent: number,
     completed: boolean = false
   ) => {
     if (!authContext?.user) return;
     try {
       await apiClient.post("/api/connect/user/progress", {
-        userId: authContext.user.id,
-        courseId,
-        moduleId,
-        lessonId,
+        course,
+        module,
+        lesson,
         timeSpent,
         completed,
       });
 
       // Update local state
       if (completed) {
-        const lessonKey = `${courseId}-${moduleId}-${lessonId}`;
+        const lessonKey = `${course.id}-${module.id}-${lesson.id}`;
         setProgress((prev) => ({
           ...prev,
           completedLessons: [...prev.completedLessons, lessonKey],
@@ -86,7 +139,6 @@ export const useProgress = () => {
     return (
       progress.courseProgress[courseId] || {
         completedLessons: 0,
-        totalLessons: 0,
         lastAccessed: new Date().toISOString(),
         timeSpent: 0,
       }
