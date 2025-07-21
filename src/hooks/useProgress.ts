@@ -135,25 +135,25 @@ export const useProgress = (initialProgress?: UserProgress) => {
   }, [authContext?.user, initialProgress, loadProgress]);
 
   const updateProgress = async (
-    course: { id: string; title: string },
-    module: { id: string; title: string },
-    lesson: { id: string; title: string },
+    courseId: string,
+    moduleId: string,
+    lessonId: string,
     timeSpent: number,
     completed: boolean = false
   ) => {
     if (!authContext?.user) return;
     try {
       await apiClient.post("/api/connect/user/progress", {
-        course,
-        module,
-        lesson,
+        course: { id: courseId, title: "" },
+        module: { id: moduleId, title: "" },
+        lesson: { id: lessonId, title: "" },
         timeSpent,
         completed,
       });
 
       // Update local state
       if (completed) {
-        const lessonKey = `${course.id}-${module.id}-${lesson.id}`;
+        const lessonKey = `${courseId}-${moduleId}-${lessonId}`;
         setProgress((prev) => ({
           ...prev,
           completedLessons: [...prev.completedLessons, lessonKey],

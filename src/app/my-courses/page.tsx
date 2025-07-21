@@ -40,12 +40,14 @@ interface CourseData {
   thumbnail: string;
 }
 
+import { type Lesson } from "@/lib/course-loader";
+
 interface Module {
   id: string;
   title: string;
   description: string;
   order: number;
-  lessons: any[];
+  lessons: Lesson[];
 }
 
 import { useProgress } from "@/hooks/useProgress";

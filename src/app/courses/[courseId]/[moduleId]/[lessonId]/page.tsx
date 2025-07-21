@@ -3,11 +3,7 @@ import { getCourseStructure, getLesson } from "@/lib/course-loader";
 import LessonContent from "@/components/lesson/LessonContent";
 
 interface LessonPageProps {
-  params: {
-    courseId: string;
-    moduleId: string;
-    lessonId: string;
-  };
+  params: any;
 }
 
 const LessonPage = async ({ params }: LessonPageProps) => {

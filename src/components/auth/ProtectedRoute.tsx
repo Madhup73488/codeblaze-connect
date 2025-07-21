@@ -4,8 +4,14 @@ import { useRouter } from 'next/navigation';
 import { AuthContext } from '@/contexts/AuthContext';
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  const { user, loading } = useContext(AuthContext);
+  const context = useContext(AuthContext);
   const router = useRouter();
+
+  if (!context) {
+    throw new Error('ProtectedRoute must be used within an AuthProvider');
+  }
+
+  const { user, loading } = context;
 
   useEffect(() => {
     if (!loading && !user) {

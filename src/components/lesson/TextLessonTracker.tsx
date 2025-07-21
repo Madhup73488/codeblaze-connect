@@ -16,7 +16,7 @@ const TextLessonTracker = ({ course, module, lesson }: TextLessonTrackerProps) =
   useEffect(() => {
     const handleUnload = () => {
       const timeSpent = Math.floor((Date.now() - startTimeRef.current) / 1000 / 60);
-      updateProgress(course, module, lesson, timeSpent);
+      updateProgress(course.id, module.id, lesson.id, timeSpent);
     };
 
     window.addEventListener('beforeunload', handleUnload);

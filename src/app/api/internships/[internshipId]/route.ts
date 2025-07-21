@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, NextRequest } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
 
@@ -14,10 +14,15 @@ interface Week {
 }
 
 export async function GET(
-  _request: Request,
-  { params }: { params: { internshipId: string } }
+  request: NextRequest,
 ) {
-  const { internshipId } = await params;
+  const { pathname } = new URL(request.url);
+  const internshipId = pathname.split('/').pop();
+
+  if (!internshipId) {
+    return new NextResponse('Internship ID is missing', { status: 400 });
+  }
+  
   const filePath = path.join(process.cwd(), 'internships', internshipId, 'internship.json');
 
   try {
