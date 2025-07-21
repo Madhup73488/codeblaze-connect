@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Course } from '../../lib/course-loader';
-import { Button } from '../../components/ui/Button';
+import { Button } from '../../components/ui/button';
 
 interface LessonNavigationProps {
   course: Course;

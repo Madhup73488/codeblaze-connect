@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
-import { Button } from '../ui/Button';
+import { Button } from '../ui/button';
 
 const Header = () => {
   const { user, logout } = useAuth();
