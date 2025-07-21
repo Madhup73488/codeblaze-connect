@@ -159,18 +159,18 @@ const InteractiveCode = ({ initialCode, solution }: InteractiveCodeProps) => {
 
           {/* Code Input */}
           <div className="flex-1 relative">
-            <textarea
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              className="w-full h-64 p-4 bg-transparent text-slate-100 font-mono text-sm leading-6 resize-none focus:outline-none placeholder-slate-500"
-              placeholder="// Start coding here..."
-              spellCheck={false}
-              style={{
-                fontFamily:
-                  'JetBrains Mono, Consolas, Monaco, "Courier New", monospace',
-                tabSize: 2,
-              }}
-            />
+              <textarea
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                className="w-full h-64 p-4 bg-transparent text-slate-100 font-mono text-sm leading-6 resize-none focus:outline-none placeholder-slate-500"
+                placeholder="// Start coding here..."
+                spellCheck={false}
+                style={{
+                  fontFamily:
+                    'JetBrains Mono, Consolas, Monaco, "Courier New", monospace',
+                  tabSize: 2,
+                }}
+              />
 
             {/* Syntax Highlighting Overlay */}
             <div className="absolute inset-0 pointer-events-none pl-4 pt-4">

@@ -88,7 +88,7 @@ const ProfilePage = () => {
         fetchUser();
         setIsEditing(false);
       }
-    } catch (err) {
+    } catch {
       toast({
         title: "Failed to update profile",
         variant: "destructive",
@@ -108,7 +108,7 @@ const ProfilePage = () => {
         });
         passwordForm.reset();
       }
-    } catch (err) {
+    } catch {
       toast({
         title: "Failed to update password",
         description: "Please check your old password and try again.",

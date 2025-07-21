@@ -20,6 +20,11 @@ import { useAuth } from "@/contexts/AuthContext";
 import api from "@/lib/api";
 import { getNextLesson } from "@/lib/progress";
 
+interface User {
+  accessible_course_ids: string[];
+  accessible_internship_ids: string[];
+}
+
 interface CourseData {
   id: string;
   title: string;
@@ -46,7 +51,7 @@ interface Module {
 import { useProgress } from "@/hooks/useProgress";
 
 const MyCoursesPage = () => {
-  const { user, loading: authLoading } = useAuth();
+  const { user, loading: authLoading } = useAuth() as { user: User | null, loading: boolean };
   const { progress: userProgress, loading: progressLoading } = useProgress();
   const [searchTerm, setSearchTerm] = useState("");
   const [filterOpen, setFilterOpen] = useState(false);
@@ -62,7 +67,7 @@ const MyCoursesPage = () => {
         user.accessible_internship_ids &&
         user.accessible_internship_ids.length > 0
       ) {
-        const courseMapping = await api.get("/api/course-mapping");
+        const courseMapping: Record<string, string[]> = await api.get("/api/course-mapping");
         const internshipCourseIds = user.accessible_internship_ids.flatMap(
           (internshipId: string) => courseMapping[internshipId] || []
         );

@@ -3,7 +3,7 @@ import { getCourseStructure } from '@/lib/course-loader';
 
 export async function GET(
   _request: Request,
-  { params }: { params: { courseId: string } }
+  { params }: { params: { courseId: string } },
 ) {
   try {
     const course = await getCourseStructure(params.courseId);

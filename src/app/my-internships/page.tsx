@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import {
   Filter,
   Search,
@@ -184,7 +185,8 @@ const MyInternshipsPage = () => {
             <img
               src={internship.logo}
               alt={internship.title}
-              className="w-8 h-8"
+              width={32}
+              height={32}
             />
           ) : (
             internship.logo

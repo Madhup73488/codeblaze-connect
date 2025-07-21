@@ -1,6 +1,5 @@
 import React from "react";
 import { getCourseStructure, getLesson } from "@/lib/course-loader";
-import { notFound } from "next/navigation";
 import LessonContent from "@/components/lesson/LessonContent";
 
 interface LessonPageProps {

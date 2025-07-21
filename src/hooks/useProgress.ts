@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useContext, useCallback } from 'react';
-import { AuthContext } from '@/contexts/AuthContext';
-import apiClient from '@/lib/api';
+import { useState, useEffect, useContext, useCallback } from "react";
+import { AuthContext } from "@/contexts/AuthContext";
+import apiClient from "@/lib/api";
 
 interface ProgressEntry {
   course: { id: string; title: string };
@@ -38,24 +38,40 @@ export const useProgress = (initialProgress?: UserProgress) => {
     if (!authContext?.user) return;
     try {
       setLoading(true);
-      const response = await apiClient.get(`/api/connect/user/progress`);
+      const response: ProgressEntry[] = await apiClient.get(`/api/connect/user/progress`);
       if (response && Array.isArray(response)) {
         const completedLessons = response
-          .filter((entry: ProgressEntry) => entry.completed)
-          .map((entry: ProgressEntry) => `${entry.course.id}-${entry.module.id}-${entry.lesson.id}`);
+          .filter((entry) => entry.completed)
+          .map(
+            (entry: ProgressEntry) =>
+              `${entry.course.id}-${entry.module.id}-${entry.lesson.id}`
+          );
 
-        const courseProgress = response.reduce((acc: any, entry: ProgressEntry) => {
-          if (!acc[entry.course.id]) {
-            acc[entry.course.id] = {
-              completedLessons: 0,
-              timeSpent: 0,
-              lastAccessed: new Date().toISOString(),
-            };
-          }
-          acc[entry.course.id].completedLessons += 1;
-          acc[entry.course.id].timeSpent += entry.timeSpent;
-          return acc;
-        }, {});
+        const courseProgress = response.reduce(
+          (
+            acc: Record<
+              string,
+              {
+                completedLessons: number;
+                timeSpent: number;
+                lastAccessed: string;
+              }
+            >,
+            entry: ProgressEntry
+          ) => {
+            if (!acc[entry.course.id]) {
+              acc[entry.course.id] = {
+                completedLessons: 0,
+                timeSpent: 0,
+                lastAccessed: new Date().toISOString(),
+              };
+            }
+            acc[entry.course.id].completedLessons += 1;
+            acc[entry.course.id].timeSpent += entry.timeSpent;
+            return acc;
+          },
+          {}
+        );
 
         setProgress({ completedLessons, courseProgress });
       }
@@ -68,28 +84,46 @@ export const useProgress = (initialProgress?: UserProgress) => {
 
   useEffect(() => {
     const loadFromStorage = () => {
-      const cachedProgress = localStorage.getItem('progress');
+      const cachedProgress = localStorage.getItem("progress");
       if (cachedProgress) {
-        const parsedProgress = JSON.parse(cachedProgress);
-        const completedLessons = parsedProgress
-          .filter((entry: ProgressEntry) => entry.completed)
-          .map((entry: ProgressEntry) => `${entry.course.id}-${entry.module.id}-${entry.lesson.id}`);
+        const parsedProgress: ProgressEntry[] = JSON.parse(cachedProgress);
+        if (Array.isArray(parsedProgress)) {
+          const completedLessons = parsedProgress
+            .filter((entry) => entry.completed)
+            .map(
+              (entry: ProgressEntry) =>
+                `${entry.course.id}-${entry.module.id}-${entry.lesson.id}`
+            );
 
-        const courseProgress = parsedProgress.reduce((acc: any, entry: ProgressEntry) => {
-          if (!acc[entry.course.id]) {
-            acc[entry.course.id] = {
-              completedLessons: 0,
-              timeSpent: 0,
-              lastAccessed: new Date().toISOString(),
-            };
-          }
-          acc[entry.course.id].completedLessons += 1;
-          acc[entry.course.id].timeSpent += entry.timeSpent;
-          return acc;
-        }, {});
-        
-        setProgress({ completedLessons, courseProgress });
-        setLoading(false);
+          const courseProgress = parsedProgress.reduce(
+            (
+              acc: Record<
+                string,
+                {
+                  completedLessons: number;
+                  timeSpent: number;
+                  lastAccessed: string;
+                }
+              >,
+              entry: ProgressEntry
+            ) => {
+              if (!acc[entry.course.id]) {
+                acc[entry.course.id] = {
+                  completedLessons: 0,
+                  timeSpent: 0,
+                  lastAccessed: new Date().toISOString(),
+                };
+              }
+              acc[entry.course.id].completedLessons += 1;
+              acc[entry.course.id].timeSpent += entry.timeSpent;
+              return acc;
+            },
+            {}
+          );
+
+          setProgress({ completedLessons, courseProgress });
+          setLoading(false);
+        }
       } else if (authContext?.user && !initialProgress) {
         loadProgress();
       }
@@ -129,12 +163,16 @@ export const useProgress = (initialProgress?: UserProgress) => {
       console.error("Failed to update progress:", error);
     }
   };
-  
-  const isLessonCompleted = (courseId: string, moduleId: string, lessonId: string): boolean => {
+
+  const isLessonCompleted = (
+    courseId: string,
+    moduleId: string,
+    lessonId: string
+  ): boolean => {
     const lessonKey = `${courseId}-${moduleId}-${lessonId}`;
     return progress.completedLessons.includes(lessonKey);
   };
-  
+
   const getCourseProgress = (courseId: string) => {
     return (
       progress.courseProgress[courseId] || {
@@ -144,13 +182,13 @@ export const useProgress = (initialProgress?: UserProgress) => {
       }
     );
   };
-  
+
   return {
     progress,
     loading,
     updateProgress,
     isLessonCompleted,
     getCourseProgress,
-    refreshProgress: loadProgress
+    refreshProgress: loadProgress,
   };
 };

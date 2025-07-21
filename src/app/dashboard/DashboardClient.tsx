@@ -11,17 +11,11 @@ import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
 import { useProgress } from "@/hooks/useProgress";
 import { getNextLesson } from "@/lib/progress";
+import { type Course } from "@/lib/course-loader";
 
 // Simplified interfaces
-interface Course {
-  id: string;
-  title: string;
-  instructor: string;
+interface CourseWithProgress extends Course {
   progress: number;
-}
-
-interface CourseData {
-  id: string;
 }
 
 interface InternshipData {
@@ -34,10 +28,34 @@ interface Stat {
   icon: React.ReactNode;
 }
 
-const DashboardClient = ({ user: initialUser, allCourses, allInternships, initialProgress }: any) => {
-  const { user, loading: authLoading } = useAuth();
-  const { progress: userProgress, loading: progressLoading } = useProgress(initialProgress);
-  const [courses, setCourses] = useState<Course[]>([]);
+interface User {
+  name: string;
+  accessible_course_ids: string[];
+  accessible_internship_ids: string[];
+}
+
+interface Progress {
+  courseProgress: {
+    [courseId: string]: {
+      completedLessons: number;
+      lastAccessed: string;
+      timeSpent: number;
+    };
+  };
+  completedLessons: string[];
+}
+
+interface DashboardClientProps {
+  user: User;
+  allCourses: Course[];
+  allInternships: InternshipData[];
+  initialProgress: Progress;
+}
+
+const DashboardClient = ({ user: initialUser, allCourses, allInternships, initialProgress }: DashboardClientProps) => {
+  const { user } = useAuth();
+  const { progress: userProgress } = useProgress(initialProgress);
+  const [courses, setCourses] = useState<CourseWithProgress[]>([]);
   const [stats, setStats] = useState<Stat[]>([]);
 
   useEffect(() => {
@@ -45,16 +63,18 @@ const DashboardClient = ({ user: initialUser, allCourses, allInternships, initia
     const loadDashboardData = () => {
       if (currentUser && userProgress && allCourses && allInternships) {
         const courseIds = currentUser.accessible_course_ids || [];
-        const enrolledCourses = allCourses.filter((course: CourseData) =>
+        const enrolledCourses = allCourses.filter((course) =>
           courseIds.includes(course.id)
         );
 
-        const coursesWithProgress = enrolledCourses.map((course: any) => {
+        const coursesWithProgress = enrolledCourses.map((course) => {
           const courseProgress = userProgress.courseProgress[course.id] || {
             completedLessons: 0,
+            lastAccessed: '',
+            timeSpent: 0,
           };
           const totalLessons = course.modules.reduce(
-            (acc: number, module: any) => acc + module.lessons.length,
+            (acc, module) => acc + module.lessons.length,
             0
           );
           return {
@@ -119,7 +139,7 @@ const DashboardClient = ({ user: initialUser, allCourses, allInternships, initia
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
           <h2 className="text-2xl font-bold">
-            {getGreeting()}, {user?.username || "Learner"}!
+            {getGreeting()}, {user?.name || "Learner"}!
           </h2>
           <p className="text-gray-500 dark:text-gray-400">
             Let's continue your learning journey.
@@ -174,7 +194,7 @@ const DashboardClient = ({ user: initialUser, allCourses, allInternships, initia
 };
 
 // Sub-component for a course card
-const CourseCard = ({ course, userProgress }: { course: any, userProgress: any }) => {
+const CourseCard = ({ course, userProgress }: { course: CourseWithProgress, userProgress: Progress }) => {
   const nextLesson = getNextLesson(course, userProgress?.completedLessons || []);
   const continueLink = nextLesson
     ? `/courses/${course.id}/${nextLesson.moduleId}/${nextLesson.lessonId}`
