@@ -1,65 +1,17 @@
-The login page has been implemented on the frontend and is now connected to the backend running on port 5000. The `apiClient` has been updated to reflect the new backend URL. The root layout has been updated to conditionally render the sidebar based on the user's authentication status, and the middleware has been updated to correctly handle route protection. The `AuthContext` has been updated to use `js-cookie` for storing the authentication token. The issue with redirection after login has been resolved by updating the `AuthContext`, `LoginForm`, and `middleware` to correctly handle the redirection. The `Layout` component has been refactored into its own file to prevent re-rendering issues.
+# Active Context
 
-**Recent Updates (Internship Section Fixes):**
+The current focus is on stabilizing the application after a series of major updates and feature implementations. This includes ensuring all new and existing features are working correctly, and that the user experience is consistent across the application.
 
-- Resolved "Route not found" errors for internship pages.
-- Corrected the API route handler at `src/app/api/internships/[internshipId]/route.ts` to dynamically use `internshipId` and extract the internship title from `internship.json`.
-- Updated `src/middleware.ts` to correctly exclude API routes from middleware processing.
-- Resolved a routing conflict by renaming `src/app/api/internships/route.ts` to `src/app/api/internships/all/route.ts`.
-- Corrected the `baseURL` in `src/lib/api.ts` to `http://localhost:3005` and ensured `api.get` always uses it.
-- Updated `src/contexts/AuthContext.tsx`, `src/app/my-internships/page.tsx`, and `src/app/internships/[internshipId]/page.tsx` to use the new `/api/internships/all` endpoint for fetching all internships.
-- Removed a conflicting `rewrites` configuration from `next.config.ts` that was redirecting API calls.
-- Fixed `TypeError: Cannot read properties of undefined (reading 'map')` in `src/app/internships/[internshipId]/weeks/[weekId]/page.tsx` by adding conditional rendering checks for `week.concepts`, `week.dailyPlan`, `week.checklist`, and `week.tips` to ensure they are arrays before mapping.
-- Reverted `src/app/internships/[internshipId]/weeks/[weekId]/page.tsx` to directly fetch internship data via API, as the underlying routing issues are now resolved.
-- Fixed the "Hydration failed" error in `src/components/layout/NavigationBar.tsx` by standardizing class names for consistent server/client rendering.
-- Configured `api.ts` to route authentication calls to `http://localhost:5000` and other API calls to `http://localhost:3005`.
-- Fixed the `params` awaiting warning in `src/app/api/internships/[internshipId]/route.ts`.
-- Refactored the layout to use a left-side sidebar for desktop view and a mobile-only header.
-- Removed the "Settings" navigation item from the sidebar.
-- Applied consistent background styling to the `/profile` page.
-- Configured `api.ts` to route PUT requests for `/connect/user/profile` to `http://localhost:5000`.
-- Updated the profile page to fetch the full user profile from the backend, including the phone number, to correctly populate the form fields.
-- Corrected the API endpoint URL in the profile page to ensure that profile updates are sent to the correct endpoint.
-- The favicons have been updated and the `layout.tsx` file has been updated to include the new favicons.
-- The profile page has been updated to use `react-hook-form` and `zod` for form validation.
-- The `AuthContext` has been updated to include a `fetchUser` function.
-- All the missing UI components have been added.
-- Fixed the casing issue with the `Button` component.
-- The `Toaster` component has been added to the layout.
-- Removed the `pages` directory.
-- Fixed the manifest error.
-- Fixed the `params` awaiting warning in the lesson layout and page.
-- Corrected the production API endpoint configuration in `src/lib/api.ts` to prevent incorrect URL fallback.
-- Updated `AuthContext.tsx` to fetch and store user progress in `localStorage` to resolve the empty dashboard issue.
-- Renamed `Button.tsx` to `button.tsx` to resolve the import casing conflict and fix the broken UI on the profile page.
-- Added padding to the main content area in `Layout.tsx` to fix the broken UI on the profile page.
-- Corrected the `onSubmit` function in `src/app/profile/page.tsx` to properly handle the API response and update the UI.
-- Improved the styling of the `Button`, `Input`, `Card`, and `Label` components to create a more polished and consistent look and feel across the application.
-- Updated the background of the profile page to be consistent with other sections of the application.
-- Created a new, more focused 12-week curriculum for the "Frontend Development Internship" that specifically incorporates React, Next.js, TypeScript, Tailwind CSS, Framer Motion, Figma, Storybook, and Vercel.
-- Updated the course mapping to reflect the new curriculum.
-- Added `framer.com` to the list of allowed image domains in `next.config.ts` to resolve the image loading error.
-- Corrected the hardcoded internship ID in `src/app/my-internships/page.tsx` to ensure the "Frontend Development Internship" card is displayed correctly.
-- Corrected the filtering logic in `src/app/my-internships/page.tsx` to ensure the correct internship cards are displayed.
-- Corrected the logic in `AuthContext.tsx` to properly handle multiple internship IDs.
-- Corrected the logic in `AuthContext.tsx` to properly update the user's accessible internship IDs and remove duplicate code.
-- Refactored the internship data loading process to use individual `metadata.json` files for each internship, removing hardcoded data from the API.
-- Updated the Framer Motion logo to the one provided by the user.
-- Updated the `InternshipCard` component to render logos from URLs.
-- Fixed an infinite loop in the `my-internships` page by wrapping `fetchUser` in `useCallback` and updating the `useEffect` dependencies.
-- Created a new "Backend Development Internship" and mapped it to the user.
-- Created a new "Python Full Stack Development Internship" and mapped it to the user.
-- Created a new "Java Full Stack Development Internship" and mapped it to the user.
-- Created the "PostgreSQL Mastery" course.
-- Created the "Redis Mastery" course.
-- Created the "Docker Mastery" course.
-- Created the "Kubernetes Mastery" course.
-- Created the "AWS Mastery" course.
-- Created the "Python Mastery" course.
-- Created the "GraphQL Mastery" course.
-- Created the "Django Mastery" course.
-- Created the "Celery Mastery" course.
-- Created the "pandas Mastery" course.
-- Created the "Java Mastery" course.
-- Created the "Spring Boot Mastery" course.
-- Corrected the API endpoint for fetching user progress to point to the backend on port 5000.
+## Recent Updates
+
+- **Internship Section:** The internship section has been significantly improved, with fixes for routing, data fetching, and UI rendering. New internship programs have been added, and the data loading process has been refactored to use individual `metadata.json` files.
+- **User Authentication:** The authentication flow has been refined, with `js-cookie` for token storage and improved redirection after login. The `AuthContext` has been updated to fetch and store user progress in `localStorage`.
+- **Profile Page:** The profile page has been updated to use `react-hook-form` and `zod` for form validation, and now correctly fetches and updates user data from the backend.
+- **UI Components:** The UI components have been improved to create a more polished and consistent look and feel. This includes updates to the `Button`, `Input`, `Card`, and `Label` components.
+- **Course Creation:** Several new courses have been created, including "PostgreSQL Mastery", "Redis Mastery", "Docker Mastery", "Kubernetes Mastery", "AWS Mastery", "Python Mastery", "GraphQL Mastery", "Django Mastery", "Celery Mastery", "pandas Mastery", "Java Mastery", and "Spring Boot Mastery".
+
+## Next Steps
+
+- **Testing:** Thoroughly test all new features and bug fixes to ensure they are working as expected.
+- **Refactoring:** Continue to refactor the codebase to improve readability, performance, and maintainability.
+- **Documentation:** Update all relevant documentation to reflect the latest changes.

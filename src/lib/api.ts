@@ -2,7 +2,7 @@ import Cookies from "js-cookie";
 
 const baseURL =
   process.env.NODE_ENV === "production"
-    ? "https://codeblaze-connect.vercel.app"
+    ? "https://connect.codeblaze.net/"
     : process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3005";
 const authBaseURL =
   process.env.NODE_ENV === "production"

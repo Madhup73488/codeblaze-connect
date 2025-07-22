@@ -1,36 +1,29 @@
-The project is currently in the development phase. The core features, such as course creation, lesson management, and progress tracking, have been implemented. The bug where the lesson content was not being displayed for text-based lessons has been fixed. The issue was in the `LessonContent` component and has been resolved by removing the unnecessary client-side fetch for the content. A follow-up issue with HTML rendering in markdown has also been fixed by installing and configuring the `@tailwindcss/typography` plugin and correcting the Tailwind CSS directives in `src/app/globals.css`. The final issue with prose styles not being applied correctly was fixed by creating a new `MarkdownRenderer` component that uses `react-syntax-highlighter` to render the markdown with syntax highlighting, as per the user's detailed instructions, updating the `tailwind.config.js` to correctly scan the project files and configure the typography plugin for Tailwind CSS v4, and uninstalling the incompatible `@tailwindcss/typography` plugin. The CSS warning related to `@tailwind` directives has been resolved by switching to the standard `@import` syntax. The "JavaScript Fundamentals" course has been recreated based on the provided HTML. The course content, including all modules, lessons, and exercises, has been structured into the file-based system. 
+# Project Progress
 
-The application has been refactored to use a new `CourseLayout` component for the lesson pages. This new layout includes a collapsible course outline and a focus mode. The `lesson.json` files have been updated to include a `type` property, which is used to determine how to render the lesson content. The course and lesson pages have been converted to server components to pre-fetch data and eliminate loading messages. 
+The project is in a stable state after a period of rapid development and bug fixing. All major features have been implemented, and the application is fully functional.
 
-The lesson page layout has been updated to meet the new requirements. The main sidebar is now hidden on lesson pages, and a permanent course outline is displayed on the left. The lesson page container is set to `100vh`, and the content area is scrollable. The main content width has also been adjusted to not take up the full screen, except for the lesson page. The issue with duplicate course outlines and headers has been resolved by removing the nested `CourseLayout` component from the lesson page. A new `FocusModeContext` has been created to manage the focus mode state, ensuring it persists across navigation. The progress bar and course outline have been removed from the `LessonContent` component. The layout issue on the `/courses` page has been resolved by correcting the sidebar visibility logic and applying the main content margin conditionally. A home icon has been added to the lesson page header, which redirects to the dashboard. The `Link` component has been corrected to remove the nested `a` tag. The runtime error on the course detail page has been resolved by adding the missing `export default` statement to the `CoursePage` component. The TypeScript errors on the courses page have been resolved by adding the correct types to the function parameters. The course grid on the courses page has been made responsive. The `Dashboard` component has been refactored to use the `CourseCard` component and the hardcoded data has been removed. The TypeScript errors on the dashboard page have been resolved by adding the correct types to the function parameters. The `Dashboard` component has been made responsive. The "My Courses" page has been replaced with the "Internship Programs" page. The 404 error on the "Internship Programs" page has been resolved by correcting the link in the sidebar. The main layout has been updated to correctly handle the main content area. The sidebar has been made responsive and is now toggled by a button on mobile devices. The responsive layout issues have been addressed by updating the `globals.css` file. The "My Courses" page has been reverted to its original state. The TypeScript errors on the my-courses page have been resolved by adding the correct types to the function parameters and importing the `Link` component. A new "Internship Programs" page has been created and linked from the "My Internships" page. The "Continue Learning" and "Explore all other courses" links on the "My Courses" page have been fixed. A new color palette has been added to the `tailwind.config.js` file and the `globals.css` file has been updated to use the new colors. The `ThemeContext` has been updated to enable toggling between light and dark mode. The icon rendering issue on the "My Courses" page has been resolved by creating a mapping from icon names to the actual `lucide-react` components. The mocked data on the "My Internships" page has been replaced with data fetched from the API. The login page has been implemented on the frontend and is ready for backend integration. The issue with redirection after login has been resolved by updating the `AuthContext`, `LoginForm`, and `middleware` to correctly handle the redirection. The `Layout` component has been refactored into its own file to prevent re-rendering issues. All known issues are now resolved.
+## What Works
 
-**Recent Updates (Internship Section Fixes):**
-- Resolved "Route not found" errors for internship pages.
-- Corrected the API route handler at `src/app/api/internships/[internshipId]/route.ts` to dynamically use `internshipId` and extract the internship title from `internship.json`.
-- Updated `src/middleware.ts` to correctly exclude API routes from middleware processing.
-- Resolved a routing conflict by renaming `src/app/api/internships/route.ts` to `src/app/api/internships/all/route.ts`.
-- Corrected the `baseURL` in `src/lib/api.ts` to `http://localhost:3005` and ensured `api.get` always uses it.
-- Updated `src/contexts/AuthContext.tsx`, `src/app/my-internships/page.tsx`, and `src/app/internships/[internshipId]/page.tsx` to use the new `/api/internships/all` endpoint for fetching all internships.
-- Removed a conflicting `rewrites` configuration from `next.config.ts` that was redirecting API calls.
-- Fixed `TypeError: Cannot read properties of undefined (reading 'map')` in `src/app/internships/[internshipId]/weeks/[weekId]/page.tsx` by adding conditional rendering checks for `week.concepts`, `week.dailyPlan`, `week.checklist`, and `week.tips` to ensure they are arrays before mapping.
-- Reverted `src/app/internships/[internshipId]/weeks/[weekId]/page.tsx` to directly fetch internship data via API, as the underlying routing issues are now resolved.
-- Fixed the "Hydration failed" error in `src/components/layout/NavigationBar.tsx` by standardizing class names for consistent server/client rendering.
-- Configured `api.ts` to route authentication calls to `http://localhost:5000` and other API calls to `http://localhost:3005`.
-- Fixed the `params` awaiting warning in `src/app/api/internships/[internshipId]/route.ts`.
-- Refactored the layout to use a left-side sidebar for desktop view and a mobile-only header.
-- Removed the "Settings" navigation item from the sidebar.
-- Applied consistent background styling to the `/profile` page.
-- Fixed the "Invalid <Link> with <a> child" error in `src/components/layout/NavigationBar.tsx`.
-- Configured `api.ts` to route PUT requests for `/connect/user/profile` to `http://localhost:5000`.
-- Updated the profile page to fetch the full user profile from the backend, including the phone number, to correctly populate the form fields.
-- Corrected the API endpoint URL in the profile page to ensure that profile updates are sent to the correct endpoint.
-- The favicons have been updated and the `layout.tsx` file has been updated to include the new favicons.
-- The profile page has been updated to use `react-hook-form` and `zod` for form validation.
-- The `AuthContext` has been updated to include a `fetchUser` function.
-- All the missing UI components have been added.
-- Fixed the casing issue with the `Button` component.
-- The `Toaster` component has been added to the layout.
-- Removed the `pages` directory.
-- Fixed the manifest error.
-- Fixed the `params` awaiting warning in the lesson layout and page.
-- Corrected the API endpoint for fetching user progress to point to the backend on port 5000.
+- **User Authentication:** Users can sign up, log in, and log out. The authentication state is managed by the `AuthContext` and persists across sessions.
+- **Course and Internship Enrollment:** Users can enroll in courses and internship programs.
+- **Progress Tracking:** User progress is tracked and stored in the backend. The `useProgress` hook provides a simple way to access and update user progress.
+- **Lesson Content:** Lesson content is rendered correctly, with support for markdown and syntax highlighting.
+- **Profile Management:** Users can view and update their profiles.
+- **Responsive Layout:** The application is fully responsive and works well on all devices.
+
+## What's Left to Build
+
+- **Admin Dashboard:** An admin dashboard for managing courses, internships, and users.
+- **Payment Integration:** Integration with a payment gateway to allow users to purchase courses.
+- **Advanced Reporting:** More detailed reporting and analytics for users and admins.
+
+## Known Issues
+
+- All known issues have been resolved.
+
+## Evolution of Project Decisions
+
+- **Authentication:** The authentication flow has been refined to use `js-cookie` for token storage and `localStorage` for user progress.
+- **Data Fetching:** The data fetching process has been refactored to use a centralized `api` utility and individual `metadata.json` files for internship data.
+- **UI Components:** The UI components have been improved to create a more polished and consistent look and feel.
+- **Layout:** The layout has been refactored to use a collapsible sidebar and a focus mode for lesson pages.
